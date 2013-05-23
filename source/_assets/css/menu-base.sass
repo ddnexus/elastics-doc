@@ -1,0 +1,65 @@
+@import mixins
+
+@mixin sub_block
+  display: block
+  z-index: 1020
+
+.menu_h_list
+  margin: 0
+  list-style: none
+  z-index: 1010
+  padding: 0 .1em 0
+  margin-left: auto !important
+  margin-right: auto !important
+  display: inline-block
+  width: auto
+  li
+    margin: 0
+    padding: 0
+    width: inherit
+    position: relative
+    text-align: center
+    display: inline-block
+    a
+      padding: .4em
+      &:link, &:visited
+        width: inherit
+        text-decoration: none
+        color: #000
+  ul
+    margin: 0
+    display: none
+    width: inherit
+    position: absolute
+    white-space: nowrap
+    padding: 1px 1px 0
+    list-style: none
+    top: 100%
+    left: 0
+    ul
+      top: 0
+      left: 100%
+    li
+      display: block
+      text-align: left
+      a
+        &:link, &:visited
+          display: block
+          width: inherit
+          position: relative
+          text-decoration: none
+
+*:first-child + html .menu_h_list li
+  a
+    &:active + ul, &:focus + ul, &:hover + ul
+      +sub_block
+  &:focus > ul, &:hover > ul
+    +sub_block
+
+.menu_h_list
+  li
+    a
+      &:active + ul, &:focus + ul
+        +sub_block
+    &:focus > ul, &:hover > ul
+      +sub_block

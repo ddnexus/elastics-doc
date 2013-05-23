@@ -1,0 +1,100 @@
+table.code-topics#filter-scopes cellspacing=0 cellpadding=0
+  tr
+    td
+      code missing
+    td
+      markdown:
+        [elasticsearch missing-filter API](http://www.elasticsearch.org/guide/reference/query-dsl/missing-filter)
+
+        Accepts a single key hash or a multiple keys hash (that will be translated in a sequence of `term` calls)
+
+      | {% shighlight ruby %}
+        missing(:color).missing(:category)
+        # or
+        missing(:color, :category)
+        {% endshighlight %}
+
+  tr
+    td
+      code term
+    td
+      markdown:
+        [elasticsearch term-filter API](http://www.elasticsearch.org/guide/reference/query-dsl/term-filter)
+
+        Accepts a single key hash or a multiple keys hash (that will be translated in a sequence of `term` calls)
+
+      | {% shighlight ruby %}
+        term(:color => 'red').term(:category => 'new')
+        # or simply
+        term(:color => 'red', :category => 'new')
+        {% endshighlight %}
+
+  tr
+    td
+      code terms
+    td
+      markdown:
+        An extended version of the [elasticsearch terms-filter API](http://www.elasticsearch.org/guide/reference/query-dsl/terms-filter)
+
+        In its basic usage it conforms to the API, but it allows also to represent the `term` and the `missing` scopes,  internally translating them in a serie of multiple scopes:
+
+      | {% shighlight ruby %}
+        # basic usage as in the API
+        terms(:color => ['red', 'blue'], :category => ['new', 'used'])
+        # if you pass a single value instead of an array it behaves exactly like `term`
+        terms(:color => 'red')
+        # if you pass a nil value it behaves exactly like `missing`
+        terms(:color => nil)
+        # all together
+        terms(:color => 'red', :category => ['new', 'used'], :code => nil)
+        # is like
+        term(:color => 'red').terms(:category => ['new', 'used']).missing(:code)
+        {% endshighlight %}
+
+  tr
+    td
+      code range
+    td
+      markdown:
+        Implements the [elasticsearch range-filter](http://www.elasticsearch.org/guide/reference/query-dsl/range-filter)
+
+      | {% shighlight ruby %}
+        range(:date => { :from => '2013-04-01',
+                         :to   => '2013-04-30' } )
+        {% endshighlight %}
+
+
+  tr
+    td
+      code filters
+    td
+      markdown:
+        This scope is a generic scope that allows to add any elasticsearch filter structure not explicitly available as a scope.
+
+        Accepts a single, or an array, or a list of filter structures. For example:
+
+      | {% shighlight ruby %}
+        filters(:numeric_range => { :age => { :from => 10,
+                                              :to   => 20,
+                                              :include_lower => true,
+                                              :include_upper => false } )
+        {% endshighlight %}
+
+
+  tr
+    td
+      code and
+      '  and
+      code or
+      '  wrappers
+    td
+      markdown:
+        You can wrap groups of filters in `and` or `or` blocks (eventually nested) and they will be built into a final elasticsearch filter.
+
+
+      | {% shighlight ruby %}
+        YourClass.or{ term(:color => 'red').term(:category => 'new') }
+        {% endshighlight %}
+
+      markdown:
+        > If you omit the wrapper for the filter scopes the `and` wrapper will be used

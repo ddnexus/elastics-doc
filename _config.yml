@@ -1,0 +1,21 @@
+name:    FlexDoc
+source:  source
+plugins: ./_plugins
+baseurl: /pippo
+
+keep_files:
+- .git
+
+slim:
+  pretty:     true
+  sort_attrs: false
+
+asset_pipeline:
+  bundle:       false         # Default = true
+  compress:     false         # Default = true
+  output_path:  assets        # Default = assets
+  display_path: pippo/assets  # Default = nil
+
+doc_tree:
+  doc_source_path: ./source/doc
+

@@ -1,0 +1,12 @@
+source 'http://rubygems.org'
+
+gem 'jekyll', '~> 1.0'
+gem 'jekyll-asset-pipeline', '0.1.5.dd'
+gem 'slim', '2.0.0.pre.8'
+gem 'jekyll-slim'
+gem 'sass'
+gem 'coffee-script'
+gem 'yui-compressor'
+gem 'rubytree'
+gem 'activesupport', :require => 'active_support/all'
+gem 'link-checker'

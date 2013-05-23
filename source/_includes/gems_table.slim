@@ -1,0 +1,58 @@
+table.code-topics#gems cellspacing=0 cellpadding=0
+  tr
+    td
+      code flex
+    td
+      markdown:
+        Provides the core infrastructure and the lower level functionality:
+
+        * HTTP clients
+        * elasticsearch API methods
+        * Templating System
+        * Cascading Variables Management
+        * Result Extenders
+        * Logging & Debugging
+        * Self-documenting tool
+        * Modules and Mixins
+  tr
+    td
+      code flex-model
+    td
+      markdown:
+        Transparently integrates your own models with one or more elasticsearch indices:
+
+        * Automatic integration with your `ActiveRecord` and `Mongoid` models
+        * Direct management of index throught `ActiveModel`
+           * Validations and callbacks
+           * Typecasting
+           * Attribute defaults
+           * Persistent storage with optimistic lock update
+           * integration with the `elasticsearch-mapper-attachment` plugin
+           * finders, chainable scopes etc. {% see 4.3 %}
+        * Automatic generation of elasticsearch mappings based on your models
+        * Parent/Child Relationships
+        * Bulk import
+        * Real-time indexing and search capabilities
+
+  tr
+    td
+      code flex-scopes
+    td
+      markdown:
+        > very cool option for most common needs and for beginners
+
+        It provides `ActiveRecord`-like chainable `scopes` allowing to use pure ruby to search your indices.
+
+
+  tr
+    td
+      code flex-rails
+    td
+      markdown:
+        integrates all the flex gems with `Rails`, providing also specific tasks, generators, logger options, etc.
+  tr
+    td
+      code flex-backup
+    td
+      markdown:
+        provides an executable and a few tasks to `dump`, `load`, `reindex` and `stat` any elasticsearch index.

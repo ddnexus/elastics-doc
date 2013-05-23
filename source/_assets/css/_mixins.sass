@@ -1,0 +1,46 @@
+$radius: .5em
+
+$text: #454
+
+$base1:   #010
+$base4:   #040
+$base5:   #050
+$base6:   #060
+$base7:   #070
+$base8:   #080
+$base9:   #090
+$baseA:   #0A0
+$baseB:   #0B0
+$baseF:   #0F0
+
+$base-gray:       #ccdacc
+$base-gray-light: #F8FaF8
+
+$gray:      #999
+$dark-gray: #555
+
+@mixin menu-base
+  background: $baseA
+  color: white
+  text-shadow: 1px 1px $base5
+  text-decoration: none
+  display: block
+  border-bottom: 1px solid $base9
+  box-shadow: inset 0 1px 4px 1px $baseB
+  padding:
+    top: .6em
+    bottom: .35em
+    left: 1em
+    right: 2em
+
+@mixin menu-neutral
+  background: none
+  color: $base6
+  text-shadow: none
+
+@mixin menu-highlighted
+  background: $baseF
+  color: $base6
+  text-shadow: none
+  box-shadow:  0 1px 4px 1px $baseB inset
+

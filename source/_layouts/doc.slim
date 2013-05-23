@@ -1,0 +1,54 @@
+doctype html
+html
+
+  head
+
+    | {% css_asset_tag global %}
+      - /_assets/css/normalize.css
+      - /_assets/css/github.css
+      - /_assets/css/syntax.css
+      - /_assets/css/menu-base.sass
+      - /_assets/css/nav-menu.sass
+      - /_assets/css/toc.css.sass
+      - /_assets/css/arrows.sass
+      - /_assets/css/doc.css.sass
+      {% endcss_asset_tag %}
+
+    | {% javascript_asset_tag global %}
+      - /_assets/js/plugins/jquery-1.9.1.js
+      - /_assets/js/plugins/jquery-color-2.1.2.js
+      - /_assets/js/plugins/jquery-resize-1.1.js
+      - /_assets/js/nav.js.coffee
+      - /_assets/js/toc.js.coffee
+      {% endjavascript_asset_tag %}
+
+    title
+      | {{site.name}} - {{page.title}}
+
+  body
+
+    #page-nav
+      | {% nav_menu %}
+
+    #page-toc
+
+    #content
+      .breadcrumb
+        | {% breadcrumb %}
+      | {{ content }}
+      br
+      .breadcrumb
+        | {% breadcrumb %}
+
+    #footer
+      ' Copyright &copy; 2012-2013 by
+      a href='mailto://dd.nexus@gmail.com' Domizio Demichelis
+      '  &mdash; Sponsored by
+      a href='http://www.escalatemedia.com' Escalate Media
+      '  and
+      a href='http://www.barquin.com' Barquin International
+
+
+
+
+

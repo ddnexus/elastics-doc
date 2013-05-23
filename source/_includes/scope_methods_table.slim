@@ -1,0 +1,50 @@
+table.code-topics#scope-methods cellspacing=0 cellpadding=0 style="width: 100%"
+  tr
+    td
+      code scoped
+    td
+      markdown:
+        This method creates a new `Flex::Scope` object, containing only the `:context` variable (i.e. your class/module). It is automatically used by all the scopes methods called directly on your class, so you probably will never need to use it directly.
+
+  tr
+    td
+      code scope
+    td
+      markdown:
+        This method generates a named scope in your class. It requires a symbol name as the first argument, and a scope, or a block (or `Proc`) returning a scope, as the second argument.
+
+      | {% shighlight ruby %}
+        # scope object
+        scope :red, term(:color => 'red')
+        # block
+        scope :color do |color|
+          term(:color => color).sort(:category => 'asc')
+        end
+        # proc
+        scope :a_scope, a_proc
+        {% endshighlight %}
+
+  tr
+    td
+      code scope_methods
+    td
+      markdown:
+        The array of all the named scopes you defined. Mostly used internally.
+
+  tr
+    td
+      code method_missing
+    td
+      markdown:
+        Used to chain the scopes with other scopes, or eventually with templates defined by `Flex::Templates`.
+
+      | {% shighlight ruby %}
+        # specially useful with variable scopes
+        scope :special, size(5).fields(:field_one, :field_two)
+
+        # you can call a template on any scope
+        special.my_template_name
+
+        # which is like
+        YourClass.my_template_name(special)
+        {% endshighlight %}

@@ -1,0 +1,56 @@
+table.code-topics#indexer-class-methods cellspacing=0 cellpadding=0
+  tr
+    td
+      code flex
+    td
+      markdown:
+        You access all the Flex features included in your model through the `flex` proxy object. It implements the methods to map your models to the elasticsearch index, define parent/child relationships and sync.
+
+  tr
+    td
+      code flex.index
+    td
+      markdown:
+        By default the index used for all the models in your app is the `Flex::Configuration.variables[:index]`. In a rails app that gets set before initializing the app {% see 1.3 %}. You can map your model to another index by explicitly setting it in your class.
+      | {% shighlight ruby %}
+        flex.index = 'foo'
+        {% endshighlight  %}
+
+  tr
+    td
+      code flex.type
+    td
+      markdown:
+        By default the type used for your model is the full-underscored class name. For example `MyModel::SuperSpecial` will generate `my_model__super_special`. Notice the double underscore in place of the commonly used slash, which avoids url conflicts. You can map your model to another type by explicitly setting it in your class:
+
+      | {% highlight ruby %}
+        flex.type = 'bar'
+        {% endhighlight %}
+
+  tr
+    td
+      code flex.parent
+    td
+      markdown:
+        Defines elasticsearch parent/child relations {% see 4.2#indexing_records %}.
+
+  tr
+    td
+      code flex.sync(*synced)
+    td
+      markdown:
+        Implemented by the `Flex::ModelSyncer` module {% see 4.4.1#flex_sync__synced_ flex.sync %}.
+
+  tr
+    td
+      code flex.synced
+    td
+      markdown:
+       Implemented by the `Flex::ModelSyncer` module {% see 4.4.1#flex_synced flex.synced %}.
+
+  tr
+    td
+      code flex_result(result)
+    td
+      markdown:
+       Custom defined method {% see 2.3#modelflex_resultresult Model.flex_result %}.

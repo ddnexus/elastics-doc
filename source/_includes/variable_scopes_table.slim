@@ -1,0 +1,191 @@
+table.code-topics#variable-scopes cellspacing=0 cellpadding=0
+  tr
+    td
+      code query_string
+    td
+      markdown:
+        This scope accepts a query string or an hash to parse as documented in [elasticsearch query-string-query API](http://www.elasticsearch.org/guide/reference/query-dsl/query-string-query). If omitted it uses `{'query': '*'}` as the default (i.e. sort of `match_all` query). It passes it as a `cleanable_query` for easier handling {% see 2.2.4#_cleanable_query :cleanable_query %}
+
+      | {% shighlight ruby %}
+        query_string('title:{Aida TO Carmen}')
+        # or
+        query_string( :query  => 'title:{Aida TO Carmen}',
+                      :fields => ['text', 'category'] )
+        {% endshighlight %}
+
+      markdown:
+        > See [Lucene Query Parser Syntax](<http://lucene.apache.org/core/old_versioned_docs/versions/3_5_0/queryparsersyntax.html>)
+
+        > __Notice__: the `query_string` scope gets overriden by chaining with another `query_string` scope
+
+  tr
+    td
+      code query
+    td
+      markdown:
+        Alias for `query_string`
+
+  tr
+    td
+      code sort
+    td
+      markdown:
+        This scope accepts one or an array or a list of sort structures documented as [elasticsearch sort API](http://www.elasticsearch.org/guide/reference/api/search/sort.html).
+
+      | {% shighlight ruby %}
+        sort(:name => 'asc')
+        {% endshighlight %}
+
+  tr
+    td
+      code fields
+    td
+      markdown:
+        The fields that you want to retrieve in order to limit the size of the response
+
+      | {% shighlight ruby %}
+        # pass an array of fields
+        fields([:field_one, :field_two])
+        # or a list of fields
+        fields(:field_one, :field_two)
+        {% endshighlight %}
+
+      markdown:
+        >  a `fields` scope used on `Flex::ActiveModel` models, freezes the returned objects (i.e. make them not editable)
+
+
+  tr
+    td
+      code script_fields
+    td
+      markdown:
+        Implements the [elasticsearch script-fields API](http://www.elasticsearch.org/guide/reference/api/search/script-fields). Adds one or more script fields to the scope.
+
+      | {% shighlight ruby %}
+        script_fields( :my_field       => 'script ...',                    # simpler form
+                       :my_other_field => {:script => 'script ...', ...} ) # elasticsearch API
+        {% endshighlight %}
+
+
+  tr
+    td
+      code size
+    td
+      markdown:
+        Limits the size of the retrieved hits
+
+      | {% shighlight ruby %}
+        size(5)
+        # same effect of
+        params(:size => 5)
+        {% endshighlight %}
+
+  tr
+    td
+      code page
+    td
+      markdown:
+        The page of the pagination. By setting this scope you get automatically set the `:from` param, consistently with the `:size` (that is usually defaulted). Very convenient when you get the page number from a pagination link). Default 1.
+
+      | {% shighlight ruby %}
+        page(3)
+        {% endshighlight %}
+
+      markdown:
+        > This scope is a direct interface to the `:page` special variable {% see 2.2.4#page :page %}
+
+  tr
+    td
+      code params
+    td
+      markdown:
+         The params are a hash of key/value pairs. Flex will transform them in the query string part of the path (all what comes after the `?`).
+
+      | {% shighlight ruby %}
+        params(:size => 4)
+        {% endshighlight %}
+
+      markdown:
+        > This scope is a direct interface to the `:params` special variable {% see 2.2.4#params :params %}
+
+  tr
+    td
+      code index
+    td
+      markdown:
+         The `:index` predefined variable
+
+      | {% shighlight ruby %}
+        index('my_index')
+        index(['my_index', 'my_other_index'])
+        {% endshighlight %}
+
+      markdown:
+        > This scope is a direct interface to the `:index` predefined variable {% see 2.2.4#index :index %}
+
+  tr
+    td
+      code type
+    td
+      markdown:
+         The `:type` predefined variable
+
+      | {% shighlight ruby %}
+        params(:size => 4)
+        {% endshighlight %}
+
+      markdown:
+        > This scope is a direct interface to the `:type` predefined variable {% see 2.2.4#type :type %}
+
+  tr
+    td
+      code variables
+    td
+      markdown:
+         A generic scope to add
+
+      | {% shighlight ruby %}
+        # returns the same scope
+        variables
+        # injects new variables
+        variables(a_hash, another_hash, :a => 2, :b => 4)
+        {% endshighlight %}
+
+  tr
+    td
+      code facets
+    td
+      markdown:
+        Implements a generic [elasticsearch facets API](http://www.elasticsearch.org/guide/reference/api/search/facets) usable with all the facets (just pass the facet hash structure).
+
+      | {% shighlight ruby %}
+        facets(:tags => {:term => {:field => 'tags'}})
+        {% endshighlight %}
+
+
+  tr
+    td
+      code highlights
+    td
+      markdown:
+        Implements the [elasticsearch highlighting API](http://www.elasticsearch.org/guide/reference/api/search/highlighting).
+
+      | {% shighlight ruby %}
+        highlight(:fields => {:text => {}})
+        {% endshighlight %}
+
+  tr
+    td
+      code metrics
+    td
+      markdown:
+        Adds the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `count`. Useful when you need to query only the counts and not the actual results.
+
+      | {% shighlight ruby %}
+        count_result = any_scope.metrics.all
+        # is like
+        count_result = any_scope.params(:search_type => 'count').all
+        {% endshighlight %}
+
+
+

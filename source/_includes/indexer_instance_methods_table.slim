@@ -1,0 +1,68 @@
+table.code-topics#indexer-instance-methods cellspacing=0 cellpadding=0
+  tr
+    td
+      code flex
+    td
+      markdown:
+        The `flex` instance object is mostly used internally, however you can access all the Flex features included in your records through it. It implements the methods to manage the elasticsearch document related to your record.
+
+  tr
+    td
+      code flex.index
+    td
+      markdown:
+        The index for this record.
+
+  tr
+    td
+      code flex.type
+    td
+      markdown:
+        The document type for this record.
+
+  tr
+    td
+      code flex.store
+    td
+      markdown:
+        Indexes the `flex_source` of this record. You don't need to use this directly if you use `Model.flex.sync` on this model.
+
+  tr
+    td
+      code flex.remove
+    td
+      markdown:
+        Removes the elasticsearch document for this record. You don't need to use this directly if you use `Model.flex.sync` on this model.
+
+  tr
+    td
+      code flex.sync
+    td
+      markdown:
+       Implemented by the `Flex::ModelSyncer` module {% see 4.4.1#flexsync flex.sync %}.
+
+  tr
+    td
+      code flex.get
+    td
+      markdown:
+       Retrieves the elasticsearch document from the index. The result is extended as usual {% see 2.3 %}, {% see 4.6 %}. Mostly useful in the console to inspect the elasticsearch related document.
+      | {% shighlight irb %}
+        >> comment = Comment.first
+        >> comment.flex.get
+        => {"_index"=>"my_index", "_type"=>"review_comment","_id"=>"4f15d2712c16bf4337000012", ... }
+        {% endshighlight  %}
+
+  tr
+    td
+      code flex_source
+    td
+      markdown:
+       {% see 4.2#indexing_records %}
+
+  tr
+    td
+      code flex_indexable?
+    td
+      markdown:
+       {% see 4.2#indexing_fields %}

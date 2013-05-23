@@ -1,0 +1,58 @@
+table.code-topics#interpolation cellspacing=0 cellpadding=0
+  tr
+    th Type of Value
+    th Tag Replacement
+  tr
+    td
+      code String and Integer
+    td
+      p
+        b Value Substitution
+      |
+        {% shighlight ruby %}
+        MyClass.my_template(:bar => 'baz')
+        {% endshighlight %}
+
+      p will result as:
+
+      | {% shighlight yaml %}
+        my_template:
+          foo: baz
+        {% endshighlight %}
+  tr
+    td
+      code Hash and Array (structures)
+    td
+      p
+        b Structure Insertion
+      |
+        {% shighlight ruby %}
+        MyClass.my_template(:bar => {'baz' => 'quux'})
+        {% endshighlight %}
+
+      p will result as:
+
+      | {% shighlight yaml %}
+        my_template:
+          foo:
+            baz: quux
+        {% endshighlight %}
+
+  tr
+    td
+      code nil, false, "", {}, []
+    td
+      p
+        b Branch Pruning
+      |
+        {% shighlight ruby %}
+        MyClass.my_template(:bar => nil) # or '', [], {}
+        {% endshighlight %}
+
+      p will result as:
+
+      | {% shighlight yaml %}
+        a_template:
+
+        {% endshighlight %}
+

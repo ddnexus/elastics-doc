@@ -1,0 +1,75 @@
+@import mixins
+
+// header / footers
+#page-nav
+  z-index: 1100
+  position: fixed
+  top: 0
+  left: 0
+  text-align: center
+  height: 2.5em //40px
+  width: 100%
+  line-height: 1.3
+  background-color: $base4
+  box-shadow: 0 0 10px 3px $base1
+
+  // menu-bar
+  ul#nav-menu
+    background-color: $base4
+    height: 2.5em
+    font-size: .98em
+    text-shadow: 1px 1px $base5
+    margin: 0 auto
+    float: none
+    // menu-bar items
+    > li
+      height: 2.5em //40px
+      &:hover
+        +menu-highlighted
+        > a
+          +menu-neutral
+      a
+        +menu-base
+        padding-right: 1em
+        box-shadow: none
+        border-bottom: none
+        background: none
+
+        &:hover, &:active
+          +menu-neutral
+      // first menu is only bottom-rounded
+      > ul
+        border-radius: 0 0 $radius $radius
+        // first item of first menu is not rounded
+        > li:first-of-type
+          border-radius: 0
+          > a
+            border-radius: 0
+    // menu
+    ul
+      background-color: $base9
+      border-radius: 0 $radius $radius $radius
+      padding: 1px 1px 0
+      min-width: 9em
+      box-shadow: 0 10px 20px -6px $base1
+      // menu-item
+      li
+        a
+          +menu-base
+          margin-top: inherit
+        &:hover
+          +menu-highlighted
+          > a
+            +menu-highlighted
+        // first item is top-rounded
+        &:first-of-type
+          border-radius: 0 $radius 0 0
+          > a
+            border-radius: 0 $radius 0 0
+        // last item is bottom-rounded
+        &:last-of-type
+          border-radius: 0 0 $radius $radius
+          > a
+            border-radius: 0 0 $radius $radius
+
+

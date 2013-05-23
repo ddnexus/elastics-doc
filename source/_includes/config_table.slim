@@ -1,0 +1,177 @@
+table.code-topics#config cellspacing=0 cellpadding=0
+  tr
+    td
+      code result_extenders
+    td
+      markdown:
+        An array of extender modules. Each gem pushes its default:
+
+      |
+        {% shighlight ruby %}
+        # flex gem
+        [ Flex::Result::Document,
+          Flex::Result::Search,
+          Flex::Result::MultiGet,
+          Flex::Result::Bulk ]
+
+        # flex-model gem
+        [ Flex::Result::DocumentLoader,
+          Flex::Result::SearchLoader,
+          Flex::Result::ActiveModel ]
+
+        # flex-scopes gem
+        [ Flex::Result::Scope ]
+        {% endshighlight %}
+
+      markdown:
+        You usually push your own extenders to the `result_extenders` array {% see 2.3 %}
+
+  tr
+    td
+      code logger
+    td
+      markdown:
+        The Flex logger. Default `Logger.new(STDERR)`
+
+  tr
+    td
+      code logger.debug_variables
+    td
+      markdown:
+        Boolean. If `true` it prints the merged variables. Default `false` or `Rails.env.development?`.
+
+  tr
+    td
+      code logger.debug_request
+    td
+      markdown:
+        Boolean. If `true` it prints the request. Default `true`.
+
+  tr
+    td
+      code logger.debug_result
+    td
+      markdown:
+        Boolean. If `true` it prints also the result. Default `true` unless in Rails Console.
+
+  tr
+    td
+      code logger.curl_format
+    td
+      markdown:
+       Boolean. If `true` it uses curl-like logging info, suitable to be copied and pasted in a terminal. Default `false` (YAML logging).
+
+  tr
+    td
+      code logger.log_to_rails_logger
+    td
+      markdown:
+        > This is a specific configuration for the `flex-rails` gem.
+
+        Boolean. If `true` it forwards the messages to the `Rails.logger`. Defaut `true` unless in Rails Console.
+
+  tr
+    td
+      code logger.log_to_stdout
+    td
+      markdown:
+        > This is a specific configuration for the `flex-rails` gem.
+
+        Boolean. Option added by flex-rails. If `true` prints the log to `STDOUT`. Default `false` unless in Rails Console.
+  tr
+    td
+      code flex_models
+    td
+      markdown:
+        > This is a specific configuration for the `flex-model` gem.
+
+        An array of model classes (or model class names) that your app will index. If you use the `Flex::ModelIndexer` integration or `Flex::ActiveModel`, this is the only required configuration setting, since it is used to generate the default mappings and other things.
+
+  tr
+    td
+      code flex_dir
+    td
+      markdown:
+        The path where Flex searches for source files. Default `'./flex'` or `"\#{Rails.root}/app/flex"` in Rails.
+
+  tr
+    td
+      code config_file
+    td
+      markdown:
+        A YAML file usually containing the custom index mapping. Default `'./config/flex.yml'` or `"\#{Rails.root}/config/flex.yml"` in Rails.
+
+  tr
+    td
+      code http_client
+    td
+      markdown:
+        The flex client instance. Default an object of class `Flex::HttpClients::Patron` or `Flex::HttpClients::RestClient`, depending on which gem you have installed (`patron` or `rest-client`). If you create a custom client class you must set it.
+
+  tr
+    td
+      code http_client.base_uri
+    td
+      markdown:
+        The base uri of the elasticsearch server used for all the requests. Default `'http://localhost:9200'`.
+  tr
+    td
+      code http_client.options
+    td
+      markdown:
+        Hash of options passed to the `http_client#new` method. Default `{}`.
+
+  tr
+    td
+      code http_client.raise_proc
+    td
+      markdown:
+        > This variable is experimental and may be removed in a next vesion.
+
+        A proc that should return whether or not to raise an error, depending on the response. It is used for example to decide whether a 404 response code should raise an error or should just be ignored. Default `proc{|respose| response.status >= 400}`
+
+  tr
+    td
+      code logger.debug_variables
+    td
+      markdown:
+        Boolean. If `true` it prints the variables. Default `true`.
+  tr
+    td
+      code logger.debug_request
+    td
+      markdown:
+        Boolean. If `true` it prints the request. Default `true`.
+
+  tr
+    td
+      code logger.debug_result
+    td
+      markdown:
+        Boolean. If `true` it prints the result. Default `true` or `false` in the `Rails` console.
+
+  tr
+    td
+      code logger.curl_format
+    td
+      markdown:
+        Boolean. If `true` it prints the request. Default `true`.
+
+  tr
+    td
+      code variables
+    td
+      markdown:
+        The `Flex::Variable` object (Hash subclass) of interpolation variables used as the lowest default level. Default:
+      |
+        {% shighlight ruby %}
+        Flex::Variables.new :index      => nil,
+                            :type       => nil,
+                            :params     => {},
+                            :no_pruning => []
+        {% endshighlight  %}
+
+      markdown:
+        {% see 2.2.4 %}
+
+

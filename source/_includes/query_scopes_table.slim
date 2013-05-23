@@ -1,0 +1,111 @@
+table.code-topics#query-scopes cellspacing=0 cellpadding=0 style="width: 100%"
+  tr
+    td
+      code find
+    td
+      markdown:
+        Retrieves a single or multiple documents using their ids
+
+      | {% shighlight ruby %}
+        # pass a single id
+        find '1Momf4s0QViv-yc7wjaDCA'
+        # or an array of ids
+        find ['1Momf4s0QViv-yc7wjaDCA', 'BFdIETdNQv-CuCxG_y2r8g']
+        {% endshighlight %}
+
+  tr
+    td
+      code first
+    td
+      markdown:
+        Retrieves the first document of the scope
+
+      | {% shighlight ruby %}
+        red_scope.first
+        MyFlexActiveModel.first
+        {% endshighlight %}
+
+  tr
+    td
+      code last
+    td
+      markdown:
+        Retrieves the last document of the scope
+
+      | {% shighlight ruby %}
+        red_scope.last
+        MyFlexActiveModel.last
+        {% endshighlight %}
+
+  tr
+    td
+      code all
+    td
+      markdown:
+        Retrieves all the documents of the scope
+
+      | {% shighlight ruby %}
+        red_scope.all
+        MyFlexActiveModel.all
+        {% endshighlight %}
+
+  tr
+    td
+      code destroy
+    td
+      markdown:
+        Destroys the documents of the scope
+
+      | {% shighlight ruby %}
+        red_scope.destroy
+        # destroys all the documents
+        MyFlexActiveModel.destroy
+        {% endshighlight %}
+
+  tr
+    td
+      code each
+    td
+      markdown:
+        Iterates over all the documents in the scope
+
+      | {% shighlight ruby %}
+        red_scope.each{|d| do_something_with(d)}
+        MyFlexActiveModel.each{|d| do_something_with(d)}
+        {% endshighlight %}
+
+  tr
+    td
+      code scan_all
+    td
+      markdown:
+        Iterates in batches, over all the documents in the scope by using the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`
+
+      | {% shighlight ruby %}
+        red_scope.scan_all do |batch|
+          batch.each {|d| do_something_with(d)}
+        end
+
+         MyFlexActiveModel.scan_all do |batch|
+           batch.each {|d| do_something_with(d)}
+         end
+        {% endshighlight %}
+
+  tr
+    td
+      code each_batch
+    td
+      markdown:
+        Alias for `scan_all`
+
+  tr
+    td
+      code count
+    td
+      markdown:
+        Counts the document in the scope
+
+      | {% shighlight ruby %}
+        red_scope.count
+        MyFlexActiveModel.count
+        {% endshighlight %}

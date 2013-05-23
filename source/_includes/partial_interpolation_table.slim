@@ -1,0 +1,111 @@
+table.code-topics#partial-interpolation cellspacing=0 cellpadding=0
+  tr
+    th Type of Value
+    th Tag Replacement
+
+  tr
+    td
+      code Single Hash
+    td
+      p
+        b Partial Insertion
+      |
+        {% shighlight ruby %}
+        MyClass.a_template(:_a_partial_template => {:bar => 'baz'})
+        {% endshighlight %}
+
+      p will result as:
+
+      | {% shighlight yaml %}
+        a_template:
+          foo: baz
+        {% endshighlight %}
+
+  tr
+    td
+      code Array of Hashes
+    td
+      p
+        b Partial Insertion repeated for each item in the hash
+      |
+        {% shighlight ruby %}
+        MyClass.a_template(:_a_partial_template => [{:bar => 'baz'}, {:bar => 'quux'})
+        {% endshighlight %}
+
+      p will result as:
+
+      | {% shighlight yaml %}
+        a_template:
+          - foo: baz
+          - foo: quux
+        {% endshighlight %}
+  tr
+    td
+      code true
+    td
+      p
+        b Partial Insertion
+      |
+        {% shighlight ruby %}
+        MyClass.a_template(:bar => 'baz', :_a_partial_template => true)
+        {% endshighlight %}
+
+      p will result as:
+
+      | {% shighlight yaml %}
+        a_template:
+          foo: baz
+        {% endshighlight %}
+
+  tr
+    td
+      code Symbol
+    td
+      p
+        b Insertion of the partial named as the Symbol
+      |
+        {% shighlight ruby %}
+        MyClass.a_template(:_a_partial_template => :_another_partial_template, :beta => 'gamma')
+        {% endshighlight %}
+
+      p will result as:
+
+      | {% shighlight yaml %}
+        a_template:
+          alpha: gamma
+        {% endshighlight %}
+  tr
+    td
+      code String
+    td
+      p
+        b Will be evaluated as a Template and Inserted
+      |
+        {% shighlight ruby %}
+        MyClass.a_template(:_a_partial_template => 'oh: <<my>>', :my => 'god')
+        {% endshighlight %}
+
+      p will result as:
+
+      | {% shighlight yaml %}
+        a_template:
+          oh: god
+        {% endshighlight %}
+
+  tr
+    td
+      code nil, false, "", {}, []
+    td
+      p
+        b Branch Pruning
+      |
+        {% shighlight ruby %}
+        MyClass.a_template(:_a_partial_template => nil) # or '', [], {}
+        {% endshighlight %}
+
+      p will result as:
+
+      | {% shighlight yaml %}
+        a_template:
+
+        {% endshighlight %}

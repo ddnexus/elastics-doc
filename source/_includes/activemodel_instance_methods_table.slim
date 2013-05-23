@@ -1,0 +1,33 @@
+table.code-topics#activemodel-instance-methods cellspacing=0 cellpadding=0
+  tr
+    td
+      code lock_update
+    td
+      markdown:
+        This method implements the optimistic lock on update documented [here](http://www.elasticsearch.org/blog/2011/02/08/versioning.html). It is done through a simple block wrapper:
+
+      | {% shighlight ruby %}
+        record.lock_update do |r|
+          r.amount += 100
+        end
+        {% endshighlight %}
+
+      markdown:
+        If you are trying to update a stale object, the block is yielded again with a fresh reloaded document and the
+        document is saved only when it is not stale anymore (i.e. the `_version` has not changed since it has been loaded).
+
+  tr
+    td
+      code raw_result
+    td
+      markdown:
+        This method returns the original elasticsearch result as it comes from the internal request. You can call it also on any array collection result.
+
+  tr
+    td
+      code method_missing
+    td
+      markdown:
+        This method forwards the missing methods to the `raw_result` structure, so your instance could reach all the methods added by the result extenders {% see 2.3 flex Result Extenders, 4.5 flex-model Result Extenders %}
+
+

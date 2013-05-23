@@ -1,0 +1,5 @@
+# jekyll build --config=_config.yml,_config_production.yml
+asset_pipeline:
+  bundle:   true
+  compress: true
+  gzip:     true
