@@ -5,13 +5,13 @@ title: How to migrate from flex 0.x
 
 # {{ page.title }}
 
-Flex 1.x has changed quite a lot from version 0.x but you need just to rename a few things in order to update to the new version. You can do it in 3 minutes with just a few search and replace.  If you miss any change, flex will work anyway, but will emit a deprecation warning.
+Flex 1.x has changed quite a lot from version 0.x but you need just to rename a few things in order to upgrade it. You can do it in 3 minutes with just a few search and replace.  If you miss any change, flex will work anyway, but will emit a deprecation warning, so keep an eye on the log.
 
 ## Changes
 
 ### 1. Gemfile change (only for rails applications)
 
-There is only one breaking change (the only that will raise an error), that you have to update if you are using flex with a Rails app. It's a very simple one: you have just to change `gem 'flex', :require => 'flex/rails'` to simply `gem 'flex-rails'`. Then run a `bundle install` and your app should be able to start, and emit the deprecation warning in the log.
+There is only one breaking change (the only that will raise an error), that you have to update if you are using flex with a Rails app. It's a very simple one: you have just to change `gem 'flex', :require => 'flex/rails'` to simply `gem 'flex-rails'`. Then run a `bundle install` and your app should be able to start, and emit the deprecation warnings in the log.
 
 ### 2. Configuration Renaming
 
@@ -41,7 +41,7 @@ There is only one breaking change (the only that will raise an error), that you 
 
 `flex:delete_indices` > `flex:index:delete`
 
-> __Notice__: some ENV variable used for the tasks, has been renamed too {% see 1.4 %}
+> __Notice__: some ENV variable used for the tasks, may also have been renamed {% see 1.4 %}
 
 ## Additions
 
