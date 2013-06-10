@@ -1,0 +1,158 @@
+---
+layout: doc
+title: Why you should use Flex rather than Tire
+---
+
+# {{ page.title }}
+
+I wrote this page because it looks like it is still not very clear what flex does and what are the differences with Tire (as you can read [here](http://stackoverflow.com/questions/14517686/integrating-elasticsearch-with-activerecord)), and also because I honestly think that if you are serious with elasticsearch, you have plenty of reasons to use Flex rather than Tire.
+
+> __Notice__: Being the author of Flex, it's difficult not being biased, but I will try to present the facts that sustain my opinions. Please, correct me if I am wrong or imprecise and I will fix any eventual mistake right away. Thanks.
+
+## My experience with Tire
+
+I had to refactor a few quite similar Rails apps that were using Tire to index a few ActiveRecord and Mongoid models. At that time I didn't have any experience with Tire, so I just assumed everything was OK and I focused only on removing the mess in the ruby code. There were lots of `Tire.search('lots,of,indices'){lots{of{nested{blocks}}}}` scattered everywhere in the apps. That didn't look nice nor easy to maintain, so as the first step, I decided to create a central module, moving all the search logic in one single place, hopefully trying to reduce the duplications with well designed methods.
+
+In place of all that nested blocks in classes and controllers, I wanted to see just method calls passing the parameters to the search module, making the controller actions simpler to read by relegating the actual search logic inside that module. I mean something like:
+
+    @result = MySearch.contents_with(:query => params[:query])
+    @tags   = MySearch.related_tags(:tag => params[:tag])
+    # or even lazier
+    @result = MySearch.contents_with(params)
+    @tags   = MySearch.related_tags(params)
+
+After working on that first step, the controllers were cleaner, but the search module looked like a bunch of long wrapper methods: one per each `Tire.search` calls extracted from the controllers. There was a lot of duplicated or very similar code inside that blocks, so I though I could extract the common parts to some helper method, but I soon discovered that that is a problem with Tire.
+
+## The Tire DSL
+
+Tire uses its own DSL to express elasticsearch queries. Cool, isn't it? Well, in practice... it isn't, and here's why.
+
+### Difficult Variable Interpolation
+
+A very natural need when you search, is interpolating your variables into the elasticsearch query. With the Tire DSL you don't have access to any variable or methods external to the search block, unless you use a cumbersome way suggested in the Tire doc. In practice you have to pass around the objects of the outer block:
+
+    @query = 'title:T*'
+
+    Tire.search 'articles' do |search|
+      search.query do |query|
+        query.string @query
+      end
+    end
+
+
+It looks pretty verbose, isn't it? Specially if you know that the only thing that blocks does is generating a simple structure:
+
+    {query: {query_string: {query: @query}}}
+
+So do we really need a ruby DSL to express that? Isn't a ruby hash more simple, more clear and more effective? Indeed. The elasticsearch API is very clear and simple because it is expressed by basic data structures, that are simpler to write, read and merge with variables or other structures. A ruby DSL seems just to make everything more difficult.
+
+> Flex variable interpolation is really a no-brainer with its simple placeholder tags, placed right in the queries where they have to be interpolated. {% see 2.2.3 %}
+
+### Difficult and Very Limited Reuse
+
+Another natural need using elasticsearch would be reusing fragments of structures for many queries. With the Tire DSL you cannot merge parts of queries: indeed they are not structures internally. You have only a very limited and vague resemblance of reuse: saving procs of boolean queries and sort of "reuse" them inside the DSL.
+
+As if that alone wouldn't be enough complex, at some point you will have also to interpolate your variables into that boolean queries by using some closure, and eventually you will have to wrap the proc in a method just to pass the variables. Ouch!
+
+> Flex allows you to reuse any fragment of any query into any other query.
+
+### Reverse Engineering Required
+
+There is another flaw with the Tire DSL: sometimes you know exactly how to express a structured elasticsearch query (and you know it because you have probably just found it in the elasticsearch doc). If you are lucky enough, that may be a query that Tire supports: great! But then you have to think about how to tell Tire to express the same structure with its own different DSL.
+
+For example you have to pass the index/indices as the first param, but you have to pass the type as a key/value pair in the options hash. You may also have to pass other key/values that in elasticsearch are part of the query structure itself, but in Tire have been moved to the options. Then you have to write the query in nested ruby blocks: some looks quite similar to the elasticsearch query structure, but others don't.
+
+All that reverse-engineering effort... only to make Tire generate the same simple structure you wanted and knew from the beginning. That looks quite twisted to me. I often wished to get rid of Tire and get straight to elasticsearch.
+
+> You don't need to reverse-engineer anything with Flex, because it expresses queries with the same elasticsearch structures, just a bit easier to read, write and reuse since you can write them in `YAML`.
+
+### Hard Coded Limitations
+
+Tire creates a search object each time you search anything. The search object expects a fixed number of possible data parts and uses that parts to compose the query. That strategy has many limitations (as you have just read), but in particular, it is limited to what the search class explicitly allows and is aware of. For example, you cannot use any query not explicitly known by Tire (and if I am not mistaken, they are just about 7 at the moment of this writing). Besides, if you need any other elasticsearch feature not explicitly known by Tire, you are on your own. And if you are serious with elasticsearch and need to use its most advanced features, you are on your own most of the times with Tire.
+
+IMO Elasticsearch is very powerful and rich: limiting it is sort of defeating the very reason you choose it.
+
+> Flex is query-agnostic: it doesn't need to know anything about the content of a query, so you can use it for any query, even for the queries that will be implemented in some future version of elasticsearch.
+
+### Pros and Cons
+
+I can guess that the goal behind the Tire DSL is simplifying the elasticsearch query structure and making it more ruby-like, so - at least in a few places - you could simplify the elasticsearch structure a bit. For example in Tire you can "just" write `{|search| search.query {|query| query.string @query }}` instead of `{query: {query_string: {query: @query}}}` as you whould do with elasticsearch.
+
+> __FYI__: with `flex-scopes` you can simply write `query(@query)` to express the same query, and you can even chain it to other scopes at any time
+
+
+ The Tire DSL doesn't look less verbose nor more elegant of the original elasticsearch structure that it's supposed to simplify, however, if you carefully count the brackets, you can spot that Tire saved one nesting level, so maybe that is the advantage!? Anyway, it looks like the cons are overwhelmingly more than the pros (if any). If we analyze the example, in order to save just one nesting level we have to renounce to a lot of benefits:
+
+- lost match with the original and documented elasticsearch structure (reverse-engineering needed)
+- lost direct options coming from the elasticsearch level that Tire removes
+- lost easy variable interpolation
+- lost merging and reuse of partial structures
+- lost all the queries that the Tire DSL doesn't explicitly know
+
+And if you want to have the lost benefits back, you end up with something a lot more complex than what it wants to simplify. So despite the good intentions, using a ruby DSL to manage data structures, doesn't seem a good idea to me.
+
+>__Notice__: The `flex-scopes` gem pursues a goal quite similar to the Tire DSL: simplifying the elasticsearch query structure and making it more ruby-like. However, unlike Tire, it adds quite a few benefits, effectively simplifying your code and making it very reusable {% see 3 %}.
+
+## Model Integration
+
+The model integration support in Tire is very basic.
+
+### No Cross-syncing
+
+Tire does not provide any mean to cross-sync models, i.e. you may need to reindex one or more records when another record changes. With Tire, if you want to do that you must do it by yourself by using `:touch` (so re-saving the related record, which will trigger the callback that will reindex it), or you have to define your own callbacks and explicitly index the related records.
+
+Cross-syncing is a very useful tool when you don't want to mirror your DBs structure into your index structure, but you want to design your index in such a way that it will be easy and efficient to search.
+
+> Flex manages (and propagates) cross-syncing with a simple one-line declaration {% see 4.4.1 %}
+
+### No parent/children relations
+
+Tire does not support parent/child relations. Implementing it on your own for each application that may need it, requires quite an effort: you have to set the right mapping, pass around the parent and the routing when any record in the relationship changes. If you have several models involved that may be quite time consuming and error prone.
+
+> Flex manages all that internally: you need only to write a one-line declaration {% see 4.2#elasticsearch_parentchildren_relations Parent/Children Relations %}
+
+### Dispersed Settings and Mapping
+
+And what about defining the index settings and mappings in the model itself? Again, you have to reverse engineer the elasticsearch structure to the Tire's own DSL, only to make Tire generate the structure you want (and already know).
+
+Anyway, I would rather prefer to have settings and mappings for all indices in one single file. That would allow a less polluted models on one end, and a centralized file to control all the elasticsearch indices on the other end. A centralized file would allow also to easily reuse common properties.
+
+> Flex generates for you the mapping defaults that keep into considerataion also parent/child relations. However you can fine-tune them in a central `YAML` file (a sort of `database.yml` for indices).
+
+### Funny Defaults
+
+Then you have that funny defaults for index and type that will generate one index per model, each index populated by one single type. That doesn't look like a basic default for an average application, does it? Perhaps a simple and basic "one index per app, one type per model" default would do for most apps, and that's similar to the familiar concept "one DB per app, one table per model".
+
+> Flex defaults to the "one index per app, one type per model", which seems a good start for most apps. However, if your particular app needs to split apart the index or manage the indices dynamically, it's just a matter of adding a simple declaration in the model.
+
+## Flex Project
+
+At a certain point of that refactoring I get tired of complaining about Tire, and decided to roll up my sleeves and write an alternative. Many thanks to [Escalate Media](http://www.escalatemedia.com) and [Barquin International](http://www.barquin.com) that supported the idea of releasing it as an Open Source Software and keep sponsorizing the project.
+
+Here is the list of requirements and how they have been implemented in the first version.
+
+{% slim flex_requirements_table.slim %}
+
+## Refactoring Done!
+
+After migrating the apps (described in the [previous section](#my_experience_with_tire)) from Tire to Flex, the searching code became stunnigly short: the search module shrinked down from more than 300 lines to just 4 lines! All the search logic was in a single, very readable `YAML` file of less than 100 lines. The queries were beautifully matching 1 to 1 with the elasticsearch API, and the variable interpolations were elegantly represented by simple placeholder tags, right in the queries (where they have to be interpolated). Besides, we could easily implement polymorphic parent/children relations in several models with just one line per model, and with another line we could cross-sync a few others.
+
+Not bad for the first version of the gem!
+
+Now, after one year of active usage and development, the current version of flex includes a lot of improvements and additions. Its code has been optimized and organized into 5 gems that you can use together or separately.
+
+It's easier to use for elasticsearch beginners, since it implements ActiveRecord-like chainable scopes for easy searching and ActiveModel integration for managing elasticsearch as it were an ActiveRecord DB.
+
+It's also more powerful for experts, since it covers all the elasticsearch APIs and offers a lot of useful tools like index dumping and loading, very detailed debugging info, high configurable logging, a self documentation tool, a lot of out of the box integrations, and a better documentation with some tutorial. {% see 1.1 %}
+
+## Flex vs Tire Comparison
+
+Here is the list of the main differences.
+
+{% slim comparison_table.slim %}
+
+## Conclusion
+
+Flex is very different from Tire: it enforces almost the opposite concepts in most areas, and implements more tools and features. So which one should you choose for your elasticsearch interactions?
+
+I honestly don't see any compelling reason to choose Tire, while I see plenty of reasons to choose Flex, but I may be biased, so if you have a different opinion I would like to know it and possibly learn from you. Please, don't hesitate to contact me and comment on this writeup. Thanks.

@@ -5,7 +5,10 @@ title: flex - Variables
 
 # Variables
 
-When you call a generated method (originated by a template), you can pass a hash of variables that will be interpolated into the templates.
+When you call a generated method (originated by a template), you can pass a list of hashes of variables that will be interpolated into the templates.
+
+> __Notice__: We will use just one hash in the following examples, but you can actually pass a list of hashes that will be deep merged into one single hash {% see 2.2.4#7_single_call_level Single Call Level %}.
+
 For example:
 
 {% highlight yaml %}
@@ -30,7 +33,7 @@ my_search:
 MyClass.my_search
 {% endhighlight %}
 
-but you can also set a default for all the `the_color` tags in the source file, or for all the source files used by your class, or for all the requests of your app by setting them at different levels.
+but you can also set a default for all the `the_color` tags in the source file, or for all the source files used by your class, or for all the requests of your app, etc. by setting them at different levels.
 
 ## Variable Levels
 
@@ -52,7 +55,7 @@ config.variables.deep_merge! :the_color => 'green'
 
 ### 2. Template Class level
 
-This is mostly used internally by the `Flex::Template::*` subclasses. You might need it if you want to create a custom template class. In that case take a look at the implementation of [flex/template/slim_search](../blob/master/lib/flex/template/slim_search.rb).
+This is mostly used internally by the `Flex::Template::*` subclasses. You might need it if you want to create a custom template class. In that case take a look at the implementation of [flex/template/slim_search](https://github.com/ddnexus/flex/blob/master/lib/flex/template/slim_search.rb).
 
 {% highlight ruby %}
 class MyTemplateClass < Flex::Template
@@ -62,9 +65,10 @@ class MyTemplateClass < Flex::Template
   ...
 end
 {% endhighlight %}
+
 ### 3. Host Class level (your class)
 
-When you want to set a default variable for all the requests from your own class (host class) you can simply add the variables to the `flex` class proxy of your class:
+When you want to set a default variable for all the requests from your own class (context class) you can simply add the variables to the `flex` class proxy of your class:
 
 {% highlight ruby %}
 class MyClass
@@ -94,7 +98,9 @@ my_search:
 - query:
     term:
       color: <<the_color>>
-- type: [car, truck]
+- type:
+  - car
+  - truck
 {% endhighlight %}
 
 ### 6. Tag Level
@@ -107,7 +113,7 @@ This is a quite specific level: may be overridden only by the call argument belo
 
 ### 7. Single Call Level
 
-This is the most specific level where you can set a variable, indeed it affect only that single request and overrides any other level that my set `:the_color`.
+This is the most specific level where you can set a variable, indeed it affect only that single request and overrides any other level that may set `:the_color`.
 
 {% highlight ruby %}
 MyClass.my_search :the_color => 'white'
@@ -120,7 +126,7 @@ Besides, all the methods that accept a variable hash, can accept a list of hashe
 MyClass.my_search @default_controller_vars, params, :the_color => 'pink'
 {% endhighlight %}
 
-The order is important! In this case we pass 3 hashes: the 3rd hash will override the 2nd, which will override the 1st.
+The order is important: in this case we pass 3 hashes: the 3rd hash will override the 2nd, which will override the 1st.
 
 ## Special Variables
 

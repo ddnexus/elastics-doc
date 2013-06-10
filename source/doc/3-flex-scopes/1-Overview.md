@@ -6,9 +6,7 @@ alias_index: true
 
 # {{ page.title }}
 
-The `flex-scopes` gem implements the same concept of the `ActiveRecord` scopes: they define search criteria that can be used to query the elasticsearch indices in pure ruby. That is a cool tool, very useful in most situations, particularly when the search criteria are quite simple, however, when the search criteria get more complex, using a template may be a cleaner technique {% see 2.2.2 %}.
-
-For that reason, the `flex-scopes` gem is not (or at least not yet) a complete interface to elasticsearch: it's just a handy tool, useful for the most common needs.
+The `flex-scopes` gem implements the same concept of the `ActiveRecord` scopes: they define search criteria that can be used to query the elasticsearch indices in pure ruby.
 
 ## Built-in Scopes
 
@@ -82,3 +80,9 @@ first_in_range = in_range_scope.first
 {% endhighlight %}
 
 {% see 3.2#scope scope, 3.2#scoped scoped%}
+
+## Chosing the right tool
+
+Flex scopes are cool tools, very useful in most situations, particularly when the search criteria are quite simple, however, when the search criteria get more complex, using templates may be a cleaner technique {% see 2.2.2 %}.
+
+For that reason, the `flex-scopes` gem is not a complete interface to elasticsearch: it's just a handy tool, useful for the most common searching needs.

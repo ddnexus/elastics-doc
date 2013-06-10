@@ -40,11 +40,11 @@ table.code-topics#scope-methods cellspacing=0 cellpadding=0 style="width: 100%"
 
       | {% shighlight ruby %}
         # specially useful with variable scopes
-        scope :special, size(5).fields(:field_one, :field_two)
+        scope :my_variables, size(5).fields(:field_one, :field_two)
 
         # you can call a template on any scope
-        special.my_template_name
+        my_variables.my_template_name
 
         # which is like
-        YourClass.my_template_name(special)
+        YourClass.my_template_name(my_variables)
         {% endshighlight %}

@@ -160,10 +160,6 @@ include Flex::Templates
 
 def self.flex_result(result)
   vars = result.variables
-  if vars[:my_class_wrapper]
-    MyClass.new result
-  else
-    result
-  end
+  vars[:my_class_wrapper] ? vars[:my_class_wrapper].new(result) : result
 end
 {% endhighlight %}

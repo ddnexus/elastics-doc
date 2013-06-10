@@ -9,7 +9,7 @@ Flex exposes the full elasticsearch API Methods as own class methods. You will p
 
 The naming of these methods tries to conform with the original elasticsearch documentation (using the file name of the original elasticsearch url), and adds a few aliases for convenience.
 
-As any template-generated method, they accept a hash of variables for interpolation {% see 2.2.4, 2.2.5 %}. This documentation reports the internal templates and the usage examples complete with all the accepted variable, for completeness. Please, notice that you can omit variables that have defaults.
+As any template-generated method, they accept a list of variables (hashes) for interpolation {% see 2.2.4, 2.2.5 %}. This documentation reports the underlying templates and the usage examples complete with all the accepted variable, for completeness. Please, notice that you can omit variables that have defaults.
 
 **Notice**: you can get the updated full reference and usage example of these methods also in the console at any time, by just doing:
 
@@ -27,4 +27,6 @@ or limiting the output to a particular method like:
 ## Methods
 
 {% slim API_methods_table.slim %}
+
+> If you find any elasticsearch API missing from this list, please, let me know and I will add it right away (it should be just a matter of a couple of minutes)
 

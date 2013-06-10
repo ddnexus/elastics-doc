@@ -57,7 +57,7 @@ If the pruning occurs in the data tree, then the entire branch that ends in a ni
 {:tag_c => nil, :tag_e => nil} # would produce {"f":12}
 {% endhighlight %}
 
-> __Notice__: You can skip the pruning of arbitrary keys that are expected to containing nil/empty values by just adding them to the `:no_pruning` variable.
+> __Notice__: You can skip the pruning of arbitrary keys that are expected to containing nil/empty values by just adding them to the `:no_pruning` variable Array.
 
 Pruning also perform `compact` and `flatten` on `Array` values. That allows easier writing of templates that would be impossible in certain `YAML` structures, like for example extending an array with more items.
 
@@ -87,4 +87,4 @@ Pruning is very useful when you have queries that should be generated dynamicall
 
 ## Variable Check
 
-The interpolation process is aware of the required variables. It raises an error if you miss any variable when you call a flex-generated method.
+The interpolation process is aware of the required or optional variables. It raises an error if you miss any required variable when you call a flex-generated method.

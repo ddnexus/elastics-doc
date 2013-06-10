@@ -25,9 +25,20 @@ table.code-topics#activemodel-instance-methods cellspacing=0 cellpadding=0
 
   tr
     td
+      code generate_id
+    td
+      markdown:
+        You define this method if you want to manage the elasticsearch document id yourself. That is specially useful in certain contexts, when you may need to create a new document or update an old one, based on certain attributes (that identify the record). For example, you may want to reindex a document when it has the same `source` and `date`, while you want to create a new one if there is no document with that `source` and `date`. You may be tempted to query the index for the presence of the document, so decide to update or create, but there is an easier way: just generate an id based on `source` and `date` and that behaviour will happen automatically. For example:
+
+      | {% shighlight ruby %}
+        def generate_id
+          Digest::MD5.hexdigest [source, date.to_s(:date)].join
+        end
+        {% endshighlight %}
+
+  tr
+    td
       code method_missing
     td
       markdown:
-        This method forwards the missing methods to the `raw_result` structure, so your instance could reach all the methods added by the result extenders {% see 2.3 flex Result Extenders, 4.5 flex-model Result Extenders %}
-
-
+        This method forwards the missing methods to the `raw_result` structure, so your instance could reach all the methods added by all the result extenders {% see 2.3 flex Result Extenders, 4.5 flex-model Result Extenders %}

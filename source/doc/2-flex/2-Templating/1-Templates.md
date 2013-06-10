@@ -36,11 +36,11 @@ Flex uses the same basic principles of any templating system, but instead of des
 Flex implements different types of templates, useful in different context:
 
 * __Generic Templates__ `Flex::Template` base class
-* __Search Templates__ `Flex::Template::Search` subclass of `Flex::Template`)
-* __Slim Search Templates__ `Flex::Template::SlimSearch`, subclass of `Flex::Template::Search`
+* __Search Templates__ `Flex::Template::Search` (subclass of `Flex::Template`)
+* __Slim Search Templates__ `Flex::Template::SlimSearch` (subclass of `Flex::Template::Search`)
 * __Partial Template__ `Flex::Tempalte::Partial` class
 
-The Generic Templates can handle all sort of requests, but they are mostly useful to internally define all the elasticsearch API Methods {% see 2.6 %}. Indeed you will mostly use Search (or SlimSearch) templates, which are search-specialized subclass of templates, easier to use. Partial Templates are used to generate repeating structures (similar to the ERB Rails partials).
+The Generic Templates can handle all sort of requests, but they are mostly useful to internally define all the elasticsearch API Methods {% see 2.6 %}. Indeed you will mostly use Search (or SlimSearch) templates, which are search-specialized subclass of templates, easier to use. Partial Templates are used to generate repeating structures (similar to the ERB Rails partials) or dynamic structures.
 
 ### Flex Generic Templates
 
@@ -72,13 +72,13 @@ As you see in the previous example, the template definitions are basically named
 * http method
 * path
 * request body (optional data structure understood by elasticsearch)
-* variables (optional hash)
+* variables (optional list of hashes)
 
 Flex uses the Generic Templates internally, in order to implement the elasticsearch API methods and as the base class for the more specialized and less verbose Search Templates. You will probably never need to define Generic Templates directly, so from now on we will focus on Search Templates. If you need to recur to Generic Templates for any reason, take a look at the "API Methods" template source file as an useful reference: it implements the full elasticsearch API in just a few lines {% see 2.6 %}.
 
 ### Flex Search Templates
 
-Search Templates are simplified Generic Templates. Since - for an elasticsearch search request - the http method is is always `'GET'` and the path end point is always `'_search'`, Search Templates omit the first 2 arguments. This is how he above request would be rewritten as a Search Template:
+Search Templates are simplified Generic Templates. For an elasticsearch search request, the http method is is always `'GET'` and the path end point is always `'_search'`, so Search Templates omit the first 2 arguments. This is how the above request would be rewritten as a Search Template:
 
 {% highlight yaml %}
 my_request:
@@ -105,9 +105,19 @@ flex.load_search_source 'your/template/search_source.yml'
 
 {% see 2.2.2 %}
 
-#### MultiSearch
+#### Scan Search
 
-Flex implements also the elasticsearch multi-search capability with a very handy methods that allows you to do multiple searches with one request {% see 2.6#YourClass_flex_multi_search MultiSearch %}
+Implements the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`:
+
+{% highlight ruby %}
+Flex.scan_search(:my_template, my_vars) do |batch|
+  batch.each{|d|do_something_with(d)}
+end
+{% endhighlight %}
+
+#### Multi Search
+
+Flex implements also the elasticsearch multi-search capability with a very handy method that allows you to do multiple searches with one request {% see 2.6#YourClass_flex_multi_search MultiSearch %}
 
 ### Flex Slim Search Templates
 

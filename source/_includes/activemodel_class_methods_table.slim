@@ -4,7 +4,7 @@ table.code-topics#activemodel-class-methods cellspacing=0 cellpadding=0
       code attribute :properties
     td
       markdown:
-        The `attribute` method is implemented by [active_attr](https://github.com/cgriego/active_attr). `Flex::ActiveModel` extends it so it accepts a `:properties` argument that is used by flex to generate the maping.
+        The `attribute` method is implemented by [active_attr](https://github.com/cgriego/active_attr). `Flex::ActiveModel` extends it so it accepts a `:properties` argument that is used by flex to generate the mapping.
       | {% shighlight ruby %}
         attribute :price, :properties => {'type' => 'float'}, :default => 0
         {% endshighlight %}
@@ -59,7 +59,7 @@ table.code-topics#activemodel-class-methods cellspacing=0 cellpadding=0
       markdown:
         Defines an attachment attribute that integrates with [elasticsearch-mapper-attachments](https://github.com/elasticsearch/elasticsearch-mapper-attachments):
 
-        * if you omit the arguments it uses :attachment as the `<attachment_field_name>`
+        * if you omit the arguments it uses `:attachment` as the `<attachment_field_name>`
         * you can also pass other properties that will be merged with the default property for attachment
         * it automatically adds a `:<attachment_field_name>_scope` scope which will add all the meta fields (title, author, ...) to the returned fields, exluding the `<attachment_field_name>` field itself, and including all the other attributes declared __before__ it. For that reason you may want to declare it as the latest attribute.
 
@@ -93,6 +93,6 @@ table.code-topics#activemodel-class-methods cellspacing=0 cellpadding=0
         result = MyModel.searchable(the_query_string).first
 
         # the nested fields like 'page.title' and 'page.author' are accessible in ruby as flattened-name methods
-        puts result.page_title + result.page_author
+        puts result.page_title, result.page_author
 
         {% endshighlight %}

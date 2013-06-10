@@ -101,7 +101,7 @@ Easily design complex search queries in simple `YAML` that automatically define 
 
 Flex implements a very simple but powerful templating system that allows you to define very elaborate queries and automatically generate the methods to use (and reuse) them. This method is typically used for search queries, that may grow quite complex, but internally Flex uses it everywhere.
 
-Define the Flex source `my_source.yml`: it's just a `YAML` document containing a few named templates and placeholder tags:
+Define the Flex source `my_source.yml`: it's just a `YAML` document containing a few elasticsearch queries and placeholder tags:
 
 {% highlight yaml %}
 my_template:

@@ -5,7 +5,7 @@ table.code-topics cellspacing=0 cellpadding=0
         | :context
     td
       markdown:
-        This variable contain the context class, which is usually the class where you included some Flex module (like `Flex::Templates`, `Flex::Scopes`, `Flex::ModelIndexer`, etc.). Is is used by the `flex-scopes` gem.
+        This variable contain the context class, which is usually the class where you included some Flex module (like `Flex::Templates`, `Flex::Scopes`, `Flex::ModelIndexer`, etc.). It is used by the `flex-scopes` gem.
 
   tr
     td
@@ -21,7 +21,7 @@ table.code-topics cellspacing=0 cellpadding=0
         | :data
     td
       markdown:
-        This variable contain the data, i.e. the request body. You may need to set it directly in some very special case, but it is mostly used internally.
+        This variable contain the data, i.e. the request body (a ruby structure that express the elasticsearch `JSON` query). You may need to set it directly in some very special case, but it is mostly used internally.
 
   tr
     td
@@ -30,14 +30,6 @@ table.code-topics cellspacing=0 cellpadding=0
     td
       markdown:
         The params are a hash of key/value pairs. Flex will transform them in the query string part of the path (all what comes after the `?`), so you will probably use it quite often.
-
-  tr
-    td
-      code
-        | :page
-    td
-      markdown:
-        The page number of the pagination. By setting this variable you get automatically set the `:from` param, consistently with the `:size` (that is usually defaulted). Very convenient when you get the page number from a pagination link). Default 1.
 
   tr
     td
@@ -61,5 +53,5 @@ table.code-topics cellspacing=0 cellpadding=0
         | :raw_result
     td
       markdown:
-        Boolean. `true` will return the raw result as returned by elasticsearch. It is mostly useful to skip the automatic casting provided by the `Flex::ActiveModel` module, or skip your own post processing of the result {% see 2.3#yourclassflex_resultresult flex_result %}.
+        Boolean. `true` will return the raw result as returned by elasticsearch. It is mostly useful to skip the automatic casting provided by the `Flex::ActiveModel` module, or skip your own post processing of the result {% see 2.3#modelflex_resultresult flex_result %}.
 

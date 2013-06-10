@@ -45,7 +45,7 @@ result2 = MySearch.another_named_template params
 
 and so retrieving the results from the elasticsearch server by just calling the generated methods.
 
-## Loader Module
+## Templates Module
 
 Sources are loaded through the `Flex::Templates` module that you include in your class. You can load one source per class, or more than one source in the same class, even if they are different types of templates. However one source can contain only templates of the same type plus any number of partials templates.
 
@@ -107,6 +107,26 @@ flex.define_search :a_named_template <<-yaml
 {% endhighlight %}
 
 >  __Notice__: since you passed the name of the template as an argument, the `YAML` string defining the source must not include it.
+
+### Template Wrapper
+
+Sometimes you may need to modify the behaviour of the template methods defined by your sources, for example to pre-process the variables passed to one or more template methods. In that case you can overwrite the original method by using the `flex.wrap` method. For example:
+
+{%highlight ruby %}
+class MyClass
+  include Flex::Templates
+  flex.load_search_source
+
+  flex.wrap :my_template, :my_other_template do |*vars|
+    super pre_process(*vars)
+  end
+
+end
+{% endhighlight %}
+
+In the example, the `load_search_source` loads the templates - namely the `my_template` and the `my_other_template` - into your `MyClass`, but you want to preprocess the variables (for example cleaning up the request `params` that you pass them). The `flex.wrap` method redefines the orignal methods with its block. Notice that `super` in the wrapper block context, refers to the original method.
+
+> __Notice__: You can omit the template names if you want to wrap all the template methods.
 
 ## The 'ANCHORS' key
 

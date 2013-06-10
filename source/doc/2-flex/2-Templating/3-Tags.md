@@ -35,7 +35,7 @@ results2 = MyClass.my_request :user_id => 49
 Tags are used as placeholder for the real values that will be interpolated into the structure just before executing the http request. The syntax follows a few very simple rules:
 
 * their name must be suitable to be ruby method names
-* they must not be one of the reserved variable names (`path`, `data`, `params`, `page`, `no_pruning`, `raise`)
+* they must not be one of the reserved variable names {% see 2.2.4#special_variables %}
 * you can use or omit spaces around names
 * they may contextually define a default (similar to the arguments of a ruby method)
 
@@ -46,7 +46,7 @@ Here are a few example of tags:
     <<a_tag_with_default= the default >>
     << an_optional_tag= ~ >>
     << _a_partial_template >>
-    "<<a_quote_wrapped_tag= {query: '*'} >>" (the wrapping quotes avoid a YAML parsing error due to the ':')
+    "<<a_quote_wrapped_tag= {query: '*'} >>" # (the wrapping quotes avoid a YAML parsing error due to the ':')
 
 You are not limited to use tag as value placeholder: you can use them anywhere in the yaml, also as key placeholder or partial keys or values if it makes sense to you:
 
@@ -78,7 +78,7 @@ my_request:
       user_id: <<user_id= 10 >>
 {% endhighlight %}
 
-With this template/method if we don't pass any index value, the `user_id` default value will be used. So we can use the query method like:
+With this template/method if we don't pass any `:user_id` variable, the default value will be used. So we can use the query method like:
 
 {% highlight yaml %}
 results1 = MyClass.my_request # will use :user_id => 10

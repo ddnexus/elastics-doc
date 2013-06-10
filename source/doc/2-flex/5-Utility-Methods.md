@@ -61,6 +61,10 @@ yaml
 
 ## Other methods
 
+### Flex.reload!
+
+This method is useful in the console, when you are editing some template source: it reloads all the sources, so you can try the changes without restarting the console.
+
 ### Flex.search
 
 This method allows you to define and use a Search Template {% see 2.2.1#flex_search_tempaltes %} on the fly. It is very useful in the console or for quick prototyping, but it is not as efficient as a regular Template loaded from source (which gets compiled), so don't use it in your production code.
@@ -79,6 +83,10 @@ As the curl-like methods, the data can be a `JSON` or `YAML` string or a `ruby` 
 ### Flex.slim_search
 
 Same as `Flex.search` but uses a Slim Search Template {% see 2.2.1#flex-slim_search_templates %}.
+
+### Flex.scan_search
+
+Shortchut for `flex.scan_search` {% see 2.2.1#scan_search %}
 
 ### Flex.json2yaml
 

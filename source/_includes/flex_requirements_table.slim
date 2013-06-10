@@ -1,0 +1,60 @@
+table#flex_requirements cellspacing=0 cellpadding=0
+
+  tr
+    th Requirement
+    th Implementation
+
+  tr
+    td It must cover the complete elasticsearch APIs, nothing excluded
+    td
+      ' Flex implements all the elasticsearch APIs as ready to use methods
+      == Helper.see '2.6'
+
+  tr
+    td It must use the same elasticsearch structures to express queries (so no reverse engineer needed)
+    td
+      ' The flex Template Sources use the same elasticsearch structures, just written in easier to write and read <code>YAML</code> (or <code>JSON</code> or ruby if you prefer)
+      == Helper.see '2.2.2'
+
+  tr
+    td The result must be the same structure returned by elasticsearch
+    td
+      ' Flex returns always the elasticsearch response, just extended (and custom-extendable) with useful methods
+      == Helper.see '2.3'
+
+  tr
+    td It must provide an easy system to reuse part of queries into other queries
+    td
+      ' You can use the native anchor/alias <code>YAML</code> capabilities to reuse query fragments, or pass structures that will be merged into the final query structure
+      == Helper.see '2.2.2,2.2.5'
+
+  tr
+    td It must allow easy variable interpolation into the query structure
+    td
+      ' Just define placeholder tags into any query, and you will have the possibility to interpolate any value in their place
+      == Helper.see '2.2.3'
+
+  tr
+    td It must allow cascading defaults (so you can set your variables at different levels in order to affect different ranges of queries)
+    td
+      ' Flex implements a very flexible and configurable variables system that saves you a lot of coding
+      == Helper.see '2.2.4'
+
+  tr
+    td It must automatically define custom search methods, starting from the bare query structure
+    td
+      ' Flex automatically defines the query methods in your classes, complete with variable checking and documentation
+      == Helper.see '1.2#4_template_based_usage Template Based Usage, 2.4'
+
+  tr
+    td It must keep the elasticsearch logic toghether, but separated from the app logic
+    td
+      ' Flex enforces a clean separation of logics through Template Sources and metaprogramming
+      == Helper.see '2.2.1'
+
+  tr
+    td It must implement a robust model integration, supporting cross-syncing and parent/child relations
+    td
+      ' Flex implements a very easy and declarative way to cross-sync and manage parent/child relations, also polymorphic
+      == Helper.see '4.4.1, 4.2#elasticsearch_parentchildren_relations Parent/Child Relations'
+

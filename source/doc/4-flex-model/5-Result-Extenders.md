@@ -41,13 +41,13 @@ loaded_collection = result.loaded_collection
   * __`result.loaded_collection`__<br>
     This method takes the index, types and ids from the collection, map them back to your original models, and query the DB with as less as possible queries, returning a collection of records (instead of a collection of elasticsearch documents). The records might be composed of mixed classes, depending on what you retrieved.
 
-    > This is an operation that requires an extra query per each type returned. For example if your collection contains 20 documents of a total of 3 different types, it generates 3 extra DB queries to retrieve the original models. For this reason it should be used only when performances are not a problem, besides, when you use it, you can avoid to load the document source, by using `Flex::Template::SlimSearch` templates, which are just regular Search Templates, that don't retrieve the source that in this case is not needed.
+    > This is an operation that requires an extra query per each type returned. For example if your collection contains 20 documents of a total of 3 different types, it generates 3 extra DB queries to retrieve the original models. For this reason it should be used only when the performance is not a problem, besides, when you use it, you can avoid to load the document source, by using `Flex::Template::SlimSearch` templates, which are just regular Search Templates, that don't retrieve the source that in this case is not needed.
 
 * __`Flex::Result::DocumentLoader`__<br>
   Applies to documents that contain (at least, but not limited to) `_index`, `_type`, `_id`. It adds the following method:
 
   * __`document.load`__<br>
-    Maps the document back to the original model and class and retrieve it from the DB:
+    Maps the document back to the original model and class and retrieves it from the DB:
 
 * __`Flex::Result::ActiveModel`__<br>
     It extends the results when the `context` class (your class) includes `Flex::ActiveModel`. It adds the following methods:
