@@ -2,7 +2,7 @@
 layout: doc
 title: Flex Overview
 alias_index: true
-alias: '/doc'
+alias: /doc
 ---
 
 # {{ page.title }}

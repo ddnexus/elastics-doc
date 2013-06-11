@@ -113,7 +113,7 @@ This is a quite specific level: may be overridden only by the call argument belo
 
 ### 7. Single Call Level
 
-This is the most specific level where you can set a variable, indeed it affect only that single request and overrides any other level that may set `:the_color`.
+This is the most specific level where you can set a variable, indeed it affects only that single request and overrides any other level that may set `:the_color`.
 
 {% highlight ruby %}
 MyClass.my_search :the_color => 'white'
@@ -130,7 +130,7 @@ The order is important: in this case we pass 3 hashes: the 3rd hash will overrid
 
 ## Special Variables
 
-Variables are usually created by you: their primary function is supplying the values to replace the tags, but there are a few variables that are special because they have a different function, so you cannot use a tag with their name. They are mostly set and used internally, but you might need to pass it explicitly in some special case.
+Variables are usually created by you: their primary function is supplying the values to replace the tags, but there are a few variables that are special because they have a different function, so you cannot define a tag with their name. They are mostly set and used internally, but you might need to pass it explicitly in some special case.
 
 {% slim special_variables_table.slim %}
 
@@ -140,7 +140,7 @@ Flex defines a few tags internally, so it adds some predefined variable to the s
 
 {% slim predefined_variables_table.slim %}
 
-> When you use other API methods (e.g. `Flex.multi_get`, `Flex.stats`, ...), you may need to set other variables as well {% see 2.6 %}.
+> When you use other API methods (e.g. `Flex.multi_get`, `Flex.stats`, ...), you may need to set other variables as well {% see 2.1 %}.
 > As usual you can get the variables and an usage example in the console with `Flex.doc`
 
 ## Flex Variables Structure

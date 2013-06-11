@@ -7,7 +7,7 @@ title: flex-model - Flex::ActiveModel
 
 The `Flex::ActiveModel` inclues the `Flex::ModelIndexer`, which includes `Flex::ModelSyncer` so you can use their method too {% see 4.4.2, 4.4.1 %}. Besides it includes the `ActiveAttr::Model` module from the [active_attr][], and the `ActiveModel` validations and callbacks, so refer to them for the documentation.
 
-We list here only the specific methods or overrides that are not documented elsewhere. We also omit the standard CRUD method that `Flex::ActiveModel` implements on its own but behave like in standard `ActiveRecord`.
+We list here only the specific methods or overrides that are not documented elsewhere. We also omit the standard CRUD methods that `Flex::ActiveModel` implements on its own but behave like in standard `ActiveRecord`.
 
 ## Class Methods
 

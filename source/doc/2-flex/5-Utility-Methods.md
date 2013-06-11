@@ -15,7 +15,7 @@ This methods are mostly used internally by the rake tasks {% see 1.4 %}, but in 
 
 This method accepts a `:collection` of objects, that can be hashes or Models, creates the formatted bulk data-string suitable to be passed to the elasticsearch server for bulk operations, and posts them. You can pass an `:action` that can be 'index' (default) or 'delete', and also a few other arguments like: `:index`, `:type`, `:version`, `:routing`, `:percolate`, `:parent`, `:timestamp`, `:ttl` that will be used as default for all the documents in the collection.
 
-**Notice**: If you have an already formatted bulk data-string you should use `Flex.bulk` {% see 2.6#flexbulk Flex.bulk %}, in order to bulk-index or bulk-delete the whole collection.
+**Notice**: If you have an already formatted bulk data-string you should use `Flex.bulk` {% see 2.1#flexbulk Flex.bulk %}, in order to bulk-index or bulk-delete the whole collection.
 
 ### Flex.import_collection(collection, args)
 

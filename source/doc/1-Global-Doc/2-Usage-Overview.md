@@ -175,7 +175,7 @@ Flex.stats :index    => %w[my_index my_other_index],
 
 > __Notice__: you don't actually need to pass any explicit `:index` or `:type` if you set them as a defaults {% see 2.2.4 %}
 
-You will probably never need to use the API Methods directly, since Flex does the heavy lifting for you, but they cover all the elasticsearch API, so they will be available when you will need to do anything special {% see 2.6 %}.
+You will probably never need to use the API Methods directly, since Flex does the heavy lifting for you, but they cover all the elasticsearch API, so they will be available when you will need to do anything special {% see 2.1 %}.
 
 ## 6. Curl-like Usage
 
