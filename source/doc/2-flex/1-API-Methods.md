@@ -1,6 +1,7 @@
 ---
 layout: doc
 title: flex - API Methods
+alias_index: true
 ---
 
 # API Methods

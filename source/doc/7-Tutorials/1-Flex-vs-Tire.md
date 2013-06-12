@@ -1,11 +1,14 @@
 ---
 layout: doc
 title: Why you should use Flex rather than Tire
+alias_index: true
 ---
 
 # {{ page.title }}
 
 I wrote this page because it looks like it is still not very clear what flex does and what are the differences with Tire (as you can read [here](http://stackoverflow.com/questions/14517686/integrating-elasticsearch-with-activerecord)), and also because I honestly think that if you are serious with elasticsearch, you have plenty of reasons to use Flex rather than Tire.
+
+You will find here a detailed analysis of the main difference between the 2 projects: if you want just a quick overview, you can jump to the [comparison table](#flex_vs_tire_comparison).
 
 > __Notice__: Being the author of Flex, it's difficult not being biased, but I will try to present the facts that support my opinion. Please, correct me if I am wrong or imprecise and I will fix any eventual mistake right away. Thanks.
 
@@ -15,11 +18,13 @@ I had to refactor a few quite similar Rails apps that were using Tire to index a
 
 In place of all that nested blocks in classes and controllers, I wanted to see just method calls passing the parameters to the search module, making the controller actions simpler to read by relegating the actual search logic inside that module. I mean something like:
 
-    @result = MySearch.contents_with(:query => params[:query])
-    @tags   = MySearch.related_tags(:tag => params[:tag])
-    # or even lazier
-    @result = MySearch.contents_with(params)
-    @tags   = MySearch.related_tags(params)
+{% highlight ruby %}
+@result = MySearch.contents_with(:query => params[:query])
+@tags   = MySearch.related_tags(:tag => params[:tag])
+# or even lazier
+@result = MySearch.contents_with(params)
+@tags   = MySearch.related_tags(params)
+{% endhighlight %}
 
 After working on that first step, the controllers were cleaner, but the search module looked like a bunch of long wrapper methods: one per each `Tire.search` calls extracted from the controllers. There was a lot of duplicated or very similar code inside that blocks, so I though I could extract the common parts to some helper method, but I soon discovered that that is a problem with Tire.
 
@@ -72,7 +77,7 @@ Tire.search 'articles' do
 end
 {% endhighlight %}
 
-As if that alone wouldn't be enough complex even without variables, at some point you will have also to interpolate your variables into that boolean queries by using some closure, and eventually you will have to wrap the proc in a method just to pass the variables. Ouch!
+As if that alone wouldn't be enough complex even without variables, at some point you will have also to interpolate your variables into that boolean queries by using some closure, and eventually you will have to wrap the procs in a method just to pass the variables. Ouch!
 
 > Flex allows you to reuse any fragment of any query into any other query.
 
@@ -166,7 +171,9 @@ Now, after one year of active usage and development, the current version of flex
 
 It's easier to use for elasticsearch beginners, since it implements `ActiveRecord`-like chainable scopes for easy searching and reusability, plus the `ActiveModel` integration to manage elasticsearch as it were an `ActiveRecord` DB.
 
-It's also more powerful for experts, since it covers all the elasticsearch APIs and offers a lot of useful tools like index dumping and loading, very detailed debugging info, high configurable logging, a self documentation tool, a lot of out of the box integrations, and a better documentation with some tutorial. {% see 1.1 %}
+It's also more powerful for experts, since it covers all the elasticsearch APIs and offers a lot of useful tools like index dumping and loading, very detailed debugging info, high configurable logging, a self documentation tool, a lot of out of the box integrations, and a better documentation with some tutorial {% see 1.1 %}.
+
+> Flex does not have a dedicated testing suite yet: its testing is still embedded in a few applications that exploit its features. However, that will be the very next development step.
 
 ## Flex vs Tire Comparison
 
@@ -176,6 +183,6 @@ Here is the list of the main differences.
 
 ## Conclusion
 
-Flex is very different from Tire: it enforces almost the opposite concepts in most areas, and implements more tools and features. So which one should you choose for your elasticsearch interactions?
+Flex is very different from Tire: it enforces almost the opposite concepts in most areas, it's easier to use and implements more tools and features. So which one should you choose for your elasticsearch interactions?
 
 I honestly don't see any reason to choose Tire, while I see plenty of compelling reasons to choose Flex, but I may be biased, so if you have a different opinion I would like to know it and possibly learn from you. Please, don't hesitate to send me your comments on this writeup. Thanks.

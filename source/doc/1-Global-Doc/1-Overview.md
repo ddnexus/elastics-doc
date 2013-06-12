@@ -28,7 +28,7 @@ Flex creates the documentation of your custom templates complete with usage exam
 Flex uses a fast libcurl HTTP client that is at least twice as fast as a pure ruby client (but you can fallback to pure ruby if you need to). It reuses the same HTTP session between different requests saving time and resources. It extends the elasticsearch result objects instead of duplicating new structures, saving memory. It compiles the YAML templates into ruby code at startup time and just calls it at render time for faster execution.
 
 * __Clean separation of the elasticsearch logic from the application logic__<br>
-Flex uses simple YAML documents (templates that you define) to encapsulate the whole request/response cycle to/from the elasticsearch server, relegating the elasticsearch logic away from the application logic. Your code will be clean, easy to write and read, and very short: "poetic-short".
+Flex uses simple YAML documents (templates that you define) to encapsulate the whole request/response cycle with the elasticsearch server, relegating the elasticsearch logic away from the application logic. Your code will be clean, easy to write and read, and very short: "poetic-short".
 
 * __Easily Extendable__<br>
 Flex provides a simple mechanism to extend all or just specific elasticsearch results with your own methods. That is a lot cleaner and self contained than extending the results in the application code {% see 2.3 %}.

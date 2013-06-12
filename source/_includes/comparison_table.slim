@@ -5,79 +5,79 @@ table#comparison cellspacing=0 cellpadding=0
     th Tire
 
   tr
-    td Implements the full elasticsearch API as ready to use methods
-    td Implement only a subset of some elasticsearch API
+    td.green Implements the full elasticsearch API as ready to use methods
+    td.orange Implements only a subset of some elasticsearch API
 
   tr
-    td Allows to compose every possible elasticsearch search query
-    td Only allows a few predetermined queries and filters
+    td.green Allows to compose every possible elasticsearch search query
+    td.orange Only allows a few predetermined queries
 
   tr
-    td Expresses queries in YAML, JSON and ruby, matching 1 to 1 with the elasticsearch API
-    td Expresses queries in its own DSL, not matching with the elasticseach API (so you need to reverse-engineer)
+    td.green Expresses queries in YAML, JSON and ruby, matching 1 to 1 with the elasticsearch API
+    td.orange Expresses queries in its own DSL, not matching with the elasticseach API
 
   tr
-    td Very configurable, detailed and easy to read logging system and debugging info
-    td Standard one-line logging
+    td.green Very configurable, detailed and easy to read logging system and debugging info
+    td.orange Standard one-line logging
 
   tr
-    td Implements Cascading Variables, with easy interpolation, deep-merging and overwriting
-    td N/A
+    td.green Implements Cascading Variables, with easy interpolation, deep-merging and overwriting
+    td.red N/A
 
   tr
-    td Can reuse any fragment of any query in any other query
-    td N/A
+    td.green Can reuse any fragment of any query in any other query
+    td.red N/A
 
   tr
-    td The original and complete elasticsearch response (extended with useful methods) is always accessible
-    td N/A
+    td.green The original and complete elasticsearch response (extended with useful methods) is always accessible
+    td.red N/A
 
   tr
-    td Implements a few mechanism to generate data-driven dynamic queries (with partials and pruning)
-    td N/A
+    td.green Implements a few mechanism to generate data-driven dynamic queries (with partials and pruning)
+    td.red N/A
 
   tr
-    td Uses meta-programming to automatically define query methods in your own classes, complete with variable checks and feedback
-    td N/A
-
-
-  tr
-    td Implements a self-documentation tool that provides detailed documentation and usage for your custom queries
-    td N/A
-
-  tr
-    td Implements an useful backup system (binary and rake tasks), to dump and load any index (not only those in your apps)
-    td N/A
-
-  tr
-    td Integrates with elasticsearch-mapper-attachment plugin
-    td N/A
+    td.green Uses meta-programming to automatically define query methods in your own classes, complete with variable checks and feedback
+    td.red N/A
 
 
   tr
-    td Enforces a clean separation between the elasticsearch logic and the application logic
-    td N/A
+    td.green Implements a self-documentation tool that generates detailed documentation and usage for your custom queries
+    td.red N/A
 
   tr
-    td Can define scopes, mix them with other scopes, and call different methods (queries) on any scope (you can call `first`, `last`, `all`, `each`, `each_batch`, ...)
-    td N/A
+    td.green Implements an useful backup system (binary and rake tasks), to dump and load any index (not only those in your apps)
+    td.red N/A
 
   tr
-    td Implements parent/child relationships, also polymorphic, transparently managing routing, parent and mappings
-    td N/A
+    td.green Integrates with elasticsearch-mapper-attachment plugin
+    td.red N/A
+
 
   tr
-    td Supports cross-syncing (i.e. you can declare that a model change will sync nother models with the index)
-    td N/A
+    td.green Enforces a clean separation between the elasticsearch logic and the application logic
+    td.red N/A
 
   tr
-    td Its development is funded by 2 sponsors
-    td N/A (?)
+    td.green Can define scopes, mix them with other scopes, and call different methods (queries) on any scope (you can call `first`, `last`, `all`, `each`, `each_batch`, ...)
+    td.red N/A
 
   tr
-    td Does not have a dedicated test suite yet (its testing is still embedded in a few apps that exploit its features)
-    td Has a dedicated test suite
+    td.green Implements parent/child relationships, also polymorphic, transparently managing mapping, routing and parent
+    td.red N/A
 
   tr
-    td It is still quite recent so it has a smaller user-base
-    td It has been around for a few years so it has a bigger user-base
+    td.green Supports cross-syncing (i.e. you can declare that a model change will sync nother models with the index)
+    td.red N/A
+
+  tr
+    td.green Its development is funded by 2 sponsors
+    td.red N/A
+
+  tr
+    td.red Does not have a dedicated testing suite yet (coming next)
+    td.green Has a dedicated testing suite
+
+  tr
+    td.orange It is still quite recent so it has a smaller user-base
+    td.green It has been around for a few years so it has a bigger user-base

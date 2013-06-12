@@ -14,6 +14,18 @@ table.code-topics#gems cellspacing=0 cellpadding=0
         * Logging & Debugging
         * Self-documenting tool
         * Modules and Mixins
+
+  tr
+    td
+      code flex-scopes
+    td
+      markdown:
+        > very cool option for most common needs and for beginners
+
+        It provides `ActiveRecord`-like chainable `scopes` allowing to use pure ruby to search your indices. It simplifies your code and make it very reusable.
+
+      == Helper.see '3'
+
   tr
     td
       code flex-model
@@ -34,15 +46,7 @@ table.code-topics#gems cellspacing=0 cellpadding=0
         * Bulk import
         * Real-time indexing and search capabilities
 
-  tr
-    td
-      code flex-scopes
-    td
-      markdown:
-        > very cool option for most common needs and for beginners
-
-        It provides `ActiveRecord`-like chainable `scopes` allowing to use pure ruby to search your indices.
-
+      == Helper.see '4'
 
   tr
     td
@@ -50,9 +54,14 @@ table.code-topics#gems cellspacing=0 cellpadding=0
     td
       markdown:
         integrates all the flex gems with `Rails`, providing also specific tasks, generators, logger options, etc.
+
+      == Helper.see '5'
+
   tr
     td
       code flex-backup
     td
       markdown:
         provides an executable and a few tasks to `dump`, `load`, `reindex` and `stat` any elasticsearch index.
+
+      == Helper.see '6'

@@ -140,7 +140,7 @@ module Jekyll
       page_url  = context.environments.first['page']['url']
       page_node = DocTree.find_by_name(page_url)
       out       = page_node.parentage.reverse.map do |node|
-                    node.short_title
+                    %(<a href="#{Helper.baseurl}#{node.name}">#{node.short_title}</a>)
                   end
       out << page_node.short_title
       out.map{|i|"<span>#{i}</span>"}.join(' &gt; ')
