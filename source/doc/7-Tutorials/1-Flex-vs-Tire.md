@@ -145,9 +145,11 @@ That suggests that the index structure should play an application-global role, r
 
 ### Funny Defaults
 
-Then you have that funny defaults for index and type that will generate one index per model, each index populated by one single type. That reiterate the design problem outlined above for settings and mappings. Besides, that defaults don't look like a basic defaults for an average application. Perhaps a simple and basic "one index per app, one type per model" default would do for most apps, and that's similar to the familiar concept "one DB per app, one table per model".
+Then you have that funny defaults for index and type that will generate one index per model, each index populated by one single type. By default, you have a completely _model-centric_ design, instead of a more useful _application-centric_ design (as already outlined in the previous topic). Beside there is another surprise if you run multiple applications that have some model class with the same name. By default, your indices will be shared among different applications because they define the same model classes. I don't think you want to index the posts of the "Racing Forum" app in the same index of the "Furniture Forum" app just because they are both managed by a `Post` model.
 
-> Flex defaults to the "one index per app, one type per model", which seems a good start for most apps. However, if your particular app needs to split apart the index or manage the indices dynamically, it's just a matter of adding a simple declaration in the model.
+That doesn't look like the best default design to start an application with. For example, a simple and basic "one index per app, one type per model" default would do for most apps: it would be _application-centric_ and would avoid unwanted index sharing. Besides, that's similar to the familiar concept "one DB per app, one table per model".
+
+> Flex is application-centric by default: it embraces "one index per app, one type per model" design to start with, however, if your particular app needs to split apart the index or manage the indices dynamically, it's just a matter of adding a simple declaration in the model.
 
 ## Flex Project
 
