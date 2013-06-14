@@ -60,7 +60,7 @@ The functionality of flex are conveniently organized and integrated by a few gem
 * `ActiveModel` 2 and 3 {% see 4.3 %}
 * `Mongoid` 2 and 3 {% see 4.2 %}
 * `Rails` 2 and 3 {% see 5 %}
-* `elasticsearch-mapper-attachments` plugin {% see 4.3#elasticsearchmapperattachments elasticsearch-mapper-attachments %}
+* `elasticsearch-mapper-attachments` plugin {% see 4.4.3#attribute_attachment %}
 * `will_paginate` and `kaminari` recent versions
 
 ## Configuration

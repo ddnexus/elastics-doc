@@ -25,6 +25,14 @@ We want to index our posts, so we could search them with elasticsearch, so we ad
 
 (* Add some explanation about the inclusion and the sync. It is documented in the flex-model section. )
 
+add it to the flex_models array in the config/initializers/flex.rb
+
+    config.flex_models |= [ Post ]
+
+create the index
+
+    $ rake flex:index:create
+
 (* Fire the console and add some record )
 
 (* now check the indexed elasticsearch documents )
