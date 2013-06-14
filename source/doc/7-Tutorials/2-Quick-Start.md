@@ -21,10 +21,10 @@ If you are on any other OS, just read [elasticsearch installation](http://www.el
 
 ## Setup
 
-- create a rails app ( use the flag for no DB )
+- create a rails app
 
 {% highlight bash %}
-$ rails new simple_search --flag-for-no-db
+$ rails new simple_search
 {% endhighlight %}
 
 - follow the first 3 steps in the flex-rails setup documentation {% see 5#setup %}
