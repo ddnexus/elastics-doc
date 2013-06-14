@@ -98,7 +98,7 @@ flex.load_search_source <<-yaml
 You can define a single Search Template inline, with the `define_search` method:
 
 {%highlight ruby %}
-flex.define_search :a_named_template <<-yaml
+flex.define_search :a_named_template, <<-yaml
   query:
     query_string:
       query: <<the_string>>

@@ -171,7 +171,7 @@ Not bad for the first version of the gem!
 
 Now, after one year of active usage and development, the current version of flex includes a lot of improvements and additions. Its code has been optimized and organized into 5 gems that you can use together or separately.
 
-It's easier to use for elasticsearch beginners, since it implements `ActiveRecord`-like chainable scopes for easy searching and reusability, plus the `ActiveModel` integration to manage elasticsearch as it were an `ActiveRecord` DB.
+It's easier to use also for elasticsearch beginners, since it implements `ActiveRecord`-like chainable scopes for easy searching and reusability, plus the `ActiveModel` integration to manage elasticsearch as it were an `ActiveRecord` DB.
 
 It's also more powerful for experts, since it covers all the elasticsearch APIs and offers a lot of useful tools like index dumping and loading, very detailed debugging info, high configurable logging, a self documentation tool, a lot of out of the box integrations, and a better documentation with some tutorial {% see 1.1 %}.
 
