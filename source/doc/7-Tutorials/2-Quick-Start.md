@@ -86,9 +86,11 @@ Add a few comment on the new created document, saying that it is just like any r
 
 - Try to add a record with no name (to experiment with validation)
 
-### Search
-
+## Search
 
 
 ### Add some custom scope to the model and use it
 
+(* use the created scopes in the console. chain a couple of scopes and get the result by calling all for example. Pass also the :page => 2 variableto the all method, to show how the pagination works (notice:if they are too less records, the default size 10 of elasticsearch will cause page #2 to return no result, you can pass a size 3 for example by passing :params =>{:size => 3}. That will generate pages of 3 documents so you can see the page #2 will have some result.
+
+(* add a note saying that if you want to study the result structure in the console, you may want to set the Flex::Configuration.logger.debug_result to true. You can do it right in the same console session, and from then on the result will be printed also in easy to read YAML.

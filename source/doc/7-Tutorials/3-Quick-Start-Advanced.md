@@ -94,6 +94,7 @@ Notice that we include Flex::ModelSyncer, and not Flex::ModelIndexer. That's bec
 ## Search
 
 ### Flex Scopes
+
 (* Show that we can add flex-scopes and use them for easy search. Please refers to the "Using flex-scopes with ActiveRecord Models" in teh flex-scope doc to setup the scope in the Post model)
 
 ### Templates

@@ -100,7 +100,11 @@ we chained togeter a few scopes: the attachment_scope is predefined by the attri
 
 Let's try it in the console:
 
-    result = FlexDocPage.searchable 'flex'
+    my_scope = FlexDocPage.searchable 'flex'
+
+That scope is chainable with other scopes as well. If we need the actual results from that scope, we should call one of the query-scopes, (all, first, last, etc.):
+
+    results = my_scope.all
 
 (* if everything is ok, please, add a FlexDocController controller and a search action with the relative view. In the view add a form:
 
@@ -175,6 +179,7 @@ The highlights need to be highlighted with something like:
       padding-left: 3px
       padding-right: 3px
 
+Now point your browser to the search page and search the Flex Doc Site from your app.
 
 (* it should be all)
 
