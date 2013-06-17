@@ -39,14 +39,14 @@ table.code-topics#indexer-instance-methods cellspacing=0 cellpadding=0
       code flex.sync
     td
       markdown:
-       Implemented by the `Flex::ModelSyncer` module {% see 4.4.1#flexsync flex.sync %}.
+        Implemented by the `Flex::ModelSyncer` module {% see 4.4.1#flexsync flex.sync %}.
 
   tr
     td
       code flex.get
     td
       markdown:
-       Retrieves the elasticsearch document from the index. The result is extended as usual {% see 2.3 %}, {% see 4.6 %}. Mostly useful in the console to inspect the elasticsearch related document.
+        Retrieves the elasticsearch document from the index. The result is extended as usual {% see 2.3 Flex Extenders,4.5 Flex Model Extenders, 5.2 Flex Rails Extenders %}. Mostly useful in the console to inspect the elasticsearch related document.
       | {% shighlight irb %}
         >> comment = Comment.first
         >> comment.flex.get
@@ -58,11 +58,11 @@ table.code-topics#indexer-instance-methods cellspacing=0 cellpadding=0
       code flex_source
     td
       markdown:
-       {% see 4.2#indexing_records %}
+        {% see 4.2#indexing_records %}
 
   tr
     td
       code flex_indexable?
     td
       markdown:
-       {% see 4.2#indexing_fields %}
+        {% see 4.2#indexing_fields %}

@@ -9,9 +9,9 @@ In this tutorial we will create a crawl rake task that will crawl this documenta
 
 ## Prerequisite
 
-You need to install the elasticsearch-mapper-attachment plugin. That's very easy: (* see the doc https://github.com/elasticsearch/elasticsearch-mapper-attachments)
+You need to install the elasticsearch-mapper-attachment plugin. That's very easy: (Tiago: see the doc https://github.com/elasticsearch/elasticsearch-mapper-attachments)
 
-(* add the installation command
+(Tiago: add the installation command
 
 ## Steps
 
@@ -69,7 +69,7 @@ Rake task
         end
       end
 
-(* please, try it and let me know whether it works as is. Ask me if you have any problem )
+(Tiago: please, try it and let me know whether it works as is. Ask me if you have any problem )
 
 
 Run the task, that will crawl and index the Flex Doc Site
@@ -106,7 +106,7 @@ That scope is chainable with other scopes as well. If we need the actual results
 
     results = my_scope.all
 
-(* if everything is ok, please, add a FlexDocController controller and a search action with the relative view. In the view add a form:
+(Tiago: if everything is ok, please, add a FlexDocController controller and a search action with the relative view. In the view add a form:
 
 
       def search
@@ -122,9 +122,9 @@ the form snippet
       '
       = submit_tag('Reset', :name => 'reset', :id => 'reset-button' )
 
-(* add also Kaminari for pagination in the gemfile and in the result page )
+(Tiago: add also Kaminari for pagination in the gemfile and in the result page )
 
-snippet for the pagination in the footer (*it is in slim, please translate it in erb)
+snippet for the pagination in the footer (Tiago:it is in slim, please translate it in erb)
 
     #pagination
       = page_entries_info @results.collection, :entry_name => 'result'
@@ -138,39 +138,18 @@ The result page will contain some loop like:
           b = page.attachment_title
 
 
-That will provide only a list of page titles and the link to the original page. It will work, but we want to do something nicer, so let's add an helper to manage the highlights.
-
-This helper will be probably included in Flex, so you could just use it in the next flex version. For now lets add it to the FlexDocHelper module
-
-    # returns the truncate attribute if not highlighted, or the first 5 highlighted segments of the attribute
-    def highlighted_content_field(doc, attr, missing_string='')
-      content = if doc.highlight && doc.highlight[attr]
-                  fragments = Array.wrap(doc.highlight[attr])
-                  txt = fragments[0..4].join(' ... ')
-                  txt << ' ...' if fragments.size > 5
-                  txt
-                else
-                  if (attr == 'attachment')
-                    missing_string
-                  else
-                    attr_name = attr.gsub('.', '_').to_sym
-                    doc.respond_to?(attr_name) ? doc.send(attr_name).truncate(600) : missing_string
-                  end
-                end
-      content.html_safe
-    end
-
-So we can change our view with:
+That will provide only a list of page titles and the link to the original page. It will work, but we want to do something nicer, so let's use the `highlighted_*` helpers to manage the highlights in the views:
 
     - @results.collection.each do |page|
       .title
         a href=page.url target='_blank'
-          b = highlighted_content_field(page, 'attachment.title')
+          b = page.highlighted_attachment_title
 
-      .content = highlighted_content_field(doc, 'attachment')
+      .content = page.highlighted_attachment
 
+> __Notice__: the `highlighted_\*` methods return the joined string from the elasticsearch `highlights`, if there are no highlights and the attribute exists they return the attribute, or an empty string in any other case.
 
-(* please add some css to make the thing nice. )
+(Tiago: please add some css to make the thing nice. )
 
 The highlights need to be highlighted with something like:
 
@@ -181,6 +160,6 @@ The highlights need to be highlighted with something like:
 
 Now point your browser to the search page and search the Flex Doc Site from your app.
 
-(* it should be all)
+(Tiago: it should be all)
 
 

@@ -5,7 +5,7 @@ title: How to migrate from flex 0.x
 
 # {{ page.title }}
 
-Flex 1.x has changed quite a lot from version 0.x but you need just to rename a few things in order to upgrade it. You can do it in 3 minutes with just a few search and replace.  If you miss any change, flex will work anyway, but will emit a deprecation warning, so keep an eye on the log.
+Flex 1.x has changed quite a lot from version 0.x but you need just to rename a few things in order to upgrade it. You can do it in a couple of minutes with just a few search and replace.  If you miss any change, flex will work anyway, but will emit a deprecation warning, so keep an eye on the log.
 
 ## Changes
 
