@@ -2,7 +2,7 @@ source 'http://rubygems.org'
 
 gem 'jekyll', '~> 1.0'
 gem 'jekyll-asset-pipeline', '0.1.5.dd'
-gem 'slim', :git => 'git://github.com/slim-template/slim.git', :ref => 'v2.0.0.pre.8'
+gem 'slim', '~>2.0.0'
 gem 'jekyll-slim', '~> 0.8.2'
 gem 'sass', '~> 3.2.9'
 gem 'coffee-script', '~>2.2.0'
