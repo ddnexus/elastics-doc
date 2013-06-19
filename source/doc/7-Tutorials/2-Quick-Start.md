@@ -3,7 +3,7 @@ layout: doc
 title: Quick Start (easy)
 ---
 
-# {{ page.title }} (Work in progress for Tiago)
+# {{ page.title }} (Work in progress)
 
 > almost no elasticsearch needed to experiment with this tutorial
 
@@ -64,22 +64,22 @@ Let's open the rails console and start to play with our new app:
 
 ### Check the index
 
-- check whether the index exists (Tiago: include the result)
+- check whether the index exists (Edit-note: include the result)
 {% highlight irb %}
 Flex.exists?
 {% endhighlight %}
 
-- check the mapping (notice the :category attribute) (Tiago: include the result)
+- check the mapping (notice the :category attribute) (Edit-note: include the result)
 {% highlight irb %}
 Flex.get_mapping
 {% endhighlight %}
 
-### Populate the index with some content (Tiago: add a few documents with different content in a few different categories )
+### Populate the index with some content (Edit-note: add a few documents with different content in a few different categories )
 
 {% highlight irb %}
 c = Content.create :name => 'First Content',
-                   :text => 'bla bla bla'     (Tiago: please add some content that makes sense )
-                   :category => 'my_category' (Tiago: same for the category )
+                   :text => 'bla bla bla'     (Edit-note: please add some content that makes sense )
+                   :category => 'my_category' (Edit-note: same for the category )
 {% endhighlight %}
 
 Add a few comment on the new created document, saying that it is just like any record, etc... eventually adding a few check of something interesting
@@ -91,6 +91,6 @@ Add a few comment on the new created document, saying that it is just like any r
 
 ### Add some custom scope to the model and use it
 
-(Tiago: use the created scopes in the console. chain a couple of scopes and get the result by calling all for example. Pass also the :page => 2 variableto the all method, to show how the pagination works (notice:if they are too less records, the default size 10 of elasticsearch will cause page #2 to return no result, you can pass a size 3 for example by passing `:params =>{:size => 3}`. That will generate pages of 3 documents so you can see the page #2 will have some result.)
+(Edit-note: use the created scopes in the console. chain a couple of scopes and get the result by calling all for example. Pass also the :page => 2 variableto the all method, to show how the pagination works (notice:if they are too less records, the default size 10 of elasticsearch will cause page #2 to return no result, you can pass a size 3 for example by passing `:params =>{:size => 3}`. That will generate pages of 3 documents so you can see the page #2 will have some result.)
 
-(Tiago: add a note saying that if you want to study the result structure in the console, you may want to set the Flex::Configuration.logger.debug_result to true. You can do it right in the same console session, and from then on the result will be printed also in easy to read YAML.)
+(Edit-note: add a note saying that if you want to study the result structure in the console, you may want to set the Flex::Configuration.logger.debug_result to true. You can do it right in the same console session, and from then on the result will be printed also in easy to read YAML.)

@@ -3,15 +3,15 @@ layout: doc
 title: Quick Start (advanced)
 ---
 
-# {{ page.title }} (Work in progress for Tiago)
+# {{ page.title }} (Work in progress)
 
 We will add a few ActiveReocrd models to the rails app created in the previous tutorial, and sync it with elasticsearch, so each time any record changes, the index will be updated.
 
 We will also add flex scopes for easy search and flex templates for advanced search
 
-(Tiago: we will add a few related model, like Post and Comment for example, so we can show how to sync related models that embeds fields from an associated record. )
+(Edit-note: we will add a few related model, like Post and Comment for example, so we can show how to sync related models that embeds fields from an associated record. )
 
-(Tiago: The structure will be something like the following. Maybe we could add logical steps one at a time, and not all together, so we could explain each part better )
+(Edit-note: The structure will be something like the following. Maybe we could add logical steps one at a time, and not all together, so we could explain each part better )
 
     class Post < ActiveRecord::Base
     end
@@ -23,7 +23,7 @@ We want to index our posts, so we could search them with elasticsearch, so we ad
     include Flex::ModelIndexer
     sync self
 
-(Tiago: Add some explanation about the inclusion and the sync. It is documented in the flex-model section. )
+(Edit-note: Add some explanation about the inclusion and the sync. It is documented in the flex-model section. )
 
 add it to the flex_models array in the config/initializers/flex.rb
 
@@ -33,9 +33,9 @@ create the index
 
     $ rake flex:index:create
 
-(Tiago: Fire the console and add some record )
+(Edit-note: Fire the console and add some record )
 
-(Tiago: now check the indexed elasticsearch documents )
+(Edit-note: now check the indexed elasticsearch documents )
 
     >> Flex.match_all :type => 'post'
 
@@ -88,14 +88,14 @@ Notice that we include Flex::ModelSyncer, and not Flex::ModelIndexer. That's bec
 >__Notice__: Flex::ModelIndexer includes Flex::ModelSyncer, so it can sync as well
 
 
-(Tiago: do something in the console to show that the comment_count gets updated each time we add or delete a comment
+(Edit-note: do something in the console to show that the comment_count gets updated each time we add or delete a comment
 
 
 ## Search
 
 ### Flex Scopes
 
-(Tiago: Show that we can add flex-scopes and use them for easy search. Please refers to the "Using flex-scopes with ActiveRecord Models" in teh flex-scope doc to setup the scope in the Post model)
+(Edit-note: Show that we can add flex-scopes and use them for easy search. Please refers to the "Using flex-scopes with ActiveRecord Models" in teh flex-scope doc to setup the scope in the Post model)
 
 ### Templates
 
@@ -111,7 +111,7 @@ Let's suppose we have just one complex query for that particular indexed model. 
 
 We can do so in 2 ways: one is adding the search template right in the model, and the other is adding a Template Source file and loading it into the model. The first way is probably simpler to understand so we will use that one in this tutorial, but if we need a few templates, and/or if the templates are complex, using a Template Source is a lot cleaner. (refers to the doc in Templating
 
-(Tiago: adapt the following code to our example )
+(Edit-note: adapt the following code to our example )
 
     flex.define_search :a_named_template, <<-yaml
       query:
@@ -122,10 +122,10 @@ We can do so in 2 ways: one is adding the search template right in the model, an
 
 As you see we use exactly the same elasticsearc structure, we just use yaml instead of json, since it is easier, but we could use a json string or even a ruby structure. We just create a tag where we want to interpolate some variable.
 
-Use the template in the console: (Tiago: adapt it to our example )
+Use the template in the console: (Edit-note: adapt it to our example )
 
     >> result = Post.a_named_template :the_string => '..'
 
-Play also with the result: (Tiago: see the doc )
+Play also with the result: (Edit-note: see the doc )
 
     >> result.collection.each ....

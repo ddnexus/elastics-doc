@@ -6,7 +6,7 @@ alias_index: true
 
 # {{ page.title }}
 
-The `flex-scopes` gem implements the same concept of the `ActiveRecord` scopes: they define search criteria that can be used to query the elasticsearch indices in pure ruby.
+The `flex-scopes` gem implements the same concept of the `ActiveRecord` scopes: they define search criteria that can be used (reused and merged) to query the elasticsearch indices in pure ruby.
 
 ## Built-in Scopes
 

@@ -3,15 +3,15 @@ layout: doc
 title: Crawl and Index this Documentation Site
 ---
 
-# {{ page.title }} (Work in progress for Tiago)
+# {{ page.title }} (Work in progress)
 
-In this tutorial we will create a crawl rake task that will crawl this documentation and index all its content with the elasticsearch-mapper-attachment plugin. Then we will add a search template connected with a search form that will highlight the results and link the original page.
+In this tutorial we will create a crawl rake task that will crawl this documentation and index all its content with the elasticsearch-mapper-attachment plugin. Then we will add a search form that will highlight the results and link to the original page.
 
 ## Prerequisite
 
-You need to install the elasticsearch-mapper-attachment plugin. That's very easy: (Tiago: see the doc https://github.com/elasticsearch/elasticsearch-mapper-attachments)
+You need to install the elasticsearch-mapper-attachment plugin. That's very easy: (Edit-note: see the doc https://github.com/elasticsearch/elasticsearch-mapper-attachments)
 
-(Tiago: add the installation command
+(Edit-note: add the installation command
 
 ## Steps
 
@@ -69,7 +69,7 @@ Rake task
         end
       end
 
-(Tiago: please, try it and let me know whether it works as is. Ask me if you have any problem )
+(Edit-note: please, try it and let me know whether it works as is. Ask me if you have any problem )
 
 
 Run the task, that will crawl and index the Flex Doc Site
@@ -106,7 +106,7 @@ That scope is chainable with other scopes as well. If we need the actual results
 
     results = my_scope.all
 
-(Tiago: if everything is ok, please, add a FlexDocController controller and a search action with the relative view. In the view add a form:
+(Edit-note: if everything is ok, please, add a FlexDocController controller and a search action with the relative view. In the view add a form:
 
 
       def search
@@ -122,9 +122,9 @@ the form snippet
       '
       = submit_tag('Reset', :name => 'reset', :id => 'reset-button' )
 
-(Tiago: add also Kaminari for pagination in the gemfile and in the result page )
+(Edit-note: add also Kaminari for pagination in the gemfile and in the result page )
 
-snippet for the pagination in the footer (Tiago:it is in slim, please translate it in erb)
+snippet for the pagination in the footer (Edit-note:it is in slim, please translate it in erb)
 
     #pagination
       = page_entries_info @results.collection, :entry_name => 'result'
@@ -149,7 +149,7 @@ That will provide only a list of page titles and the link to the original page. 
 
 > __Notice__: the `highlighted_\*` methods return the joined string from the elasticsearch `highlights`, if there are no highlights and the attribute exists they return the attribute, or an empty string in any other case.
 
-(Tiago: please add some css to make the thing nice. )
+(Edit-note: please add some css to make the thing nice. )
 
 The highlights need to be highlighted with something like:
 
@@ -160,6 +160,6 @@ The highlights need to be highlighted with something like:
 
 Now point your browser to the search page and search the Flex Doc Site from your app.
 
-(Tiago: it should be all)
+(Edit-note: it should be all)
 
 
