@@ -22,10 +22,11 @@ Manage the elasticsearch index as it were a DB, through `ActiveModel` models. Ge
 
 ## Setup
 
-Flex needs to know what are your Flex models, and in which order you want them to be imported in the index (in case of bulk import of the DB and parent/child relations), so each time you add a `include Flex::ModelIndexer` or `include Flex::ActiveModel` statement, remember to add the model class name to the `config.flex_models` array in the initializer file. Remember also that parents go first.
+Flex needs to know your Flex models, and in which order you want them to be imported in the index (in case of bulk import of the DB and parent/child relations), so each time you add a `include Flex::ModelIndexer` or `include Flex::ActiveModel` statement, remember to add the model class name to the `config.flex_models` and/or `config.flex_active_models` arrays in the initializer file. Remember also that parents go first.
 
 {% highlight ruby %}
 config.flex_models = %w[ Thread Post ]
+config.flex_active_models = %w[ WebContent ]
 {% endhighlight %}
 
 ## elasticsearch Mapping

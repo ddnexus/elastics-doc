@@ -49,7 +49,7 @@ end
 - open the generated file  `config/initializers/flex.rb` and change it so it will include the `Content` model:
 
 {% highlight ruby %}
-config.flex_models = %w[ Content ]
+config.flex_active_models = %w[ Content ]
 {% endhighlight %}
 
 - create the index

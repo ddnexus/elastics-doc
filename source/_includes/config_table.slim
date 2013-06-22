@@ -85,7 +85,16 @@ table.code-topics#config cellspacing=0 cellpadding=0
       markdown:
         > This is a specific configuration for the `flex-model` gem.
 
-        An array of model classes (or model class names) that your app will index. If you use the `Flex::ModelIndexer` integration or `Flex::ActiveModel`, this is the only required configuration setting, since it is used to generate the default mappings and other things.
+        An array of model classes (or model class names) that your app will index. This is the only required configuration setting if you use the `Flex::ModelIndexer` integration, since it is used to generate the default mappings and the default models for the `import` task.
+
+  tr
+    td
+      code flex_active_models
+    td
+      markdown:
+        > This is a specific configuration for the `flex-model` gem.
+
+        An array of ActiveModel classes (or model class names) that your app defines. This is the only required configuration setting if you use the `Flex::ActiveModel` integration, since it is used to generate the default mappings.
 
   tr
     td

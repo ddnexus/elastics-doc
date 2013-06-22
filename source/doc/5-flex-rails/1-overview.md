@@ -29,11 +29,12 @@ gem 'flex-rails'
 
 ### 4. Customize the `config/initializers/flex.rb`
 
-In this initializer you must add the `flex_models` array (of names or classes), and may want to customize other configuration variables. For example:
+In this initializer you must add the `flex_models` and/or `flex_active_models` arrays (of names or classes), and may want to customize other configuration variables. For example:
 
 {% highlight ruby %}
 Flex::Configuration.configure do |config|
   config.flex_models = %w[ Project ]
+  config.flex_active_models = %w[ WebContent ]
   config.result_extenders |= [YourResultExtenderA, YourResultExtenderB, ...]
   config.variables.deep_merge! :index => 'test',
                                :type  => 'project'

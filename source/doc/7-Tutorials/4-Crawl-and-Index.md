@@ -26,9 +26,9 @@ First, we add a Flex::ActiveModel model, that will manage the pages we crawl
 
 The attribute_attachment is a special attribute that integrates the elasticsearch-mapper-attachment plugin. It can index various type of contens, like html, pdf, word, excel etc.
 
-add the FlexDocPage to the flex_models array in the config/initializers/flex.rb
+add the FlexDocPage to the flex_active_models array in the config/initializers/flex.rb
 
-    config.flex_models |= [ Post, FlexDocPage ]
+    config.flex_active_models |= [ FlexDocPage ]
 
 Create the index
 
