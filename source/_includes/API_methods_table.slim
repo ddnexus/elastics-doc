@@ -436,6 +436,34 @@ table.code-topics#api-methods cellspacing=0 cellpadding=0
 
   tr
     td
+      code Flex.get_source
+    td
+      markdown:
+        [elasticsearch API](http://www.elasticsearch.org/guide/reference/api/get.html)
+
+        Retrieves a the source of document from the index.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        get:
+        - GET
+        - /<<index>>/<<type>>/<<id>>/_source
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.get_source :id    => id,               # required
+                        :type  => nil,
+                        :index => "flex_test_index"
+        {% endshighlight %}
+
+  tr
+    td
       code Flex.multi_get
     td
       markdown:
