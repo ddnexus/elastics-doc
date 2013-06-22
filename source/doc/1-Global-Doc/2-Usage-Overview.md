@@ -144,7 +144,7 @@ my_facet = result.facets['my_facet']
 
 ## 5. elasticsearch API Methods Usage
 
-Flex exposes all the elasticsearch API methods as class methods. A few examples:
+Flex exposes all the elasticsearch API methods as ready to use class methods. A few examples:
 
 {% highlight ruby %}
 Flex.exist? :index => 'my_index'
