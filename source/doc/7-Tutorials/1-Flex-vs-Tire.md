@@ -181,7 +181,7 @@ It's easier to use also for elasticsearch beginners, since it implements `Active
 
 It's also more powerful for experts, since it covers all the elasticsearch APIs and offers a lot of useful tools like index dumping and loading, very detailed debugging info, high configurable logging, a self documentation tool, a lot of out of the box integrations, and a better documentation with some tutorial {% see 1.1 %}.
 
-> Flex does not have a dedicated testing suite yet: its testing is still embedded in a few applications that exploit its features. However, that will be the very next development step.
+> Flex does not have a dedicated testing suite yet: its testing is still embedded in a few applications that exploit its features. If you have some spare time, please, contribute.
 
 
 ### Conclusion

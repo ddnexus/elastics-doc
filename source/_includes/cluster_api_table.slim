@@ -1,0 +1,295 @@
+table.code-topics.api-methods cellspacing=0 cellpadding=0
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  tr
+    th colspan=2
+      a href="http://www.elasticsearch.org/guide/reference/api/admin-cluster-health/" target="_blank" Health
+
+  tr
+    td
+      code Flex.cluster_health
+    td
+      markdown:
+        Gets a very simple status on the health of the cluster.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        cluster_health:
+        - GET
+        - /_cluster/health/<<index>>
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.cluster_health :index => "flex_test_index"
+        {% endshighlight %}
+
+      markdown:
+        > You can pass the params as the `:params` variable
+
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  tr
+    th colspan=2
+      a href="http://www.elasticsearch.org/guide/reference/api/admin-cluster-state/" target="_blank" State
+
+  tr
+    td
+      code Flex.cluster_state
+    td
+      markdown:
+        Gets a comprehensive state information of the whole cluster.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        cluster_state:
+        - GET
+        - /_cluster/state
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.cluster_state
+        {% endshighlight %}
+
+      markdown:
+        > You can pass the params as the `:params` variable
+
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  tr
+    th colspan=2
+      a href="http://www.elasticsearch.org/guide/reference/api/admin-cluster-update-settings/" target="_blank" Update Settings
+
+  tr
+    td
+      code Flex.put_cluster_settings
+    td
+      markdown:
+        Updates cluster wide specific settings.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        put_cluster_settings:
+        - PUT
+        - /_cluster/settings
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.put_cluster_settings
+        {% endshighlight %}
+
+      markdown:
+        > You can pass the settings structure as the `:data` variable
+
+  tr
+    td
+      code Flex.get_cluster_settings
+    td
+      markdown:
+        Retrieves cluster settings.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        get_cluster_settings:
+        - GET
+        - /_cluster/settings
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.get_cluster_settings
+        {% endshighlight %}
+
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  tr
+    th colspan=2
+      a href="http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-info/" target="_blank" Nodes Info
+
+  tr
+    td
+      code Flex.cluster_nodes_info
+    td
+      markdown:
+        Retrieves one or more (or all) of the cluster nodes information.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        cluster_nodes_info:
+        - GET
+        - /_nodes/<<nodes= ~ >>/<<endpoint= ~ >>
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.cluster_nodes_info :nodes    => nil,
+                                :endpoint => nil
+        {% endshighlight %}
+
+
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  tr
+    th colspan=2
+      a href="http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-stats/" target="_blank" Nodes Stats
+
+  tr
+    td
+      code Flex.cluster_nodes_info
+    td
+      markdown:
+        Retrieves one or more (or all) of the cluster nodes statistics.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        cluster_nodes_stats:
+        - GET
+        - /_nodes/<<nodes= ~ >>/stats/<<endpoint= ~ >>
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.cluster_nodes_stats :nodes    => nil,
+                                 :endpoint => nil
+        {% endshighlight %}
+
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  tr
+    th colspan=2
+      a href="http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-shutdown/" target="_blank" Nodes Shutdown
+
+  tr
+    td
+      code Flex.cluster_nodes_shutdown
+    td
+      markdown:
+        Shutdown one or more (or all) nodes in the cluster.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        cluster_nodes_shutdown:
+        - POST
+        - /_cluster/nodes/<<nodes= ~ >>/_shutdown
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.cluster_nodes_shutdown :nodes => nil
+        {% endshighlight %}
+
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  tr
+    th colspan=2
+      a href="http://www.elasticsearch.org/guide/reference/api/admin-cluster-nodes-hot-threads/" target="_blank" Nodes Hot Threads
+
+  tr
+    td
+      code Flex.cluster_nodes_hot_threads
+    td
+      markdown:
+        Gets the current hot threads on each node in the cluster.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        cluster_nodes_hot_threads:
+        - GET
+        - /_nodes/<<nodes= ~ >>/hot_threads
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.cluster_nodes_hot_threads :nodes => nil
+        {% endshighlight %}
+
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  tr
+    th colspan=2
+      a href="http://www.elasticsearch.org/guide/reference/api/admin-cluster-reroute.html" target="_blank" Cluster Reroute
+
+  tr
+    td
+      code Flex.cluster_reroute
+    td
+      markdown:
+        Explicitly execute a cluster reroute allocation command including specific commands.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        cluster_reroute:
+        - POST
+        - /_cluster/reroute
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.cluster_reroute
+        {% endshighlight %}
+
+      markdown:
+        You can pass the data structure as the `:data` variable
+
