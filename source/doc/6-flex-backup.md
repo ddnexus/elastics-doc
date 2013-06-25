@@ -34,11 +34,12 @@ This gem provides the `flex-backup` executable  to `dump`, `load` and `stat` any
         -z, --size [SIZE]                The chunk size to dump per shard (default: 50 * number of shards)
 
     Load options:
+        -m, --index-map [INDEX_MAP]      The index rename map (example: -m=dumped_index_name:loaded_index_name,a:b)
         -o, --timeout [SECONDS]          The http_client timeout for bulk loading (default: 20 seconds)
-        -b, --batch_size [BATCH_SIZE]    The batch size to load (default: 1000)
+        -b, --batch-size [BATCH_SIZE]    The batch size to load (default: 1000)
 
     Other options:
         -v, --version                    Shows the version and exits
         -h, --help                       Displays this screen
 
-It also provides a few tasks to `dump`, `load` or `reindex` {% see 1.4 %}.
+It also provides a few tasks to `dump`, `load` and `reindex` {% see 1.4 %}.

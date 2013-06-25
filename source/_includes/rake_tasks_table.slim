@@ -88,7 +88,7 @@ table.code-topics cellspacing="0" cellpadding="0"
 
         It reload/restore the index by loading a dump file (produced by the the `flex:backup:dump`)
 
-        > __Notice__: It loads the data into the original index name. If you want to reload the data into another index, you should search and replace the index name in the dump file.
+        > __Notice__: It loads the data into the original index name. If you want to reload the data into another index, you must set the `INDEX_MAP` variable.
 
         #### Environment variables
 
@@ -96,6 +96,7 @@ table.code-topics cellspacing="0" cellpadding="0"
 
         * `FILE` The path to the dump file. Default: `'./flex-backup.dump'`
         * `BATCH_SIZE` The document batch size used to import the dump file to the elasticsearch server. Default `1000`.
+        * `INDEX_MAP`  The index rename map (example: -m=dumped_index_name:loaded_index_name,a:b).
         * `TIMEOUT` The HTTP-client timeout. Default `20` for this task. (it is usually `5` for regular queries as set in `Configuration.http_client_options[:timeout]`).  You might need a higher timeout if you raise the `BATCH_SIZE`.
         * `VERBOSE` Prints informations during the process. Default: `true`
 
