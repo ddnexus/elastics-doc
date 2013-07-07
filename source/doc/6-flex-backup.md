@@ -11,17 +11,18 @@ This gem provides the `flex-backup` executable  to `dump`, `load` and `stat` any
     flex-backup 1.0.0 (c) 2012-2013 by Domizio Demichelis
 
         flex-backup:
-            Flex tool to dump/load data from/to elasticsearch.
+            Generic binary tool to dump/load data from/to any elasticsearch index (no app needed).
+            If you need to migrate data, use the flex migration mechanism, that provides live reindexing.
         Usage:
             flex-backup <command> [options]
         <command>:
-            dump   dumps the data from one or more elasticsearch indices
-            load   loads a dumpfile
-            stats  prints the full elasticsearch stats
+            dump    dumps the data from one or more elasticsearch indices
+            load    loads a dumpfile
+            stats   prints the full elasticsearch stats
 
         Notice: The load command will load the dump-file into elasticsearch without removing any pre-existent data.
                 If you need fresh indices, use the flex:index:delete and flex:index:create rake tasks from your
-                application, which will also recreate the mapping. If you need to reindex you can use flex:backup:reindex.
+                application, which will also recreate the mapping.
 
     Common options:
         -f, --file [FILE]                The path of the dumpfile (default: './flex-backup.dump')
@@ -42,4 +43,4 @@ This gem provides the `flex-backup` executable  to `dump`, `load` and `stat` any
         -v, --version                    Shows the version and exits
         -h, --help                       Displays this screen
 
-It also provides a few tasks to `dump`, `load` and `reindex` {% see 1.4 %}.
+It also provides a few tasks to `dump`, `load` {% see 1.4 %}.

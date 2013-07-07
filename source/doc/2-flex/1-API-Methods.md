@@ -16,7 +16,7 @@ When an API has flags/parameters, you can pass them as the `:params` variable; w
 
 > __Notice__: you can get the updated full reference and usage example of these methods also in the console at any time, by just writing `Flex.doc` (for the full API) or `Flex.doc :create_index, :get_index_mapping, ...` (for specific methods).
 
-> This document is updated to elasticsearch version 0.90.1
+> This document is updated to elasticsearch version 0.90.2
 
 
 ## Core API

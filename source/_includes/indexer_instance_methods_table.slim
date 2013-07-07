@@ -25,14 +25,14 @@ table.code-topics#indexer-instance-methods cellspacing=0 cellpadding=0
       code flex.store
     td
       markdown:
-        Indexes the `flex_source` of this record. You don't need to use this directly if you use `Model.flex.sync` on this model.
+        Indexes the `flex_source` of this record. It is used internally and you don't need to use this directly if you use `Model.flex.sync` on this model. If you need to manually index the records/documents, you should use `record.flex.sync` instead because it is live-reindex safe.
 
   tr
     td
       code flex.remove
     td
       markdown:
-        Removes the elasticsearch document for this record. You don't need to use this directly if you use `Model.flex.sync` on this model.
+        Removes the elasticsearch document for this record. It is used internally and you don't need to use this directly if you use `Model.flex.sync` on this model. If you need to manually index the records/documents, you should use `record.flex.sync` instead because it is live-reindex safe.
 
   tr
     td
