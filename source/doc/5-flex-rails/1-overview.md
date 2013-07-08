@@ -23,6 +23,8 @@ gem 'patron', '~>0.4.18'
 gem 'flex-rails'
 {% endhighlight %}
 
+> __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use the master branch of the `patron` gem, or switch to the `rest-client` gem.
+
 ### 2. Run `bundle install`
 
 ### 3. Run `rails generate flex:setup` that will install the needed files with comments and stubs
@@ -95,7 +97,7 @@ Flex comes with a Rails 3 engine that integrates with your app very easily. The 
 You might want to have different configuration settings for different environments. You can do so by using the `config.flex` object in the environment file, for example:
 
 {% highlight ruby %}
-config.flex.http_client          = Flex::HttpClients::Patron
+config.flex.http_client          = Flex::HttpClients::RestClient
 config.flex.http_client.base_uri = 'http://localhost:9400'
 {% endhighlight %}
 
