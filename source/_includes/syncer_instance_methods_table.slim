@@ -5,3 +5,10 @@ table.code-topics#syncer-instance-methods cellspacing=0 cellpadding=0
     td
       markdown:
         It syncs the list of synced models, as set in the `flex.synced` array.  This method is automatically called when the record changes, so you probably don't need to use it explicitly. If you need to sync manually, then you should not use `Model.flex.sync(*synced)` which will define the callbacks. Instead you should use `Model.flex.synced = [self, :other, ...]` that does the same but does not set the callbacks.
+
+  tr
+    td
+      code flex.refresh_index
+    td
+      markdown:
+       It will manually refresh the index by using `Flex.refresh_index` API method. For automatic refresh you can also use `Flex::RefreshCallback` {% see 4.4.3#flexrefreshcallback Flex::RefreshCallback %}.

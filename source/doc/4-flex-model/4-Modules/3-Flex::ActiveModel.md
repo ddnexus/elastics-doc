@@ -17,3 +17,7 @@ We list here only the specific methods or overrides that are not documented else
 ## Instance Methods
 
 {% slim activemodel_instance_methods_table.slim %}
+
+## Flex::RefreshCallback
+
+You can include this module if you want flex to refresh the index automatically. It will add 2 callbacks: `:after_save` and `after_destroy` with a call to the `Flex.refresh_index` API method.
