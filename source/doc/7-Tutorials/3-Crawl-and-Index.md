@@ -101,7 +101,7 @@ task :index_flex_doc => :environment do
   # we want to destroy all the pages we eventually already have in the index, so they will be fresh each time we re-crawl
   FlexDocPage.destroy
 
-  Anemone.crawl('http://ddnexus.github.io/flex/doc/1-Global-Doc/1-Overview.html', :verbose => true) do |anemone|
+  Anemone.crawl('http://ddnexus.github.io/flex/', :verbose => true) do |anemone|
 
     anemone.on_every_page do |page|
       # index only the successful html pages with some content
@@ -153,7 +153,7 @@ FLEX-DEBUG    :data:
 FLEX-DEBUG      query:
 FLEX-DEBUG        query_string:
 FLEX-DEBUG          query: ! '*'
-=> 26
+=> 30
 {% endhighlight %}
 
 You can also get an indexed page, for example:
