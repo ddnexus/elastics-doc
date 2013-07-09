@@ -12,7 +12,7 @@ This gem provides the `flex-backup` executable  to `dump`, `load` and `stat` any
 
         flex-backup:
             Generic binary tool to dump/load data from/to any elasticsearch index (no app needed).
-            If you need to migrate data, use the flex migration mechanism, that provides live reindexing.
+            If you need to migrate data, use the flex live-reindexing.
         Usage:
             flex-backup <command> [options]
         <command>:

@@ -12,7 +12,7 @@ I wrote this page because it looks like it is still not very clear what flex doe
 
 ## Quick Facts Comparison Table
 
-This is just a quick overview showing the main differences between the 2 projects.
+This is just a quick overview showing the main differences between the 2 projects: the rest of this writeup is dedicated to the detailed analysis of the differences.
 
 {% slim comparison_table.slim %}
 

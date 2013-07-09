@@ -26,6 +26,8 @@ So in order to ensure that consistency, the `reindex` method needs to stop the i
 
 The `:stop_indexing_proc` will be called (almost) at the end of the live-reindexing, just before the index swap. Just remember that the `reindex` method will reindex, call your proc to stop the indexing and swap the old index with the new one: after that you must swap the old code with the new one and resume the indexing that your proc stopped. The time from the indexing-stop to the indexing-restart will probably be just a few milliseconds or seconds at worse, but that is a critical step if you want a consistent and complete index and a smooth swapping.
 
+> If you deploy with `capistrano`, you you should run the `reindex` method right before `creating_symlink` (perhaps in a migration) and you should resume the indexing right after it.
+
 There are 2 different `reindex` methods: one for the `ActiveRecord` and `Mongoid` models, and another for the `ActiveModel` models.
 
 ### Flex::ModelLiveReindexing.reindex
