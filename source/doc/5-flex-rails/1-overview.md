@@ -23,7 +23,7 @@ gem 'patron', '~>0.4.18'
 gem 'flex-rails'
 {% endhighlight %}
 
-> __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use the master branch of the `patron` gem, or switch to the `rest-client` gem.
+> __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should download [patron-0.4.18.flex.gem](/patron-0.4.18.flex.gem), install it with `gem install /path/to/patron-0.4.18.flex.gem --local` and be sure your app will use that version, or switch to the `rest-client` gem.
 
 ### 2. Run `bundle install`
 
@@ -78,9 +78,9 @@ Usually contains your search classes (those that include any of `Flex::Templates
 > 1. each time you add a `Flex::ModelIndexer` or `Flex::ActiveModel` you should add its name to the `config/initializers/flex.rb`
 > 2. each time you add/change a `flex.parent` relation in a model you should reindex your DB(s) with `rake flex:import FORCE=true`
 
-## Rails 3
+## Rails 3 and 4
 
-Flex comes with a Rails 3 engine that integrates with your app very easily. The engine sets a few configuration defaults:
+Flex comes with a Rails engine that integrates with your app very easily. The engine sets a few configuration defaults:
 
  * `config.flex.variables[:index]` to your application's underscored name, plus the current `Rails.env` (e.g. `'my_app_development'`)
  * `config.flex.config_file` default path to `"#{Rails.root}/config/flex.yml"`
@@ -103,5 +103,5 @@ config.flex.http_client.base_uri = 'http://localhost:9400'
 
 ## Rails 2
 
-You can use Flex with Rails 2 applications as well, just remember that you should require `flex-rails` so it will set the `config_file` and `flex_dir` paths for you {% see 1.3 %}, but remember that the default `config.flex.variables[:index]` variable for Rails 2 is not set so you better configure it, somewhere. Also remember that you should explicitly call `Flex::Rails::Helper.after_initialize` to complete the rails integration. Except this little difference in the configuration, there is no other difference from Rails 3.
+You can use Flex with Rails 2 applications as well, just remember that you should require `flex-rails` so it will set the `config_file` and `flex_dir` paths for you {% see 1.3 %}, but remember that the default `config.flex.variables[:index]` variable for Rails 2 is not set so you better configure it, somewhere. Also remember that you should explicitly call `Flex::Rails::Helper.after_initialize` to complete the rails integration. Except this little difference in the configuration, there is no other difference from Rails 3 and 4.
 

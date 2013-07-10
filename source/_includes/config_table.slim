@@ -117,7 +117,7 @@ table.code-topics#config cellspacing=0 cellpadding=0
       markdown:
         The flex client instance. Default an object of class `Flex::HttpClients::Patron` or `Flex::HttpClients::RestClient`, depending on which gem you have installed (`patron` or `rest-client`). If you create a custom client class you must set it.
 
-        > __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use the master branch of the `patron` gem, or switch to the `rest-client` gem.
+        > __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should download [patron-0.4.18.flex.gem](/patron-0.4.18.flex.gem), install it with `gem install /path/to/patron-0.4.18.flex.gem --local` and be sure your app will use that version, or switch to the `rest-client` gem.
 
   tr
     td
@@ -198,8 +198,16 @@ table.code-topics#config cellspacing=0 cellpadding=0
   tr
     td
       code
+        | redis
+    td
+      markdown:
+        The redis client object. Default: `$redis || Redis.current`. Used by the flex-reindex feature defined in the `flex-model` gem {% see 4.6 %}.
+
+  tr
+    td
+      code
         | stop_indexing_proc
     td
       markdown:
-        A proc that should ensure to stop/suspend all the actions that would produce any change in the indices being live-reindexed. Used by the flex-reindex feature defined in the `flex-model` gem {% see 4.6 %}.
+        A proc that should ensure to stop/suspend all the actions that would produce any change in the indices being live-reindexed. Used by the flex-reindex feature defined in the `flex-model` gem, overridden by the live-reindex method options {% see 4.6 %}.
 
