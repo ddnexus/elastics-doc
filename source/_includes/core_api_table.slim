@@ -647,3 +647,72 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
                        :type  => nil
         {% endshighlight %}
 
+
+  tr
+    td
+      code  Flex.search_by_id
+    td
+      markdown:
+        Get a document without using the get API (which doesn't support fields '\*')
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        search_by_id:
+        - GET
+        - /<<index>>/<<type>>/_search
+        - query:
+            term:
+              _id: <<id>>
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.search_by_id :id      => id,    # required
+                          :type    => nil,
+                          :index   => "flex_test_index",
+                          :refresh => false
+        {% endshighlight %}
+
+      markdown:
+        > A `:refresh => true` variable will first refresh the index
+
+  tr
+    td
+      code  Flex.scan_search
+    td
+      markdown:
+
+        Generic implementation of the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`:
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.scan_search(:my_template, my_vars) do |result|
+          result['hits']['hits'].each{|d|do_something_with(d)}
+        end
+        {% endshighlight %}
+
+  tr
+    td
+      code  Flex.scan_all
+    td
+      markdown:
+
+        Specific implementation of the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`, applied to the `match_all` template/query:
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.scan_all(my_vars) do |batch|
+          batch.each{|d|do_something_with(d)}
+        end
+        {% endshighlight %}

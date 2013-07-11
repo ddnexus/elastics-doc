@@ -110,8 +110,8 @@ flex.load_search_source 'your/template/search_source.yml'
 Implements the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`:
 
 {% highlight ruby %}
-Flex.scan_search(:my_template, my_vars) do |batch|
-  batch.each{|d|do_something_with(d)}
+Flex.scan_search(:my_template, my_vars) do |result|
+  result['hits']['hits'].each{|d|do_something_with(d)}
 end
 {% endhighlight %}
 
