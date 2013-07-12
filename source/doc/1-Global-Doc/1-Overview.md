@@ -54,7 +54,7 @@ The functionality of flex are conveniently organized and integrated by a few gem
 1. Install the gem `patron` (faster, libcurl C based) or `rest-client` (pure ruby)
 2. Install the flex gem(s) {% see 1.1#gems %}
 
-> __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should download [patron-0.4.18.flex.gem](/patron-0.4.18.flex.gem), install it with `gem install /path/to/patron-0.4.18.flex.gem --local` and be sure your app will use that version, or switch to the `rest-client` gem.
+> __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should download [patron-0.4.18.flex.gem]({{site.baseurl}}/patron-0.4.18.flex.gem), install it with `gem install /path/to/patron-0.4.18.flex.gem --local` and be sure your app will use that version, or switch to the `rest-client` gem.
 
 ### Out Of The Box Integrations
 

@@ -15,12 +15,11 @@ The flex live-reindex feature is what you need in this case. You can leave your 
 
 ## Requirements
 
-- The live-reindex feature rely on a `redis` list in order to track the changes made by the processes of your running app during the reindex. You need to install [redis](http://www.redis.io/download) and the `redis` gem, and/or you may need to add it to your Gemfile.
-- The `:ensure_indices` option (only required when you do a partial reindex) rely on the `flex-backup` gem, so you need to install it (and/or add it to your Gemfile) to enable partial reindexing.
+The live-reindex feature rely on a `redis` list in order to track the changes made by the processes of your running app during the reindex. You need to install [redis](http://www.redis.io/download) and the `redis` gem, and/or you may need to add it to your Gemfile.
 
 ## Usage
 
-Using the live-reindex feature is very easy, but you need to understand the basic about how it works in order to use it properly.
+Using the live-reindex feature is very easy, but you need to understand the basics about how it works in order to use it properly, or you might corrupt your indices {% see 4.6#caveats %}.
 
 The live reindexing should be the last step of your new deployment, performed just before you swap the old code with the new one. It will take care of reindex your data in new index/indices, including the changes being made during the reindexing itself.
 
@@ -28,14 +27,14 @@ The live reindexing should be the last step of your new deployment, performed ju
 
 ### Index Renaming
 
- The names of the new indices will be prefixed with a timestamp, similar to the timestamp prepended in the `ActiveRecord` migration (something like `20130608103457_my_index` for the index `my_index`). However, when the reindex will be completed each old index will be deleted and the new indices will be aliased with the original base name. That means that your app will continue to use e.g. the `my_index` name, but it will automatically point to the new (prefixed) index (no intervention required on your side).
+ The names of the new indices will be prefixed with a timestamp, similar to the timestamp prepended in the `ActiveRecord` migration: something like `20130608103457_my_index` for the index `my_index`. However, when the reindex will be completed each old index will be deleted and the new indices will be aliased with the original base name. That means that your app will continue to use e.g. the `my_index` name, but it will automatically point to the new (prefixed) index (no intervention required on your side).
 
 ### Stop Indexing
 
 It's important to understand that code and index must constantly match when the app is running: the old code with the old index; the new code with the new index.
-So in order to ensure that consistency - if your index may get changed by the old code during the reindexing - the live-reindex feature needs to stop the indexing during the swapping. For that reason you must define the `:stop_indexing_proc` proc that must ensure to prevent all the processes that use the old code to change the index (e.g. put the app in maintenance mode, wait for eventual `resque` tasks in the queue to complete before returning, flush the indices, etc.).
+So in order to ensure that consistency the live-reindex feature needs to stop the indexing during the swapping (old code and index / new code and index). For that reason you must define the `:stop_indexing_proc` proc that must ensure to prevent all the processes that use the old code to change the index (e.g. put the app in maintenance mode, wait for eventual `resque` tasks in the queue to complete before returning, flush the indices, etc.).
 
-The `:stop_indexing_proc` will be called (almost) at the end of the live-reindexing, just before the index swap. Just remember that the reindex methods will reindex, call your proc to stop the indexing and swap the old index with the new one: after that you must swap the old code with the new one and resume the indexing that your proc stopped. The time from the indexing-stop to the indexing-restart will probably be just a few milliseconds or seconds at worse, but that is a critical step if you want a consistent and complete index and a smooth swapping.
+The `:stop_indexing_proc` will be called (almost) at the end of the live-reindexing, just before the index swap. Just remember that the reindex methods will reindex, call your proc to stop the indexing and swap the old index with the new one: after that you must swap the old code with the new one and resume the indexing that your proc stopped. The elapsed time from the indexing-stop to the indexing-restart will probably be just a few milliseconds or seconds at worse, but that is a critical step if you want a consistent and complete index and a smooth swapping.
 
 > If you deploy with `capistrano`, you should resume the indexing right after the `creating_symlink`
 
@@ -51,11 +50,11 @@ However you can also pass it as an option of the method. For example:
 Flex::LiveReindex.<reindex_method>(:stop_indexing_proc => proc{...})
 {% endhighlight %}
 
-> In case your index is not being changed during the reindexing, obviously you do not need to stop the indexing so you can explicitly pass `:stop_indexing_proc => nil` to silence the `MissingStopIndexingProcError` error.
+> The `:stop_indexing_proc` is explicitly required for your production environment, and for very good reasons. However when you are experimenting in your development environment, you don't need to stop anything, so you can silence the `MissingStopIndexingProcError` error by explicitly pass `:stop_indexing_proc => nil`. You may also want to set a different `Flex::Configuration.stop_indexing_proc` for different environments.
 
 ### Tracking Changes
 
-During the reindexing, your live app may do some change on the index. The changes are tracked in a redis list and will be indexed at the end of the reindexing. If you pass a block with the reindex method it will receive (also) the changes done during the reindexing, so giving you the chance to update the new index in some special way.
+During the reindexing, your live app may change some document in the old index/indices. The changes are tracked in a redis list and will be indexed at the end of the reindexing. If you pass a block with the reindex method it will receive (also) the changes done during the reindexing, so giving you the chance to update the new index/indices consistently with the change.
 
 The tracking is done inside the Flex API methods defined for store and delete (i.e. `store`, `put_store`, `post_store`, `delete` and `remove`)
 
@@ -67,11 +66,11 @@ The methods accept also an optional block, which will be used to eventually tran
 
 The block will receive the action (`'index'` or `'delete'`) as the first argument, and the hash document pulled from elasticsearch. It is expected to return the eventually modified document (in the same structure understood by elasticsearch), or a DB record/document to index. In case of delete action, it should return the same hash document. If you want to halt the indexing/deletion for that particular document, you must return a blank value.
 
-
 For example:
 
 {% highlight ruby %}
-Flex::LiveReindex.<reindex_method>(my_options) do |action, raw_document_hash|
+# a simple block
+Flex::LiveReindex./<reindex_method>(my_options) do |action, raw_document_hash|
   if action == 'index'
     raw_document_hash['_source']['some_field'] = my_transform(raw_document_hash['_source']['some_field'])
     raw_document_hash['_source'].delete('some_other_field')
@@ -83,12 +82,44 @@ end
 
 > It's important to notice that the raw document hash argument passed to the block is a document pulled from one of the elasticsearch OLD indices, containing the old structure.
 
+The block may need to process different indices in different way, and the old index name might be prefixed (if it is already the product of a live-reindex). When you need to check the index name you should use the `base_index` method on the document hash. It will return the unprefixed index name of the raw_document_hash. For example:
+
+{% highlight irb %}
+>> raw_document_hash['_index'] == '20130608103457_my_index'
+=> true
+
+>> raw_document_hash.base_index == 'my_index'
+=> true
+{% endhighlight %}
+
+You should always use the `base_index` method when you need to check the index of the document. For example:
+
+{% highlight ruby %}
+Flex::LiveReindex.<reindex_method>(my_options) do |action, raw_document_hash|
+  if action == 'index'
+    case raw_document_hash.base_index
+    when 'my_index'
+      ...
+    when 'some_other_index'
+      ...
+    end
+  end
+  # you must return the modified document
+  raw_document_hash
+end
+{% endhighlight %}
+
+
 If you pass no block, the reindex method will use a default proc, different for different type of reindexing: see the details about each default in the specific method session.
 
 
 ## Reindex Methods
 
-There are 3 different reindexing methods, useful in different contexts but working quite similarly.
+There are 3 different reindexing methods, useful in different contexts but working quite similarly. You can use only one of the 3 methods and only one time in one live-reindex session, then you have to swap the code and deploy. If you need to use more than one method, you must do it in different deploys.
+
+> If you try to use more than one of the reindexing method in the same session, the execution of the second method will raise a `MultipleReindexError` error. In that case the first reindexing execution took place regularly (and the error will tell you the new index/indices that have been swapped OK), but the other reindexing(s) have been aborted so you have still the old index/indices in place. If the code-changes that you were about to deploy rely on the successive reindexings that have been aborted, your app may fail, so you should complete the other reindexing in single successive deploys ASAP.
+>
+> If you are in development environment and REALLY know what you are doing, you can restart the process and silence that error by passing `:safe_reindex => false`.
 
 ### Flex::LiveReindex.import_models
 
@@ -96,7 +127,7 @@ There are 3 different reindexing methods, useful in different contexts but worki
 
 The transform block will be used only to pass the tracked changes at the end of the reindexing.
 
-If you don't pass any block a default proc will be used. It will simply pull the current record/document from the DB and index it in the new index, or delete the elasticsearch document from the new index in case of a `'delete'` action. That's fine when you don't change the structure of your models, and change only the `flex_source` method for example. But if you delete or rename models, it will fail. In that case you could alias the models or split the change in 2 deploys, or you  must pass an explicit block that will receive as usual the action and the document hash pulled from the old elasticsearch index at the moment of the change: you must do the changes in the document (like changing the type for example, or reindexing some other record, etc.) and return the proper result {% see 4.6#transform_block %}.
+If you don't pass any block a default proc will be used. It will simply pull the current record/document from the DB and index it in the new index, or delete the elasticsearch document from the new index in case of a `'delete'` action. That's fine when you don't change the structure of your models, and change only the `flex_source` method for example. But if you delete or rename models, it will fail. In that case you could alias the models or split the changes in 2 deploys, or you  must pass an explicit block that will receive as usual the action and the document hash pulled from the old elasticsearch index at the moment of the change: you must do the changes in the document (like changing the type for example, or reindexing some other record, etc.) and return the proper result {% see 4.6#transform_block %}.
 
 #### Full Reindex
 
@@ -133,10 +164,11 @@ The full reindex reindexes all the `Flex::Configuration.flex_active_models` and 
 
 ### Flex::LiveReindex.migrate_index
 
-> Use this kind of generic live reindex for any index, when you prefer to interact directly with the documents, regardless the models. It migrates directly the content of one single index through the transform block that you must pass it.
+> Use this kind of generic live reindex for any index, when you prefer to interact directly with the documents, regardless the models. It migrates directly the content of one or more indices through the transform block that you must pass it.
 
 The transform block will be used to pass ALL the record being reindexed AND the tracked changes at the end of the reindexing. If you don't pass any block, the index will be copied verbatim into the new index.
 
+You can pass the `:index` option to limit the indices to migrate: if you don't pass any `:index` option the default indices of your app will be used. (the `:models` and the `:ensure_indices` are ignored by this method).
 
 ## Caveats
 
@@ -146,4 +178,4 @@ __IMPORTANT__: When you live-reindex, the `Flex::Configuration.app_id` should be
 
 ### Safe live-reindex
 
-Live-reindexing is a potentially dangerous process because it deletes the old indices after a successful reindexing. If you have a bug in the transform block or any issue with the `app_id` (mentioned above) you risk to lose part of the old index. For that reasons you should always backup your indices before proceed, or at least dump the data with the `flex:backup:dump` task. That's very important especially with `Flex::ActiveModel` models, that don't have the data mirrored in a DB. Besides, this is a very new implementation that has not been tested very well yet, so please, do backup your indices before proceed.
+Live-reindexing is a potentially dangerous process because it deletes the old indices after a successful reindexing. If you have a bug in the transform block or any issue with the `app_id` (mentioned above), or you use multiple times any of the 3 reindexing methods without deploying, __you may lose part of the indices or corrupt them__. For that reasons you should always backup your indices before proceed, or at least dump the data with the `flex:backup:dump` task. That's very important especially with `Flex::ActiveModel` models, that don't have the data mirrored in a DB. Besides, this is a very new implementation that has not been tested very well yet, so please, do backup your indices before proceed.

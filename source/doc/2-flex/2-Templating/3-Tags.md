@@ -39,7 +39,7 @@ Tags are used as placeholder for the real values that will be interpolated into 
 * you can use or omit spaces around names
 * they may contextually define a default (similar to the arguments of a ruby method)
 
-Here are a few example of tags:
+Here are a few examples of tags:
 
     <<a_tag>>
     << another_tag >>
