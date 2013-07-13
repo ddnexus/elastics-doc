@@ -6,7 +6,7 @@ alias_index: true
 
 # {{ page.title }}
 
-The `flex-rails` gem provides the engine and generators to integrate the flex gems with `Rails`. It loads the `flex`, `flex-scopes` and `flex-model` gems, so you don't have to explicitly include them in the Gemfile, unless you need to force some special version or commit.
+The `flex-rails` gem provides the engine and generators to integrate the flex gems with `Rails`. It also loads the `flex`, `flex-scopes` and `flex-model` gems, so you don't have to explicitly include them in the Gemfile, unless you need to force some special version or commit.
 
 ## Setup
 
@@ -17,9 +17,9 @@ Add the following to your Gemfile:
 {% highlight ruby %}
 # use one of the following
 # libcurl C based http client - faster
-gem 'patron', '~>0.4.18'
+gem 'patron'
 # pure ruby http client - more compatible
-# gem 'rest-client', '~> 1.6.7'
+# gem 'rest-client'
 gem 'flex-rails'
 {% endhighlight %}
 
@@ -29,9 +29,18 @@ gem 'flex-rails'
 
 ### 3. Run `rails generate flex:setup` that will install the needed files with comments and stubs
 
-### 4. Customize the `config/initializers/flex.rb`
+## Work Flow
 
-In this initializer you must add the `flex_models` and/or `flex_active_models` arrays (of names or classes), and may want to customize other configuration variables. For example:
+### 1. Customize your models
+
+Add the `include Flex::<some_model_module>` to the model that need it {% see 4 %}.
+
+- Each time you include a `Flex::ModelIndexer` or `Flex::ActiveModel` you should add its name to the `config/initializers/flex.rb`
+- Each time you alter the way your models generate the source that will be indexed (for example by changing your `flex_source` methods or adding/changing a `flex.parent` relation in a model) you should reindex your DB(s) {% see 4.6 %}
+
+### 2. Customize the `config/initializers/flex.rb`
+
+In this initializer you must add the `flex_models` and/or `flex_active_models` arrays. They are the names or the classes of the models that you customized with `include Flex::ModelIndexer` or `include Flex::ActiveModel`, and may want to customize other configuration variables. For example:
 
 {% highlight ruby %}
 Flex::Configuration.configure do |config|
@@ -45,11 +54,7 @@ end
 
 {% see 1.3 %}
 
-### 5. Run `rake flex:import` or `rake flex:index:create`
-
-You sould use either `rake flex:index:create` or `rake flex:import` (if you already have data to index from your DB) in order to create a new index and its auto-generated mapping.
-
-### 6. Customize `config/flex.yml`
+### 3. Customize `config/flex.yml`
 
 This is an optional yaml file used to add custom mapping to your index or indices. You don't need to use it unless you start to map your index/indices better. Flex provides a quite detailed mapping by default, keeping into consideration all your indexed models and also parent/child relationships. Your file will be deep merged with the structure that Flex will prepare on its own. You can inspect the mapping in the console with one of:
 
@@ -67,16 +72,13 @@ While at it you can get info about the method and the usage of `get_mapping` by 
 
 {% see 2.4 %}
 
-### 7. Customize the `app/flex/*`
+### 4. Run `rake flex:index:create` or `rake flex:import`
 
-Usually contains your search classes (those that include any of `Flex::Templates`, `Flex::ModelIndexer`) and your Tempates Sources {% see 2.2.2 %}. Average applications usually have just one class and one source template file but your mileage may vary. Here you can also add your Result Extenders modules {% see 2.3 %}, so keeping all the Flex related files together.
+You sould use either `rake flex:index:create` or `rake flex:import` (if you already have data to index from your DB) in order to create a new index and its auto-generated mapping.
 
-### 8. Remember
+### 5. Customize the `app/flex/*`
 
-> During development, remember also:
->
-> 1. each time you add a `Flex::ModelIndexer` or `Flex::ActiveModel` you should add its name to the `config/initializers/flex.rb`
-> 2. each time you add/change a `flex.parent` relation in a model you should reindex your DB(s) with `rake flex:import FORCE=true`
+Usually contains your search classes (those that include any of `Flex::Templates`, `Flex::ModelIndexer`, etc.) and your Tempates Sources {% see 2.2.2 %}. Average applications usually have just one class and one source template file but your mileage may vary. Here you can also add your Result Extenders modules {% see 2.3 %}, so keeping all the Flex related files together.
 
 ## Rails 3 and 4
 
@@ -103,5 +105,5 @@ config.flex.http_client.base_uri = 'http://localhost:9400'
 
 ## Rails 2
 
-You can use Flex with Rails 2 applications as well, just remember that you should require `flex-rails` so it will set the `config_file` and `flex_dir` paths for you {% see 1.3 %}, but remember that the default `config.flex.variables[:index]` variable for Rails 2 is not set so you better configure it, somewhere. Also remember that you should explicitly call `Flex::Rails::Helper.after_initialize` to complete the rails integration. Except this little difference in the configuration, there is no other difference from Rails 3 and 4.
+You can use Flex with Rails 2 applications as well, just remember that you should require `flex-rails` so it will set the `config_file` and `flex_dir` paths for you {% see 1.3 %}, but remember that the default `config.flex.variables[:index]` variable and the `config.flex.app_id` for Rails 2 are not set so you better configure them, somewhere. Also remember that you should explicitly call `Flex::Rails::Helper.after_initialize` to complete the rails integration. Except this little difference in the configuration, there is no other difference from Rails 3 and 4.
 

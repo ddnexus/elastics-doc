@@ -34,7 +34,7 @@ The live reindexing should be the last step of your new deployment, performed ju
 It's important to understand that code and index must constantly match when the app is running: the old code with the old index; the new code with the new index.
 So in order to ensure that consistency the live-reindex feature needs to stop the indexing during the swapping (old code and index / new code and index). For that reason you must define the `:stop_indexing_proc` proc that must ensure to prevent all the processes that use the old code to change the index (e.g. put the app in maintenance mode, wait for eventual `resque` tasks in the queue to complete before returning, flush the indices, etc.).
 
-The `:stop_indexing_proc` will be called (almost) at the end of the live-reindexing, just before the index swap. Just remember that the reindex methods will reindex, call your proc to stop the indexing and swap the old index with the new one: after that you must swap the old code with the new one and resume the indexing that your proc stopped. The elapsed time from the indexing-stop to the indexing-restart will probably be just a few milliseconds or seconds at worse, but that is a critical step if you want a consistent and complete index and a smooth swapping.
+The `:stop_indexing_proc` will be called (almost) at the end of the live-reindexing, just before the index swap. Just remember that the reindex methods will reindex, call your proc to stop the indexing and swap the old index with the new one: after that you must swap the old code with the new one and resume the indexing that your proc stopped (or maybe just restart the new deployed app). The elapsed time from the indexing-stop to the indexing-restart will probably be just a few milliseconds or seconds at worse, but that is a critical step if you want a consistent and complete index and a smooth swapping.
 
 > If you deploy with `capistrano`, you should resume the indexing right after the `creating_symlink`
 
@@ -82,22 +82,22 @@ end
 
 > It's important to notice that the raw document hash argument passed to the block is a document pulled from one of the elasticsearch OLD indices, containing the old structure.
 
-The block may need to process different indices in different way, and the old index name might be prefixed (if it is already the product of a live-reindex). When you need to check the index name you should use the `base_index` method on the document hash. It will return the unprefixed index name of the raw_document_hash. For example:
+The block may need to process different indices in different ways, and the old index name might be prefixed (if it is already the product of a live-reindex). When you need to check the index name you should use the `index_basename` method on the document hash. It will return the unprefixed index name of the raw_document_hash. For example:
 
 {% highlight irb %}
->> raw_document_hash['_index'] == '20130608103457_my_index'
-=> true
+>> raw_document_hash['_index']
+=> "20130608103457_my_index"
 
->> raw_document_hash.base_index == 'my_index'
-=> true
+>> raw_document_hash.index_basename
+=> "my_index"
 {% endhighlight %}
 
-You should always use the `base_index` method when you need to check the index of the document. For example:
+You should always use the `index_basename` method when you need to check the index of the document. For example:
 
 {% highlight ruby %}
 Flex::LiveReindex.<reindex_method>(my_options) do |action, raw_document_hash|
   if action == 'index'
-    case raw_document_hash.base_index
+    case raw_document_hash.index_basename
     when 'my_index'
       ...
     when 'some_other_index'
@@ -148,8 +148,8 @@ Flex::LiveReindex.import_models :models         => [ MyModelA, MyModelB ],
 
 The `:ensure_indices` option ensures 2 things:
 
-1. It dumps and loads the complete data from the old index to the new one, then reimport only the models you listed. In case the index is built by a few models, that is faster than reimporting all the models from scratch, besides it ensures you won't miss any data from the old index.
-2. It checks whether any record/document in your DB would use any index not specifically listed in the `:ensure_indices` option. That might happen if you forgot to list one index that a model is referring to, or if you forgot that your model uses dynamic indices (so indexing part of its records in some other index). If it encounters any index that is not specifically listed it will abort the reindexing, raising an error that will show you the extra index found.
+1. It copies the complete data from the old index to the new one first (then it will reindex only the models you listed). That ensures you won't miss any data from the old indices. Besides, in case the index is built by more models, that is faster than reimporting all the models from scratch.
+2. It checks whether any record/document in your DB would use any index not specifically listed in the `:ensure_indices` option. That would compromise the safety ensured by point #1, so if that happens, it will abort the reindexing and raise an error that will show you the extra index found. You may want to add it to the `:ensure_indices` array and retry the reindex, so ensuring it will be first copied from the old index.
 
 > You can also pass other options, that will be forwarded to the `import` task. You can use the symbolic version of the env options (e.g.: `MODELS` > `:models`) {% see 1.4#flex_import flex:import %}.
 
