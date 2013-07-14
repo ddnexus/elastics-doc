@@ -1,6 +1,7 @@
 table.code-topics.api-methods cellspacing=0 cellpadding=0
 
 
+
   ///////////////////////////////////////////////////////////////////////////
   tr
     th colspan=2
@@ -72,7 +73,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
 
 
-
   ///////////////////////////////////////////////////////////////////////////
   tr
     th colspan=2
@@ -103,7 +103,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
                     :type  => nil,
                     :index => "flex_test_index"
         {% endshighlight %}
-
 
 
 
@@ -166,7 +165,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
 
 
-
   ///////////////////////////////////////////////////////////////////////////
   tr
     th colspan=2
@@ -198,8 +196,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
                        :type  => nil,
                        :index => "flex_test_index"
         {% endshighlight %}
-
-
 
 
 
@@ -237,7 +233,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
 
 
-
   ///////////////////////////////////////////////////////////////////////////
   tr
     th colspan=2
@@ -250,8 +245,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       markdown:
         The Search API is completely covered by the Flex Templating system and mostly covered by the `flex-scopes` gem.
       == Helper.see('2.2,3')
-
-
 
 
 
@@ -291,8 +284,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
         result.responses.each{|r| r.do_something }
         {% endshighlight %}
-
-
 
 
 
@@ -381,9 +372,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
 
 
-
-
-
   ///////////////////////////////////////////////////////////////////////////
   tr
     th colspan=2
@@ -391,7 +379,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.bulk
+      code Flex.post_bulk_string
     td
       markdown:
         Performs many index/delete operations in a single API call.
@@ -400,10 +388,10 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight yaml %}
-        bulk:
+        post_bulk_string:
         - POST
         - /_bulk
-        - << lines >>
+        - << bulk_string >>
         {% endshighlight %}
 
       markdown:
@@ -411,11 +399,12 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.bulk :lines => lines   # required
+        Flex.post_bulk_string :bulk_string => bulk_string   # required
         {% endshighlight %}
 
       br
-      == Helper.see('1.4#flex_import flex:import,2.5#collection_management_methods')
+      == Helper.see('1.4#flex_import flex:import,2.5#bulk_support')
+
 
 
   ///////////////////////////////////////////////////////////////////////////
@@ -447,9 +436,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
         Flex.count :index => "flex_test_index",
                    :type  => nil
         {% endshighlight %}
-
-
-
 
 
 
@@ -485,8 +471,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       markdown:
         > You can pass the query as the `:data` variable
-
-
 
 
 
@@ -533,8 +517,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
 
 
-
-
   ///////////////////////////////////////////////////////////////////////////
   tr
     th colspan=2
@@ -568,8 +550,6 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       markdown:
         > You must pass the query to validate as the `:data` variable
         > You can pass the parameters as the `:params` variable
-
-
 
 
 
@@ -610,12 +590,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
 
 
-
-
-
   ///////////////////////////////////////////////////////////////////////////
   tr
-    th colspan=2
+    th colspan=2 id='flex_additions'
       | Flex Additions
 
 
@@ -686,8 +663,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       code  Flex.scan_search
     td
       markdown:
-
-        Generic implementation of the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`:
+        Generic implementation of the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`. It passes the raw result to the block.
 
       markdown:
         **Usage**
@@ -704,8 +680,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       code  Flex.scan_all
     td
       markdown:
-
-        Specific implementation of the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`, applied to the `match_all` template/query:
+        Specific implementation of the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`, applied to the `match_all` template/query. It passes an array of documents to the block.
 
       markdown:
         **Usage**
@@ -713,6 +688,23 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       |
         {% shighlight ruby %}
         Flex.scan_all(my_vars) do |batch|
+          batch.each{|d|do_something_with(d)}
+        end
+        {% endshighlight %}
+
+  tr
+    td
+      code  Flex.dump_all
+    td
+      markdown:
+        Like `Flex.scan_all`, with added `{:params => {:fields => '*,_source'}}`. Used to include all the relevant fields from a document:
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.dump_all(my_vars) do |batch|
           batch.each{|d|do_something_with(d)}
         end
         {% endshighlight %}

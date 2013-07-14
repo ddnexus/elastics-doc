@@ -6,9 +6,15 @@ alias_index: true
 
 # Templates
 
-With Flex Templates you almost don't need to write code: you can focus on writing bare elasticsearch queries, and Flex will generate the code for you. You can write all your custom queries in friendly `YAML` instead of `JSON`, add your own placeholder-tags where you want dynamic values instead of static strings, and Flex will automatically generate the methods to use in your code.
+With Flex Templates you almost don't need to write the code for searching: you can focus on writing bare elasticsearch queries, and Flex will generate the code for you. You can write all your custom queries in friendly `YAML` instead of `JSON`, add your own placeholder-tags where you want dynamic values instead of static strings, and Flex will automatically generate the methods to use in your code.
 
-This approach drastically cuts down time and effort to interface your app to elasticsearch, substancially reducing the whole elasticsearch logic to a simple `YAML` file, which adds its own advantages to the whole:
+## Usage Overview
+
+{% include template_usage_example.md %}
+
+### Advantages
+
+This approach drastically cuts down time and effort to interface your app to elasticsearch, substancially reducing the whole search logic to a simple `YAML` file, which adds its own advantages to the whole:
 
 - `YAML` is very easy to write and read, so you can save a lot of typing and squinting
 - `YAML` maps 1 to 1 to the `JSON` structures that you need for elasticsearch, so you don't have to learn anything new
@@ -23,13 +29,13 @@ Besides, the auto generated methods give you a few other useful advantages for f
 * data driven dynamic requests
 * interpolation
 
-{% see 1.2 %}
+{% see 2.2.4, 2.2.5, 2.2.6 %}
 
 ## General Concepts
 
 A basic principle of any templating systems (like ERB, Mustache, etc) is that you define your templates by separating the static part (that doesn't change between renderings) from the dynamic part (that may change each time). That way, a template defines a self-contained logic that needs only a hash of variables to interpolate in order to render the final output.
 
-Flex uses the same basic principles of any templating system, but instead of describing and rendering a text output, its templates describe a http request to the elasticsearch server, that will be interpolated with variables and rendered as the resulting structure returned by elasticsearch.
+Flex Templates use the same basic principles of any templating system, but instead of describing and rendering a text output, its templates describe a http request to the elasticsearch server, that will be interpolated with variables and rendered as the resulting structure returned by elasticsearch.
 
 ## Template Types
 
@@ -74,7 +80,7 @@ As you see in the previous example, the template definitions are basically named
 * request body (optional data structure understood by elasticsearch)
 * variables (optional list of hashes)
 
-Flex uses the Generic Templates internally, in order to implement the elasticsearch API methods and as the base class for the more specialized and less verbose Search Templates. You will probably never need to define Generic Templates directly, so from now on we will focus on Search Templates. If you need to recur to Generic Templates for any reason, take a look at the "API Methods" template source file as an useful reference: it implements the full elasticsearch API in just a few lines {% see 2.1 %}.
+Flex uses the Generic Templates internally, in order to implement the elasticsearch API methods and as the base class for the more specialized and less verbose Search Templates. You will probably never need to define Generic Templates directly, so from now on we will focus on Search Templates. If you need to recur to Generic Templates for any reason, take a look at the templates listed in the API Methods section {% see 2.1 %}.
 
 ### Flex Search Templates
 
@@ -104,16 +110,6 @@ flex.load_search_source 'your/template/search_source.yml'
 {% endhighlight %}
 
 {% see 2.2.2 %}
-
-#### Scan Search
-
-Implements the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`:
-
-{% highlight ruby %}
-Flex.scan_search(:my_template, my_vars) do |result|
-  result['hits']['hits'].each{|d|do_something_with(d)}
-end
-{% endhighlight %}
 
 #### Multi Search
 

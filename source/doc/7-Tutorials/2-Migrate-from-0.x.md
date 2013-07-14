@@ -9,9 +9,15 @@ Flex 1.x has changed quite a lot from version 0.x but you need just to rename a 
 
 ## Changes
 
-### 1. Gemfile change (only for rails applications)
+### 1. Gem changes
 
-There is only one breaking change (the only that will raise an error), that you have to update if you are using flex with a Rails app. It's a very simple one: you have just to change `gem 'flex', :require => 'flex/rails'` to simply `gem 'flex-rails'`. Then run a `bundle install` and your app should be able to start, and emit the deprecation warnings in the log.
+#### Rails Apps
+
+You have to change `gem 'flex', :require => 'flex/rails'` to simply `gem 'flex-rails'` in your `Gemfile`. Run a `bundle install` and your app should be able to start. Then it will emit the deprecation warnings for the other changes in the log.
+
+#### Non Rails Apps
+
+If you used model related functionality, you will be required to load the `flex-model` gem that is now separated by the `flex` core gem.
 
 ### 2. Configuration Renaming
 
@@ -26,6 +32,16 @@ There is only one breaking change (the only that will raise an error), that you 
 `add` > `deep_merge!` for all variables receivers
 
 `info` > `doc` to print the self documentation (e.g. `Flex.doc`, `YourClass.flex.doc` {% see 2.4 %})
+
+#### Bulk Support
+
+`Flex.bulk(:lines => lines_bulk_string)` > `Flex.post_bulk_string(:bulk_string => lines_bulk_string)`
+
+`Flex.process_bulk(:collection => collection)` > `Flex.post_bulk_collection(collection, options)`
+
+`Flex.import_collection` > `Flex.post_bulk_collection`
+
+`Flex.delete_collection(collection)` > `Flex.post_bulk_collection(collection, :action => "delete")`
 
 ### 4. Modules Renaming
 
@@ -45,4 +61,4 @@ There is only one breaking change (the only that will raise an error), that you 
 
 ## Additions
 
-You may want to check the new documentation in order to take advantage of the new features of the gems. For example, you may want to add `Flex::Scopes` to some of your classes, or you may want to use the new `flex-backup` binary and tasks, or fine-tuning the configuration of the new flex logger etc. {% see 1.1, 1.2 %}
+You may want to check the new documentation in order to take advantage of the new features of the gems. For example, you may want to add `Flex::Scopes` to some of your classes, or you may want to use the new `flex-backup` binary and tasks, or live-reindexing your code/index changes, or fine-tuning the configuration of the new flex logger etc. {% see 1.1, 1.2 %}

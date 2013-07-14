@@ -5,25 +5,8 @@ title: flex - Utility Methods
 
 # Utility Methods
 
-Flex defines some utility class methods: a few are useful for collection management, and a few are mostly useful for quick prototyping and debugging.
+Flex defines some utility class methods: a few are useful for bulk management, and a few are mostly useful for quick prototyping and debugging.
 
-## Collection Management Methods
-
-This methods are mostly used internally by the rake tasks {% see 1.4 %}, but in special cases you may need to use them directly.
-
-### Flex.process_bulk(args)
-
-This method accepts a `:collection` of objects, that can be hashes or Models, creates the formatted bulk data-string suitable to be passed to the elasticsearch server for bulk operations, and posts them. You can pass an `:action` that can be 'index' (default) or 'delete', and also a few other arguments like: `:index`, `:type`, `:version`, `:routing`, `:percolate`, `:parent`, `:timestamp`, `:ttl` that will be used as default for all the documents in the collection.
-
-**Notice**: If you have an already formatted bulk data-string you should use `Flex.bulk` {% see 2.1#flexbulk Flex.bulk %}, in order to bulk-index or bulk-delete the whole collection.
-
-### Flex.import_collection(collection, args)
-
-It just calls `Flex.process_bulk` setting the `:collection` to the first argument, and the `:action` to `"index"`
-
-### Flex.delete_collection(collection, args)
-
-It just calls `Flex.process_bulk` setting the `:collection` to the first argument `:action` to `"delete"`
 
 ## Curl-like Methods
 
@@ -46,9 +29,9 @@ Flex.GET '/_search', {:query => {:match_all => {}}}
 
 # same thing with YAML
 Flex.GET '/_search', <<-yaml
-query:
-  match_all: {}
-yaml
+  query:
+    match_all: {}
+  yaml
 
 # using also tags and variables (for the sake of it)
 Flex.GET '/_search', '{"query":{"<<a_tag>>":{}}}', :a_tag => 'match_all'
@@ -58,6 +41,22 @@ query:
   <<a_tag>>: {}
 yaml
 {% endhighlight %}
+
+## Bulk Support
+
+This methods are mostly used internally by the rake tasks {% see 1.4 %}, but you may want to use them directly.
+
+### Flex.post_bulk_collection
+
+This method accepts a `collection` of objects as the first argument and a hash of options. It passes each object in the `collection` (and the options) to the `Flex.build_bulk_string` and collects the formatted bulk string and posts it.
+
+**Notice**: If you have an already formatted bulk string you should use `Flex.post_bulk_string` {% see 2.1#Flex_post_bulk_string Flex.post_bulk_string %}.
+
+### Flex.build_bulk_string
+
+Accepts an object as the first argument and a hash of options. The object can be a `Hash` in the same format of the elasticsearch document results, or a `Flex::ModelIndexer` / `Flex::ActiveModel` instance.
+
+ You can pass an `:action` option that can be `'index'` (default), `'create'`, `'update'` or `'delete'`. It will return the bulk string understood by the [elasticsearch bulk API](http://www.elasticsearch.org/guide/reference/api/bulk/), that can be joined with other bulk strings in order to collect the complete bulk string to pass to the `Flex.post_bulk_string` method.
 
 ## Other methods
 
@@ -73,9 +72,9 @@ For example:
 
 {% highlight ruby %}
 result = Flex.search <<-yaml, :index => 'a_non_default_index'
-query:
-  match_all: {}
-yaml
+           query:
+             match_all: {}
+         yaml
 {% endhighlight %}
 
 As the curl-like methods, the data can be a `JSON` or `YAML` string or a `ruby` structure, and you can also pass the optional variable hash as usual.
@@ -84,10 +83,6 @@ As the curl-like methods, the data can be a `JSON` or `YAML` string or a `ruby` 
 
 Same as `Flex.search` but uses a Slim Search Template {% see 2.2.1#flex-slim_search_templates %}.
 
-### Flex.scan_search
-
-Shortchut for `flex.scan_search` {% see 2.2.1#scan_search %}
-
 ### Flex.json2yaml
 
 Converts a `JSON` string to a `YAML` string
@@ -95,4 +90,8 @@ Converts a `JSON` string to a `YAML` string
 ### Flex.yaml2json
 
 Converts a `YAML` string to a `JSON` string
+
+## Quasi API Methods
+
+{% see 2.1#flex_additions %}
 
