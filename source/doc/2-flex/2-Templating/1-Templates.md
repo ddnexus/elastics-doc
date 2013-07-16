@@ -14,7 +14,9 @@ With Flex Templates you almost don't need to write the code for searching: you c
 
 ### Advantages
 
-This approach drastically cuts down time and effort to interface your app to elasticsearch, substancially reducing the whole search logic to a simple `YAML` file, which adds its own advantages to the whole:
+This approach drastically cuts down time and effort to interface your app to elasticsearch, substancially reducing the whole search logic to a simple `YAML` file {% see 7.3#adding_flex_templates %}.
+
+Besides, `YAML` adds its own advantages to the whole:
 
 - `YAML` is very easy to write and read, so you can save a lot of typing and squinting
 - `YAML` maps 1 to 1 to the `JSON` structures that you need for elasticsearch, so you don't have to learn anything new

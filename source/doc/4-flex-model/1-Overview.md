@@ -12,25 +12,37 @@ The `flex-model` gem provides the means to map and sync your data to elasticsear
 
 > This is useful when the data you need to index is in some DB(s) managed by your application.
 
-Index and keep automaticaly synced your DBs with elasticsearch with just a few declarations in your models. You can mirror 1 to 1 your DBs to the index/indices, but you can also map any DB structure to any index structure you may design in order to ease the querying. You have the complete control over which data gets indexed and how it gets indexed, transparently managing elasticsearch parent/child relationships, also polymorphic {% see 4.2 %}.
+Index and keep automaticaly synced your DBs with elasticsearch with just a few declarations in your models. You can mirror 1 to 1 your DBs to the index/indices, but you can also map any DB structure to any index structure you may design in order to ease the querying. You have the complete control over which data gets indexed and how it gets indexed, transparently managing elasticsearch parent/child relationships, also polymorphic {% see 4.2, 7.3 %}.
 
 ## 2. Direct integration throught ActiveModel
 
 > This is useful when the index doesn't come from data in any DB(s) or when you want to use the elasticsearch index as a data storage.
 
-Manage the elasticsearch index as it were a DB, through `ActiveModel` models. Get validations and callbacks, typecasting, attribute defaults, persistent storage, with optimistic lock update, finders, chainable scopes etc. {% see 4.3 %}
+Manage the elasticsearch index as it were a DB, through `ActiveModel` models. Get validations and callbacks, typecasting, attribute defaults, persistent storage, with optimistic lock update, finders, chainable scopes etc. {% see 4.3, 7.4 %}
 
 ## Setup
 
-Flex needs to know your Flex models, and in which order you want them to be imported in the index (in case of bulk import of the DB and parent/child relations), so each time you add a `include Flex::ModelIndexer` or `include Flex::ActiveModel` statement, remember to add the model class name to the `config.flex_models` and/or `config.flex_active_models` arrays in the initializer file. Remember also that parents go first.
+Flex needs to know your Flex models, and in which order you want them to be imported in the index (in case of bulk import of the DB and parent/child relations), so each time you add a `include Flex::ModelIndexer` or `include Flex::ActiveModel` statement, remember to add the model class name to the `config.flex_models` and/or `config.flex_active_models` arrays in the initializer file.
 
 {% highlight ruby %}
 config.flex_models = %w[ Thread Post ]
 config.flex_active_models = %w[ WebContent ]
 {% endhighlight %}
 
-## elasticsearch Mapping
+## Elasticsearch Mapping
 
 Flex provides a default mapping that keeps into consideration also your parent/child relations, and the properties declared for `Flex::ActiveModel` models. The default mapping is deep-merged with your `flex.yml` file {% see 1.3 %}, that is expected to contain all the mapping that you may want to define/override, written in friendly `YAML`.
 
 Notice that in order to have the automatic routing and mapping for parent/child relationships you must either run the `flex:import FORCE=true` task (which will create a new index), or the `flex:index:create` task {% see 1.4 %}.
+
+## Dynamic Indices
+
+You can implement dynamic indices very easily by just defining an instance method in your model:
+
+{% highlight ruby %}
+def flex_index
+  old_creation_date? ? 'old_index' : 'new_index'
+end
+{% endhighlight %}
+
+> You can also override other metafields by defining a similar method {% see 4.4.2#overriding_flex_metafields %}

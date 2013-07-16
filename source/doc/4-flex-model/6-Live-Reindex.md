@@ -34,7 +34,7 @@ The live reindexing should be the last step of your new deployment, performed ju
 It's important to understand that code and index must constantly match when the app is running: the old code with the old index; the new code with the new index.
 So in order to ensure that consistency the live-reindex feature needs to stop the indexing during the swapping (old code and index / new code and index). For that reason you must define the `:stop_indexing_proc` proc that must ensure to prevent all the processes that use the old code to change the index (e.g. put the app in maintenance mode, wait for eventual `resque` tasks in the queue to complete before returning, flush the indices, etc.).
 
-The `:stop_indexing_proc` will be called (almost) at the end of the live-reindexing, just before the index swap. Just remember that the reindex methods will reindex, call your proc to stop the indexing and swap the old index with the new one: after that you must swap the old code with the new one and resume the indexing that your proc stopped (or maybe just restart the new deployed app). The elapsed time from the indexing-stop to the indexing-restart will probably be just a few milliseconds or seconds at worse, but that is a critical step if you want a consistent and complete index and a smooth swapping.
+The `:stop_indexing_proc` will be called (almost) at the end of the live-reindexing, just before the index swap. Just remember that the reindex methods will: 1) reindex, 2) call your proc to stop the indexing and 3) swap the old index with the new one. After that you must: 1) swap the old code with the new one and 2) resume the indexing that your proc stopped (or maybe just restart the new deployed app). The elapsed time from the indexing-stop to the indexing-restart will probably be just a few milliseconds or seconds at worse, but that is a critical step if you want a consistent and complete index and a smooth swapping.
 
 > If you deploy with `capistrano`, you should resume the indexing right after the `creating_symlink`
 
@@ -56,7 +56,7 @@ Flex::LiveReindex.<reindex_method>(:stop_indexing_proc => proc{...})
 
 During the reindexing, your live app may change some document in the old index/indices. The changes are tracked in a redis list and will be indexed at the end of the reindexing. If you pass a block with the reindex method it will receive (also) the changes done during the reindexing, so giving you the chance to update the new index/indices consistently with the change.
 
-The tracking is done inside the Flex API methods defined for store and delete (i.e. `store`, `put_store`, `post_store`, `delete` and `remove`)
+The tracking is done inside the Flex API methods defined for store and delete (i.e. `store`, `put_store`, `post_store`, `delete` and `remove`).
 
 If your indices may get modified by some custom method, by other applications or by some elasticsearch river (none of which uses the above methods), the changes during the reindexing will not be traacked, hence will not be mirrored to the new index/indices. In that case, you must explicitly keep track of the changes by using the `track_change` or the `track_external_change` methods. Pease, take a look at the code and if you need some assistance, send me an email.
 
@@ -64,7 +64,13 @@ If your indices may get modified by some custom method, by other applications or
 
 The methods accept also an optional block, which will be used to eventually transform the documents passed.
 
-The block will receive the action (`'index'` or `'delete'`) as the first argument, and the hash document pulled from elasticsearch. It is expected to return the eventually modified document (in the same structure understood by elasticsearch), or a DB record/document to index. In case of delete action, it should return the same hash document. If you want to halt the indexing/deletion for that particular document, you must return a blank value.
+The block will receive the action (`'index'` or `'delete'`) as the first argument, and the hash document pulled from elasticsearch. It is expected to change the passed document and return one of:
+
+- a Hash with a single key/value pair of action/document: `{ action => document }` (where document can be a hash understood by elasticsearch or a DB record/document to index).
+- an array of Hashes like the above (when you need to split one single action into a few different actions): `[ { action => document },{ action => document }, ... ]`
+- a nil value (when you want to halt the indexing/deletion for a particular document)
+
+The returned result(s) will be bulk-indexed.
 
 For example:
 
@@ -75,8 +81,8 @@ Flex::LiveReindex./<reindex_method>(my_options) do |action, raw_document_hash|
     raw_document_hash['_source']['some_field'] = my_transform(raw_document_hash['_source']['some_field'])
     raw_document_hash['_source'].delete('some_other_field')
   end
-  # you must return the modified document
-  raw_document_hash
+  # you must return the action and the modified document
+  {action => raw_document_hash}
 end
 {% endhighlight %}
 
@@ -104,11 +110,12 @@ Flex::LiveReindex.<reindex_method>(my_options) do |action, raw_document_hash|
       ...
     end
   end
-  # you must return the modified document
-  raw_document_hash
+  # you must return the action and the modified document
+  {action => raw_document_hash}
 end
 {% endhighlight %}
 
+> __Important__: you must not directly or indirectly run code that may call the `store`, `put_store`, `post_store`, `delete` and `remove`  Flex API methods from inside your transform block, or your app will enter in an infinite loop. Your block must return one document or an array of documents understood by the `Flex.build_bulk_string` method {% see 2.5#flexbuild_bulk_string Flex.build_bulk_string %}.
 
 If you pass no block, the reindex method will use a default proc, different for different type of reindexing: see the details about each default in the specific method session.
 
@@ -168,7 +175,7 @@ The full reindex reindexes all the `Flex::Configuration.flex_active_models` and 
 
 The transform block will be used to pass ALL the record being reindexed AND the tracked changes at the end of the reindexing. If you don't pass any block, the index will be copied verbatim into the new index.
 
-You can pass the `:index` option to limit the indices to migrate: if you don't pass any `:index` option the default indices of your app will be used. (the `:models` and the `:ensure_indices` are ignored by this method).
+You can pass the `:index` option to limit the indices to migrate: if you don't pass any `:index` option the default indices of your app will be used. (the `:models` is ignored by this method).
 
 ## Caveats
 

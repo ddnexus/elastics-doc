@@ -1,11 +1,15 @@
 ---
 layout: doc
-title: Crawl and Index this Doc
+title: Index and Search External Data
 ---
 
 # {{ page.title }}
 
-In this tutorial we will create a small Rails app that will crawl this very documentation and index all its content with the `elasticsearch-mapper-attachment` plugin. Then we will add a search form that will search in the elasticsearch index, highlight the results and link to the original documentation page.
+> __Notice__: This tutorial is complemented by the previous one, please read both of them {% see 7.3 %}.
+
+When the data you want to search is not managed by your app, you can index and search it as easily as it were in your own DB. Indeed you can use elasticsearch as it were a sort of DB itself, managing its indices and types with your models as you do with databases and tables.
+
+In this tutorial we will create a small Rails app that will crawl this very documentation and index all its content with the `elasticsearch-mapper-attachment` plugin. It will do so without using any DB, using only one elasticsearch index, managed by a simple model. Then we will add a search form that will search in the elasticsearch index, highlight the results and link to the original documentation page, so you will learn also how to use the results that you pull from your searches.
 
 ## Prerequisite
 
@@ -53,6 +57,7 @@ When it finishes, run the generator:
 
 {% highlight bash %}
 $ rails generate flex:setup
+# press return when asked
 {% endhighlight %}
 
 ## Model and Index
@@ -309,3 +314,4 @@ em
 
 Job done! Now we can start the rails server, and point the browser to our new search app.
 
+> __Notice__: This tutorial is complemented by the previous one, please read both of them {% see 7.3 %}.

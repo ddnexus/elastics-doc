@@ -66,3 +66,30 @@ table.code-topics#indexer-instance-methods cellspacing=0 cellpadding=0
     td
       markdown:
         {% see 4.2#indexing_fields %}
+
+
+  tr
+    th colspan=2 id='overriding_flex_metafields'
+      | Overriding Flex Metafields
+
+  tr
+    td
+      code flex_id
+      ' ,
+      code flex_index
+      ' ,
+      code flex_type
+      ' ,
+      code flex_parent
+      ' ,
+      code flex_routing
+    td
+      markdown:
+
+        __Use only if you know what you are doing!__
+
+        > You define any of this methods in your model, if you want to override the `flex.id`, `flex.index`, `flex.type`, `flex.parent` and/or `flex.routing` generation.
+
+        The `flex_index` should be used if you want to implement dynamic indices in your model.
+
+

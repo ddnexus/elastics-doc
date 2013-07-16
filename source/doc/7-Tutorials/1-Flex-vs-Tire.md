@@ -161,7 +161,7 @@ That doesn't look like the best default design to start an application with. For
 
 At a certain point of that refactoring I get tired of complaining about Tire, and decided to roll up my sleeves and write an alternative. Many thanks to [Escalate Media](http://www.escalatemedia.com) and [Barquin International](http://www.barquin.com) that supported the idea of releasing it as an Open Source Software and keep sponsorizing the project.
 
-Here is the list of requirements and how they have been implemented in the first version.
+Here is the list of requirements for the first version of flex, and how they have been implemented.
 
 {% slim flex_requirements_table.slim %}
 
@@ -179,7 +179,7 @@ Now, after one year of active usage and development, the current version of flex
 
 It's easier to use also for elasticsearch beginners, since it implements `ActiveRecord`-like chainable scopes for easy searching and reusability, plus the `ActiveModel` integration to manage elasticsearch as it were an `ActiveRecord` DB.
 
-It's also more powerful for experts, since it covers all the elasticsearch APIs and offers a lot of useful tools like index dumping and loading {% see 6 %}, a very advanced live-reindex feature {% see 4.6 %}, very detailed debugging info, high configurable logging, a self documentation tool, a lot of out of the box integrations, and a better documentation with some tutorial {% see 1.1 %}.
+It's also more powerful for experts, since it covers all the elasticsearch APIs {% see 2.1 %} and offers a lot of useful tools like index dumping and loading {% see 6 %}, a very advanced live-reindex feature {% see 4.6 %}, very detailed debugging info, high configurable logging, a self documentation tool, a lot of out of the box integrations, and a better documentation with some tutorial {% see 1.1 %}.
 
 > Flex does not have a dedicated testing suite yet: its testing is still embedded in a few applications that exploit its features. If you have some spare time, please, contribute.
 
