@@ -59,7 +59,7 @@ total   = Product.count
 
 > Almost no elasticsearch knowledge required: a ruby-rails way that covers most searching needs!
 
-Scopes are a great way to define the criteria to search the index in pure ruby. You can mix and match many scopes to create a new search criteria, and finally get your result by calling the usual `find`,  `count`, `destroy`, `first`, `last`, `all`. You can also use `scan_all` when you want to process a lot of documents in batches.
+Scopes are a great way to define the criteria to search the index in pure ruby. You can mix and match many scopes to create a new search criteria, and finally get your result by calling the usual `find`,  `count`, `delete`, `first`, `last`, `all`. You can also use `scan_all` when you want to process a lot of documents in batches.
 
 
 {% highlight ruby %}

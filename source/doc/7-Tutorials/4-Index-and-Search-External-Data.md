@@ -103,8 +103,8 @@ desc 'Crawl and index the Flex Doc Site'
 
 task :index_flex_doc => :environment do
   puts "Crawling The Flex Doc site:"
-  # we want to destroy all the pages we eventually already have in the index, so they will be fresh each time we re-crawl
-  FlexDocPage.destroy
+  # we want to delete all the pages we eventually already have in the index, so they will be fresh each time we re-crawl
+  FlexDocPage.delete
 
   Anemone.crawl('http://ddnexus.github.io/flex/', :verbose => true) do |anemone|
 

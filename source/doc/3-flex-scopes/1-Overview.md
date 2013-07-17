@@ -25,7 +25,7 @@ cheap_scope = MyClass.range :price => {:to => '99.99'}
 
 ## Query Scopes
 
-On that search criteria, you can call any of the query scopes like the usual `find`,  `count`, `destroy`, `first`, `last`, `all`, etc.:
+On that search criteria, you can call any of the query scopes like the usual `find`,  `count`, `delete`, `first`, `last`, `all`, etc.:
 
 {% highlight ruby %}
 first_red   = red_scope.first
