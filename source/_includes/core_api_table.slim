@@ -382,7 +382,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       code Flex.post_bulk_string
     td
       markdown:
-        Performs many index/delete operations in a single API call.
+        Performs many index/create/update/delete operations in a single API call.
 
         **Template**
 
@@ -401,6 +401,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
         {% shighlight ruby %}
         Flex.post_bulk_string :bulk_string => bulk_string   # required
         {% endshighlight %}
+
+      markdown:
+        It may return `nil` if you pass a blank `:bulk_string`
 
       br
       == Helper.see('1.4#flex_import flex:import,2.5#bulk_support')
