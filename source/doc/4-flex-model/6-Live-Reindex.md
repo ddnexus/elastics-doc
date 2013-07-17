@@ -5,7 +5,7 @@ title: flex-model - Live Reindex
 
 # {{ page.title }}
 
-If you ever tried to reindex your production app while it is running you know that it might be quite a difficult task. You have the old code running and constantly updating the old index, and you need to deploy some new search feature with the new code, that would produce and need a new index, so what should you do? If the production index/indices are small, you may shut-down your site for a few minutes in order to deploy the new code, reindex and restart the site. No big deal: problem solved! But quite typically your index/indices are big, so the reindexing would require you to shut down your site (or part of it) during a few hours, and that wouldn't be acceptable. If your app is making money, shutting it down would likely cost you a lot of bucks.
+If you ever tried to reindex your production app while it is running you know that it might be quite a difficult task. You have the old code running and constantly updating the old index/indices, and you need to deploy some new search feature with the new code, that would produce and need a new index, so what should you do? If the production index/indices are small, you may shut-down your site for a few minutes in order to deploy the new code, reindex and restart the site. No big deal: problem solved! But quite typically your index/indices are big, so the reindexing would require you to shut down your site (or part of it) during a few hours, and that wouldn't be acceptable. If your app is making money, shutting it down would likely cost you a lot of bucks.
 
 So you could try a live update, i.e. re-import the data while the old data is still in place. From a commercial point of view, that solution is probably better than shutting down the site, but it is still a bad one from a technical point of view. Your index will stay in an inconsistent state during the time of the update, and that may probably cause both your old and new code to fail during the process. The "deploy-then-update" will not be better than the "update-then-deploy" technique: both will likely produce a quite bad user experience during the process - depending on the magnitude of your changes.
 
@@ -115,7 +115,7 @@ Flex::LiveReindex.<reindex_method>(my_options) do |action, raw_document_hash|
 end
 {% endhighlight %}
 
-> __Important__: you must not directly or indirectly run code that may call the `store`, `put_store`, `post_store`, `delete` and `remove`  Flex API methods from inside your transform block, or your app will enter in an infinite loop. Your block must return one document or an array of documents understood by the `Flex.build_bulk_string` method {% see 2.5#flexbuild_bulk_string Flex.build_bulk_string %}.
+> __Important__: you must not directly or indirectly run code that may call the `store`, `put_store`, `post_store`, `delete` and `remove`  Flex API methods from inside your transform block, or your app will enter in an infinite loop. Your block must return documents understood by the `Flex.build_bulk_string` method {% see 2.5#flexbuild_bulk_string Flex.build_bulk_string %}.
 
 If you pass no block, the reindex method will use a default proc, different for different type of reindexing: see the details about each default in the specific method session.
 
@@ -124,9 +124,11 @@ If you pass no block, the reindex method will use a default proc, different for 
 
 There are 3 different reindexing methods, useful in different contexts but working quite similarly. You can use only one of the 3 methods and only one time in one live-reindex session, then you have to swap the code and deploy. If you need to use more than one method, you must do it in different deploys.
 
-> If you try to use more than one of the reindexing method in the same session, the execution of the second method will raise a `MultipleReindexError` error. In that case the first reindexing execution took place regularly (and the error will tell you the new index/indices that have been swapped OK), but the other reindexing(s) have been aborted so you have still the old index/indices in place. If the code-changes that you were about to deploy rely on the successive reindexings that have been aborted, your app may fail, so you should complete the other reindexing in single successive deploys ASAP.
+> If you try to use more than one of the reindexing method in the same session, the execution of the second method will raise a `MultipleReindexError` error. In that case the first reindexing execution took place regularly (and the error will tell you the new index/indices that have been swapped successfully), but the other reindexing(s) have been aborted so you have still the old index/indices in place. If the code-changes that you were about to deploy rely on the successive reindexings that have been aborted, your app may fail, so you should complete the other reindexing in single successive deploys ASAP.
 >
 > If you are in development environment and REALLY know what you are doing, you can restart the process and silence that error by passing `:safe_reindex => false`.
+
+If any other (not `MultipleReindexError`) error is raised during the process, the live-reindex will be aborted. In that case, your old index/indices have not been touched at all so they are left exactly as before. The new index/indices being built are probably incomplete, so they have already been deleted by an ensure block, so they left no trace in your elasticsearch server.
 
 ### Flex::LiveReindex.import_models
 
@@ -179,10 +181,14 @@ You can pass the `:indices` option to limit the indices to migrate: if you don't
 
 ## Caveats
 
+### Just Upgraded
+
+When you live-reindex, make sure your live app is running the same version of flex of your new deploy, or you may corrupt your index/indices and/or miss the live changes (made by the old running code during the reindexing). You should never live-reindex in the same deploy you upgrade flex. Instead upgrade, deploy, then live-reindex on one next deploy.
+
 ### Flex::Configuration.app_id
 
-__IMPORTANT__: When you live-reindex, the `Flex::Configuration.app_id` should be set and match for both the old code and the new code. If you use `flex-rails` it is already set and matching, however, if you set it explicitly, ensure that the running app processes are using the same id of the new code, or you will miss all the changes made by the old running code during the reindexing. In other words, you cannot set and run it in the same commit/deploy: instead you should set it, commit and deploy, then make your changes and reindex on the next deploy.
+When you live-reindex, the `Flex::Configuration.app_id` should be set and match for both the old code (running app) and the new code. If you use `flex-rails` it is already set and matching, however, if you set it explicitly, ensure that the running app processes are using the same id of the new code, or you will miss all the live changes (made by the old running code during the reindexing). In other words, you cannot set and run it in the same commit/deploy: instead you should set it, commit and deploy, then make your changes and reindex on the next deploy.
 
 ### Safe live-reindex
 
-Live-reindexing is a potentially dangerous process because it deletes the old indices after a successful reindexing. If you have a bug in the transform block or any issue with the `app_id` (mentioned above), or you use multiple times any of the 3 reindexing methods without deploying, __you may lose part of the indices or corrupt them__. For that reasons you should always backup your indices before proceed, or at least dump the data with the `flex:backup:dump` task. That's very important especially with `Flex::ActiveModel` models, that don't have the data mirrored in a DB. Besides, this is a very new implementation that has not been tested very well yet, so please, do backup your indices before proceed.
+Live-reindexing is a potentially dangerous process because it deletes the old indices after a successful reindexing. If you have a bug in the transform block or any issue with the `app_id` (mentioned above), or forget the couple of caveats above, you may lose or corrupt part of the indices. For that reasons you should always backup your indices before proceed, or at least dump the data with the `flex:backup:dump` task. That's very important especially with `Flex::ActiveModel` models, that don't have the data mirrored in a DB. Besides, this is a very new implementation that didn't have the time to be tested thoroughly yet, so please, do backup your indices before live-reindexing.
