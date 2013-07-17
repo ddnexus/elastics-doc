@@ -169,13 +169,13 @@ This method works similarly to the `Flex::LiveReindex.import_models` for the opt
 
 The full reindex reindexes all the `Flex::Configuration.flex_active_models` and the partial reindex works similarly to the `migrate_models` method.
 
-### Flex::LiveReindex.migrate_index
+### Flex::LiveReindex.migrate_indices
 
 > Use this kind of generic live reindex for any index, when you prefer to interact directly with the documents, regardless the models. It migrates directly the content of one or more indices through the transform block that you must pass it.
 
 The transform block will be used to pass ALL the record being reindexed AND the tracked changes at the end of the reindexing. If you don't pass any block, the index will be copied verbatim into the new index.
 
-You can pass the `:index` option to limit the indices to migrate: if you don't pass any `:index` option the default indices of your app will be used. (the `:models` is ignored by this method).
+You can pass the `:indices` option to limit the indices to migrate: if you don't pass any `:indices` option the default indices of your app will be used. (the `:models` is ignored by this method).
 
 ## Caveats
 
