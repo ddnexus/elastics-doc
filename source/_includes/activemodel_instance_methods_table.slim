@@ -1,13 +1,13 @@
 table.code-topics#activemodel-instance-methods cellspacing=0 cellpadding=0
   tr
     td
-      code lock_update
+      code safe_update
     td
       markdown:
         This method implements the optimistic lock on update documented [here](http://www.elasticsearch.org/blog/2011/02/08/versioning.html). It is done through a simple block wrapper:
 
       | {% shighlight ruby %}
-        record.lock_update do |r|
+        record.safe_update do |r|
           r.amount += 100
         end
         {% endshighlight %}
@@ -18,10 +18,24 @@ table.code-topics#activemodel-instance-methods cellspacing=0 cellpadding=0
 
   tr
     td
+      code safe_update!
+    td
+      markdown:
+        Like `safe_update` but will raise a `Flex::ActiveModel::DocumentInvalidError` if the document is not valid.
+
+  tr
+    td
       code raw_result
     td
       markdown:
         This method returns the original elasticsearch result as it comes from the internal request. You can call it also on any array collection result.
+
+  tr
+    td
+      code raw_document
+    td
+      markdown:
+        This method returns the original elasticsearch document as it comes from the internal request.
 
   tr
     td
@@ -36,9 +50,12 @@ table.code-topics#activemodel-instance-methods cellspacing=0 cellpadding=0
         end
         {% endshighlight %}
 
+      br
+      == Helper.see '4.4.2#overriding_flex_metafields'
+
   tr
     td
-      code method_missing
+      code document.method_missing
     td
       markdown:
-        This method forwards the missing methods to the `raw_result` structure, so you can also call all the methods added by all the result extenders {% see 2.3 flex Result Extenders, 4.5 flex-model Result Extenders %}
+        This method forwards the missing methods `raw_document` structure, so you can also call all the methods added by all the result extenders {% see 2.3 flex Result Extenders, 4.5 flex-model Result Extenders %}
