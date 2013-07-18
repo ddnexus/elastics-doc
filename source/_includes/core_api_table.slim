@@ -655,11 +655,10 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
         Flex.search_by_id :id      => id,    # required
                           :type    => nil,
                           :index   => "flex_test_index",
-                          :refresh => false
         {% endshighlight %}
 
       markdown:
-        > A `:refresh => true` variable will first refresh the index
+        > This method uses the search API, which is not real-time like the get API. You may want to refresh the index with `Flex.refresh_index`, before calling it.
 
   tr
     td

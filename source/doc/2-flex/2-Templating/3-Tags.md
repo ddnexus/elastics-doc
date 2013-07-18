@@ -47,6 +47,7 @@ Here are a few examples of tags:
     << an_optional_tag= ~ >>
     << _a_partial_template >>
     "<<a_quote_wrapped_tag= {query: '*'} >>" # (the wrapping quotes avoid a YAML parsing error due to the ':')
+    << a_nested.tag.1 >> # (will be interpolated with :a_nested[:tag][1] variable value)
 
 You are not limited to use tag as value placeholder: you can use them anywhere in the yaml, also as key placeholder or partial keys or values if it makes sense to you:
 
