@@ -8,7 +8,7 @@ alias_index: true
 
 I wrote this page because it looks like it is still not very clear what flex does and what are the differences with Tire (as you can read [here](http://stackoverflow.com/questions/14517686/integrating-elasticsearch-with-activerecord)), and also because I honestly think that if you are serious with elasticsearch, you have plenty of reasons to use Flex rather than Tire.
 
-> __Notice__: Being the author of Flex, it's difficult not being biased, but I will try to present the facts that support my opinion. Please, correct me if I am wrong or imprecise and I will fix any eventual mistake right away. Thanks.
+> __Notice__: Being the author of Flex, it's difficult not being biased, but I will try to present the facts that support my opinions. Please, correct me if I am wrong or imprecise and I will fix any eventual mistake right away. Thanks.
 
 ## Quick Facts Comparison Table
 
@@ -57,9 +57,11 @@ That block looks pretty verbose, isn't it? Specially if you know that the only t
 {query: {query_string: {query: @query}}}
 {% endhighlight %}
 
+> It gets even worse if you add other stuff, like order or facets, but this simple example is enough to get the point.
+
 So do we really need a ruby DSL to express that? Isn't a ruby hash more simple, more clear and more effective? Indeed. The elasticsearch API is very clear and simple because it is expressed by basic data structures, that are simpler to write, read and merge with variables or other structures. A ruby DSL seems just to make everything more difficult.
 
-> Flex variable interpolation is really a no-brainer with its simple placeholder tags, placed right in the queries where they have to be interpolated. {% see 2.2.3 %}
+> Flex variable interpolation is really a no-brainer with its simple placeholder tags, placed right in the queries where they have to be interpolated {% see 7.3#adding_flex_templates %}.
 
 #### Difficult and Very Limited Reusability
 
@@ -85,11 +87,11 @@ end
 
 As if that alone wouldn't be enough complex even without variables, at some point you will have also to interpolate your variables into that boolean queries by using some closure, and eventually you will have to wrap the procs in a method just to pass the variables. Ouch!
 
-> Flex allows you to reuse any fragment of any query into any other query.
+> Flex allows you to reuse any fragment of any query into any other query {% see 2.2.2#query_fragment_reuse %}. You can even use chainable scopes to pure ruby reusability {% see 3 %}
 
 #### Hard Coded Limitations
 
-Tire creates a search object each time you search anything. The search object expects a fixed number of possible data parts and uses that parts to compose the query. That strategy has many limitations (as you have just read), but in particular, it is limited to what the search class explicitly allows and is aware of. For example, you cannot use any query not explicitly known by Tire (and if I am not mistaken, they are just about 7 at the moment of this writing). Besides, if you need any other elasticsearch feature not explicitly known by Tire, you are on your own. And if you are serious with elasticsearch and need to use its most advanced features, you are on your own most of the times with Tire.
+Tire creates a search object each time you search anything. The search object expects a fixed number of possible data parts and uses that parts to compose the query. That strategy has many limitations (as you have just read), but in particular, it is limited to what the search class explicitly allows and is aware of. For example, you cannot use any query not explicitly known by Tire (and if I am not mistaken, they are just about 7 at the moment of this writing, which means that you don't have access to the 80% of the elasticsearch search queries). Besides, if you need any other elasticsearch feature not explicitly known by Tire, you are on your own. And if you are serious with elasticsearch and need to use its most advanced features, you are on your own most of the times with Tire.
 
 IMO Elasticsearch is very powerful and rich: limiting it is sort of defeating the very reason you choose it.
 
@@ -103,7 +105,7 @@ For example you have to pass the index/indices as the first param, but you have 
 
 All that reverse-engineering effort... only to make Tire generate the same simple structure you wanted and knew from the beginning. That looks quite twisted to me. I often wished to get rid of Tire and get straight to elasticsearch.
 
-> You don't need to reverse-engineer anything with Flex, because it expresses queries with the same elasticsearch structures, just easier to read, write and reuse since you can express them in `YAML`.
+> You don't need to reverse-engineer anything with Flex, because it can express queries by using exactly the same elasticsearch structures, just easier to read, write and reuse since you can express them in `YAML` {% see 7.3#adding_flex_templates %}.
 
 #### Pros and Cons
 
@@ -149,13 +151,13 @@ That suggests that the index structure should play an application-global role, r
 
 > Flex allows you to map any DB structure to any index structure. It generates for you the mapping defaults that keep into consideration also parent/child relations and properties you may define in your models. However you can fine-tune them in a central `YAML` file (a sort of `database.yml` for indices).
 
-#### Funny Defaults
+#### Model Centric Defaults
 
-Then you have that funny defaults for index and type that will generate one index per model, each index populated by one single type. By default, you have a completely _model-centric_ design, instead of a more useful _application-centric_ design (as already outlined in the previous topic). Beside there is another surprise if you run multiple applications that have some model class with the same name. By default, your indices will be shared among different applications because they define the same model classes. I don't think you want to index the posts of the "Racing Forum" app in the same index of the "Furniture Forum" app just because they are both managed by a `Post` model.
+Surprisingly, the Tire's defaults generate one index per model, each index populated by one single type. That means that - by default - you have a completely _model-centric_ design, instead of a more useful _application-centric_ design (as already outlined in the previous topic). Beside there is another surprise if you run multiple applications that have some model class with the same name. By default, your indices will be shared among different applications because they define the same model classes. I don't think you want to index the posts of the "Racing Forum" app in the same index of the "Furniture Forum" app just because they are both managed by a `Post` model.
 
 That doesn't look like the best default design to start an application with. For example, a simple and basic "one index per app, one type per model" default would do for most apps: it would be _application-centric_ and would avoid unwanted index sharing. Besides, that's similar to the familiar concept "one DB per app, one table per model".
 
-> Flex is application-centric by default: it embraces "one index per app, one type per model" design to start with, however, if your particular app needs to split apart the index or manage the indices dynamically, it's just a matter of adding a simple declaration in the model.
+> Flex is application-centric by default: it embraces "one index per app, one type per model" design to start with, however, if your particular app needs to split apart the index or manage the indices dynamically, it's just a matter of adding a simple definition in the model {% see 4.4.2#overriding_flex_metafields %}.
 
 ### Flex Project
 

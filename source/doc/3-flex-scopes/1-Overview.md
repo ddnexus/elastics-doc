@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: flex-scopes - Overview
+title: flex-scopes - Scopes Overview
 alias_index: true
 ---
 

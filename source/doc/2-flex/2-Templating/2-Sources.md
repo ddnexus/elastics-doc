@@ -128,7 +128,7 @@ In the example, the `load_search_source` loads the templates - namely the `my_te
 
 > __Notice__: You can omit the template names if you want to wrap all the template methods.
 
-## The 'ANCHORS' key
+## Query Fragment Reuse
 
 Any Template Source file may contain an optional `ANCHORS` key, which is simply a literal key that you may use as a sort of storage for fragments of structures. By using the `YAML` anchor/alias mechanism you can reuse them in more than one templates. The following is a real world example:
 

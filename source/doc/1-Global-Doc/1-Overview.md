@@ -7,7 +7,12 @@ alias: /doc
 
 # {{ page.title }}
 
-Flex is a complete ruby client for [elasticsearch][], it is fast and efficient, easy to use and customize. You can transparently integrate it with `ActiveRecord`, `Mongoid` and `ActiveModel` models, with or without automatic synchronization, with or without `Rails`, integrated with `will_paginate` and `kaminari` and the `elasticsearch-mapper-attachments` plugin.
+Flex is the ultimate ruby client for [elasticsearch][], it is powerful, fast and efficient, easy to use and customize.
+
+It covers ALL the elasticsearch API, and transparently integrates it with your app and its components (like `Rails`, `ActiveRecord`, `Mongoid`, `ActiveModel`, `will_paginate`, `kaminari`, `elasticsearch-mapper-attachments`, ...).
+
+It also implement and integrates very advanced features, (like chainable scopes, live-reindex, cross-model syncing, query fragment reuse, parent/child relationships, templating, self-documentation tools, detailed debugging, ...).
+
 
 * __Easy to use even for beginners__<br>
 If you have almost no elasticsearch knowledge, fear not! You can populate and search the elasticsearch index as it were an `ActiveRecord` DB, using very familiar chainable scopes and finders, validation and callbacks that you are used to master in your models {% see 3, 4.3 %}
