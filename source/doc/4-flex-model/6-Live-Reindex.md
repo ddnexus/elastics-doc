@@ -117,7 +117,7 @@ Flex::LiveReindex.<reindex_method>(my_options) do |action, raw_document_hash|
 end
 {% endhighlight %}
 
-> __Important__: you must not directly or indirectly run code that may call the `store`, `put_store`, `post_store`, `delete` and `remove`  Flex API methods from inside your transform block, or your app will enter in an infinite loop. Your block must return documents understood by the `Flex.build_bulk_string` method {% see 2.5#flexbuild_bulk_string Flex.build_bulk_string %}.
+> __Important__: you must not directly or indirectly run code that may call the `store`, `put_store`, `post_store`, `delete` and `remove`  Flex API methods from inside your transform block, or your app will enter in an infinite loop. Your block must return documents understood by the `Flex.build_bulk_string` method {% see 2.6#flexbuild_bulk_string Flex.build_bulk_string %}.
 
 If you pass no block, the reindex method will use a default proc, different for different type of reindexing: see the details about each default in the specific method session.
 

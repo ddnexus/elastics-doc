@@ -49,7 +49,7 @@ The `flex` gem comes with a few extenders (documented here) and more are added b
   It extends the results coming from a search query. It adds the following methods:
 
   * __`result.collection`__<br>
-    It is the shortcut to `result['hits']['hits']` from search results. The collection is extended by the typical pagination methods {% see 2.3#flexresultcollection Flex::Result::Collection %}, Besides, each hit in the array gets extended also by the `Flex::Result::Document` extender (see below).
+    It is the shortcut to `result['hits']['hits']` from search results. The collection is extended by the typical pagination methods {% see 2.4#flexresultcollection Flex::Result::Collection %}, Besides, each hit in the array gets extended also by the `Flex::Result::Document` extender (see below).
 
   * __`result.facets`__<br>
     Just a shortcut for `result['facets']`
@@ -58,7 +58,7 @@ The `flex` gem comes with a few extenders (documented here) and more are added b
   It extends the results coming from a multi-get query. It adds the following methods:
 
   * __`result.docs`__ or __`result.collection`__<br>
-    It is the shortcut to `result['docs']` from multi-get results. The collection is extended by the typical pagination methods {% see 2.3#flexresultcollection Flex::Result::Collection %}, Besides, each hit in the array gets extended also by the `Flex::Result::Document` extender (see below).
+    It is the shortcut to `result['docs']` from multi-get results. The collection is extended by the typical pagination methods {% see 2.4#flexresultcollection Flex::Result::Collection %}, Besides, each hit in the array gets extended also by the `Flex::Result::Document` extender (see below).
 
 * __`Flex::Result::Document`__<br>
   Applies to documents that contain (at least, but not limited to) `_index`, `_type`, `_id`. It adds the following methods:

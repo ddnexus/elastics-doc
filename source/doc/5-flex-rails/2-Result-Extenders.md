@@ -5,7 +5,7 @@ title: flex-rails - Result Extenders
 
 # {{ page.title }}
 
-The `flex-rails` gem adds an extender to the standard extended `Flex::Result` object {% see 2.3 %}.
+The `flex-rails` gem adds an extender to the standard extended `Flex::Result` object {% see 2.4 %}.
 
 * __`Flex::Result::RailsHelper`__<br>
   It extends the results coming from a search query. It adds the following method to the document in the collection:

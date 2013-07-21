@@ -38,7 +38,7 @@ class Post < ActiveRecord::Base
 end
 {% endhighlight %}
 
-In this example we set the elasticsearch `index` and `type` explicitly, but we could also omit that and let Flex use the defaults. For example if your application uses just one index named `'forum'`, and you set it in the initializer file, you can omit to declare it in all models. Also the default type for the model class `Post` is `'post'`, so again you can omit to delare it explicitly {% see 2.2.4, 4.4.2#class_methods %}.
+In this example we set the elasticsearch `index` and `type` explicitly, but we could also omit that and let Flex use the defaults. For example if your application uses just one index named `'forum'`, and you set it in the initializer file, you can omit to declare it in all models. Also the default type for the model class `Post` is `'post'`, so again you can omit to delare it explicitly {% see 2.3.4, 4.4.2#class_methods %}.
 
 ### elasticsearch Parent/Children Relations
 

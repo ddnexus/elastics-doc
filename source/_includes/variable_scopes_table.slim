@@ -4,7 +4,7 @@ table.code-topics#variable-scopes cellspacing=0 cellpadding=0
       code query_string
     td
       markdown:
-        This scope accepts a query string or an hash to parse as documented in [elasticsearch query-string-query API](http://www.elasticsearch.org/guide/reference/query-dsl/query-string-query). If omitted it uses `{'query': '*'}` as the default (i.e. sort of `match_all` query). It passes it as a `cleanable_query` for easier handling {% see 2.2.4#_cleanable_query :cleanable_query %}
+        This scope accepts a query string or an hash to parse as documented in [elasticsearch query-string-query API](http://www.elasticsearch.org/guide/reference/query-dsl/query-string-query). If omitted it uses `{'query': '*'}` as the default (i.e. sort of `match_all` query). It passes it as a `cleanable_query` for easier handling {% see 2.3.4#_cleanable_query :cleanable_query %}
 
       | {% shighlight ruby %}
         query_string('title:{Aida TO Carmen}')
@@ -92,7 +92,7 @@ table.code-topics#variable-scopes cellspacing=0 cellpadding=0
         {% endshighlight %}
 
       markdown:
-        > This scope is a direct interface to the `:page` special variable {% see 2.2.4#page :page %}
+        > This scope is a direct interface to the `:page` special variable {% see 2.3.4#page :page %}
 
   tr
     td
@@ -106,7 +106,7 @@ table.code-topics#variable-scopes cellspacing=0 cellpadding=0
         {% endshighlight %}
 
       markdown:
-        > This scope is a direct interface to the `:params` special variable {% see 2.2.4#params :params %}
+        > This scope is a direct interface to the `:params` special variable {% see 2.3.4#params :params %}
 
   tr
     td
@@ -121,7 +121,7 @@ table.code-topics#variable-scopes cellspacing=0 cellpadding=0
         {% endshighlight %}
 
       markdown:
-        > This scope is a direct interface to the `:index` predefined variable {% see 2.2.4#index :index %}
+        > This scope is a direct interface to the `:index` predefined variable {% see 2.3.4#index :index %}
 
   tr
     td
@@ -136,7 +136,7 @@ table.code-topics#variable-scopes cellspacing=0 cellpadding=0
         {% endshighlight %}
 
       markdown:
-        > This scope is a direct interface to the `:type` predefined variable {% see 2.2.4#type :type %}
+        > This scope is a direct interface to the `:type` predefined variable {% see 2.3.4#type :type %}
 
   tr
     td

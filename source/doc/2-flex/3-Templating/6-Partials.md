@@ -5,7 +5,7 @@ title: flex - Partial Templates
 
 # Partial Templates
 
-> __Notice__: you should know about all the Templating section before reading this {% see 2.2.1, 2.2.2, 2.2.3, 2.2.4, 2.2.5 %}.
+> __Notice__: you should know about all the Templating section before reading this {% see 2.3.1, 2.3.2, 2.3.3, 2.3.4, 2.3.5 %}.
 
 Flex Partial Templates are templates that will be inserted into other templates at interpolation time. They are used in a few different ways in order to make the templating system more dynamic and powerful. For example:
 

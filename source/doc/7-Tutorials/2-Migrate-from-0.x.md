@@ -31,7 +31,7 @@ If you used model related functionality, you will be required to load the `flex-
 
 `add` > `deep_merge!` for all variables receivers
 
-`info` > `doc` to print the self documentation (e.g. `Flex.doc`, `YourClass.flex.doc` {% see 2.4 %})
+`info` > `doc` to print the self documentation (e.g. `Flex.doc`, `YourClass.flex.doc` {% see 2.5 %})
 
 #### Bulk Support
 

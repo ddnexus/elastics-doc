@@ -5,7 +5,7 @@ title: flex-model - Result Extenders
 
 # {{ page.title }}
 
-The `flex-model` gem adds a few extender to the standard extended `Flex::Result` object {% see 2.3 %}. They are aware of your models, so you can do, for example:
+The `flex-model` gem adds a few extender to the standard extended `Flex::Result` object {% see 2.4 %}. They are aware of your models, so you can do, for example:
 
 {% highlight ruby %}
 

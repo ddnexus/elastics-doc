@@ -35,7 +35,7 @@ results2 = MyClass.my_request :user_id => 49
 Tags are used as placeholder for the real values that will be interpolated into the structure just before executing the http request. The syntax follows a few very simple rules:
 
 * their name must be suitable to be ruby method names
-* they must not be one of the reserved variable names {% see 2.2.4#special_variables %}
+* they must not be one of the reserved variable names {% see 2.3.4#special_variables %}
 * you can use or omit spaces around names
 * they may contextually define a default (similar to the arguments of a ruby method)
 
@@ -66,7 +66,7 @@ post_sorted = MyClass.most_counted :counter => 'post'
 
 will respectively generate `{"sort":{"blog_count":"desc"}}` `{"sort":{"post_count":"desc"}}` data queries.
 
-{% see 2.2.5 %}
+{% see 2.3.5 %}
 
 ## Tag defaults
 
@@ -88,4 +88,4 @@ results2 = MyClass.my_request :user_id => 45
 
 Tags defaults work very similarly to the argument defaults of ruby methods. Notice however that the default string (from the `=` to the closing `>>`) is evaluated as a `YAML` string as well, so you may need to wrap the tag in quotes if you want to pass valid `YAML` as a default. Besides, if you want to define a `nil` value as a default, you should use the `~` character (that `YAML` explicitly evaluates to nil). Besides, `nil` as a default will also make the tag optional.
 
-{% see 2.2.4 %}
+{% see 2.3.4 %}

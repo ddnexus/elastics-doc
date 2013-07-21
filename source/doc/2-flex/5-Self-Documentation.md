@@ -65,7 +65,7 @@ That output is suitable for being copied and pasted right in your class, just be
 
 You can get the self documetation of all the methods your class defines, by just **not** passing any template name to the `doc` method.
 
-> **Notice**: you can get the self documentation also for the Flex API Pethods by doing the same with `Flex` {% see 2.1 %}:
+> **Notice**: you can get the self documentation also for the Flex API Pethods by doing the same with `Flex` {% see 2.2 %}:
 
 {% highlight irb %}
 >> Flex.doc

@@ -18,7 +18,7 @@ It also implements and integrates very advanced features like chainable scopes, 
 If you have almost no elasticsearch knowledge, fear not! You can populate and search the elasticsearch index as it were an `ActiveRecord` DB, using very familiar chainable scopes and finders, validation and callbacks that you are used to master in your models {% see 3, 4.3 %}
 
 * __Powerful for experts__<br>
-Flex provides 6 different ways to interact with elasticsearch, useful in different contexts. From a fully automatic integration, to a very low-level manual interaction; a clever and powerful templating system that covers all the elaticsearch API {% see 2.2 %}; <u>all</u> the standard elasticsearch API as ready to use methods; very detailed debugging info, high configurable logging, etc. {% see 1.2 %}, very easy to use live-reindexing {% see 4.6 %}
+Flex provides 6 different ways to interact with elasticsearch, useful in different contexts. From a fully automatic integration, to a very low-level manual interaction; a clever and powerful templating system that covers all the elaticsearch API {% see 2.3 %}; <u>all</u> the standard elasticsearch API as ready to use methods; very detailed debugging info, high configurable logging, etc. {% see 1.2 %}, very easy to use live-reindexing {% see 4.6 %}
 
 * __Easy to learn__<br>
 Flex doesn't try to create any "powerful DSL" on top of the elasticsearch API: it just transparently uses the elasticsearch API, so you will never have to learn anything twice or adapt any elasticsearch query to use with ruby, a very common practice needed with other clients {% see 7.1 %}.
@@ -27,7 +27,7 @@ Flex doesn't try to create any "powerful DSL" on top of the elasticsearch API: i
 You can reuse full queries, or part of them to build other queries, interpolate variables into queries at request time, or define and use smart cascading defaults to reduce clutter and duplications. Flex creates the needed methods in your classes for you, so 99% of the times you will have just to use them in your code, and for the other 1% you will just need to define a simple wrapper method.
 
 * __Self Documenting__<br>
-Flex creates the documentation of your custom templates complete with usage examples. You can get it by simply calling a method... also very handy in the console {% see 2.4 %}.
+Flex creates the documentation of your custom templates complete with usage examples. You can get it by simply calling a method... also very handy in the console {% see 2.5 %}.
 
 * __Fast and Efficient__<br>
 Flex uses a fast libcurl HTTP client that is at least twice as fast as a pure ruby client (but you can fallback to pure ruby if you need to). It reuses the same HTTP session between different requests saving time and resources. It extends the elasticsearch result objects instead of duplicating new structures, saving memory. It compiles the YAML templates into ruby code at startup time and just calls it at render time for faster execution.
@@ -36,7 +36,7 @@ Flex uses a fast libcurl HTTP client that is at least twice as fast as a pure ru
 Flex uses simple YAML documents (templates that you define) to encapsulate the whole request/response cycle with the elasticsearch server, relegating the elasticsearch logic away from the application logic. Your code will be clean, easy to write and read, and very short: "poetic-short".
 
 * __Easily Extendable__<br>
-Flex provides a simple mechanism to extend all or just specific elasticsearch results with your own methods. That is a lot cleaner and self contained than extending the results in the application code {% see 2.3 %}.
+Flex provides a simple mechanism to extend all or just specific elasticsearch results with your own methods. That is a lot cleaner and self contained than extending the results in the application code {% see 2.4 %}.
 
 * __Fully Integrated__<br>
 {% see 1.1#out_of_the_box_integrations %}

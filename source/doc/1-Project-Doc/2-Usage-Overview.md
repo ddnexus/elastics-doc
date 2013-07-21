@@ -92,7 +92,7 @@ end
 
 {% endhighlight %}
 
-You can use the `flex-scopes` with every class that includes any Flex module {% see 3.1 %}
+You can use the `flex-scopes` with every class that includes any Flex module {% see 3 %}
 
 
 ## 4. Template Based Usage
@@ -103,7 +103,7 @@ Flex implements a very simple but powerful templating system that allows you to 
 
 {% include template_usage_example.md %}
 
-{% see 2.2 %}
+{% see 2.3 %}
 
 ## 5. elasticsearch API Methods Usage
 
@@ -136,9 +136,9 @@ Flex.stats :index    => %w[my_index my_other_index],
 
 {% endhighlight %}
 
-> __Notice__: you don't actually need to pass any explicit `:index` or `:type` if you set them as a defaults {% see 2.2.4 %}
+> __Notice__: you don't actually need to pass any explicit `:index` or `:type` if you set them as a defaults {% see 2.3.4 %}
 
-You will probably never need to use the API Methods directly, since Flex does the heavy lifting for you, but they cover all the elasticsearch API, so they will be available when you will need to do anything special {% see 2.1 %}.
+You will probably never need to use the API Methods directly, since Flex does the heavy lifting for you, but they cover all the elasticsearch API, so they will be available when you will need to do anything special {% see 2.2 %}.
 
 ## 6. Curl-like Usage
 
@@ -160,7 +160,7 @@ yaml
 
 You don't need to pass the base uri: just the path since the `base_uri` is a configuration setting that defaults to the elasticsearch `http:://localhost:9200` {% see 1.3 %}.
 
-In all methods above you can also use tags in path and data, and get them interpolated with the default or explicit variables, as you do with a regular Flex template {% see 2.5#curllike_methods Curl-like Methods %})
+In all methods above you can also use tags in path and data, and get them interpolated with the default or explicit variables, as you do with a regular Flex template {% see 2.6#curllike_methods Curl-like Methods %})
 
 {% highlight ruby %}
 Flex.GET '/<<index>>/<<type>>/_search', <<-yaml, :index => 'my_index', :my_term => 'any'

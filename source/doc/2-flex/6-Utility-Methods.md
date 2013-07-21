@@ -50,7 +50,7 @@ This methods are mostly used internally by the rake tasks {% see 1.4 %}, but you
 
 This method accepts a `collection` of objects as the first argument and a hash of options. It passes each object in the `collection` (and the options) to the `Flex.build_bulk_string` and collects the formatted bulk string and posts it.
 
-**Notice**: If you have an already formatted bulk string you should use `Flex.post_bulk_string` {% see 2.1#Flex_post_bulk_string Flex.post_bulk_string %}.
+**Notice**: If you have an already formatted bulk string you should use `Flex.post_bulk_string` {% see 2.2#Flex_post_bulk_string Flex.post_bulk_string %}.
 
 ### Flex.build_bulk_string
 
@@ -66,7 +66,7 @@ This method is useful in the console, when you are editing some template source:
 
 ### Flex.search
 
-This method allows you to define and use a Search Template {% see 2.2.1#flex_search_tempaltes %} on the fly. It is very useful in the console or for quick prototyping, but it is not as efficient as a regular Template loaded from source (which gets compiled), so don't use it in your production code.
+This method allows you to define and use a Search Template {% see 2.3.1#flex_search_tempaltes %} on the fly. It is very useful in the console or for quick prototyping, but it is not as efficient as a regular Template loaded from source (which gets compiled), so don't use it in your production code.
 
 For example:
 
@@ -81,7 +81,7 @@ As the curl-like methods, the data can be a `JSON` or `YAML` string or a `ruby` 
 
 ### Flex.slim_search
 
-Same as `Flex.search` but uses a Slim Search Template {% see 2.2.1#flex-slim_search_templates %}.
+Same as `Flex.search` but uses a Slim Search Template {% see 2.3.1#flex-slim_search_templates %}.
 
 ### Flex.json2yaml
 
@@ -93,5 +93,5 @@ Converts a `YAML` string to a `JSON` string
 
 ## Quasi API Methods
 
-{% see 2.1#flex_additions %}
+{% see 2.2#flex_additions %}
 

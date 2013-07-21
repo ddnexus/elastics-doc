@@ -75,9 +75,9 @@ By including `Flex::ActiveModel` you include also the `ActiveAttr::Model`. It pr
 
 ### Finders, Scopes and Templates
 
-`Flex::ActiveModel` includes also the `Flex::Scopes` by default, so you have all the cool finders and chainable scopes ready to use in your model {% see 3.1 %}
+`Flex::ActiveModel` includes also the `Flex::Scopes` by default, so you have all the cool finders and chainable scopes ready to use in your model {% see 3 %}
 
-Besides, if you need more power to easily write complex queries, you can include the `Flex::Templates` module and use it as usual {% see 2.2 %}
+Besides, if you need more power to easily write complex queries, you can include the `Flex::Templates` module and use it as usual {% see 2.3 %}
 
 ## Methods
 

@@ -5,9 +5,9 @@ title: flex - Interpolation
 
 # Interpolation
 
-> __Notice__: you should know about all the Templating section before reading this {% see 2.2.1, 2.2.2, 2.2.3, 2.2.4 %}.
+> __Notice__: you should know about all the Templating section before reading this {% see 2.3.1, 2.3.2, 2.3.3, 2.3.4 %}.
 
-Flex Templates describe a structure (or a partial structure) that basically reflects the elasticsearch API while tags identify the place where your app can interpolate values or other partial structures. The _interpolation_ is the internal process that creates the actual structure that get sent to the elasticsearch server. This process is driven by the interpolation values, i.e. the runtime data in your application, stored into various `Flex::Variables` hashes {% see 2.2.4 %}.
+Flex Templates describe a structure (or a partial structure) that basically reflects the elasticsearch API while tags identify the place where your app can interpolate values or other partial structures. The _interpolation_ is the internal process that creates the actual structure that get sent to the elasticsearch server. This process is driven by the interpolation values, i.e. the runtime data in your application, stored into various `Flex::Variables` hashes {% see 2.3.4 %}.
 
 For example, the following template has the tag `bar` that will be interpolated with the value passed as the `:bar` variable:
 
@@ -82,7 +82,7 @@ Pruning is very useful when you have queries that should be generated dynamicall
 
 ## Partial Template Interpolation
 
-{% see 2.2.6#partial_tempate_interpolation %}
+{% see 2.3.6#partial_tempate_interpolation %}
 
 
 ## Variable Check

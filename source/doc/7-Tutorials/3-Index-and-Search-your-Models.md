@@ -120,7 +120,7 @@ If you look into the `FlexSearch` you will see that it already includes `Flex::S
 >> FlexSearch.query('ruby AND rails').all
 {% endhighlight %}
 
-> You can find more predefined scopes in the flex scopes documentation page, and learn how to chain together many scopes and define custom scopes {% see 3.1, 3.2 %}.
+> You can find more predefined scopes in the flex scopes documentation page, and learn how to chain together many scopes and define custom scopes {% see 3 %}.
 
 If you want to add your own custom scope, just do so in the `flex/flex_search.rb` module, and use it as any other predefined scope.
 
@@ -209,6 +209,6 @@ Flex::MissingVariableError: the required :my_query variable is missing.
 
 > __Remember__: During a console session you must use `Flex.reload!` each time you add or change a template in any source or the changes will not be available in the session. That doesn't apply to the rails server: in development mode the rails server will automatically reload the changes in the sources at each request, so you will just have to reload the page in order to see the effect of your changes.
 
-Flex Templates are not only easy to implement and use, they are also very powerful. They can generate very dynamic queries based on the variables you send them, automatically adding or removing part of their queries. {% see 2.2.5, 2.2.6 %}
+Flex Templates are not only easy to implement and use, they are also very powerful. They can generate very dynamic queries based on the variables you send them, automatically adding or removing part of their queries. {% see 2.3.5, 2.3.6 %}
 
 > __Notice__: This tutorial is complemented by the next one, please read both of them {% see 7.4 %}.

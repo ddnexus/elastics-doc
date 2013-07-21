@@ -22,7 +22,7 @@ Besides, `YAML` adds its own advantages to the whole:
 - `YAML` maps 1 to 1 to the `JSON` structures that you need for elasticsearch, so you don't have to learn anything new
 - `YAML` natively allows you to define and reuse part of queries into other queries, so you will write less lines, avoiding potential errors
 
-Flex Templates enforce a clean separation of the elasticsearch logic from the application logic, also allowing flexibility: indeed you can keep the elasticsearch queries in a central file, or split them in separated files {% see 2.2.2 %}
+Flex Templates enforce a clean separation of the elasticsearch logic from the application logic, also allowing flexibility: indeed you can keep the elasticsearch queries in a central file, or split them in separated files {% see 2.3.2 %}
 
 Besides, the auto generated methods give you a few other useful advantages for free, without the need to write any code:
 
@@ -31,7 +31,7 @@ Besides, the auto generated methods give you a few other useful advantages for f
 * data driven dynamic requests
 * interpolation
 
-{% see 2.2.4, 2.2.5, 2.2.6 %}
+{% see 2.3.4, 2.3.5, 2.3.6 %}
 
 ## General Concepts
 
@@ -48,7 +48,7 @@ Flex implements different types of templates, useful in different context:
 * __Slim Search Templates__ `Flex::Template::SlimSearch` (subclass of `Flex::Template::Search`)
 * __Partial Template__ `Flex::Tempalte::Partial` class
 
-The Generic Templates can handle all sort of requests, but they are mostly useful to internally define all the elasticsearch API Methods {% see 2.1 %}. Indeed you will mostly use Search (or SlimSearch) templates, which are search-specialized subclass of templates, easier to use. Partial Templates are used to generate repeating structures (similar to the ERB Rails partials) or dynamic structures.
+The Generic Templates can handle all sort of requests, but they are mostly useful to internally define all the elasticsearch API Methods {% see 2.2 %}. Indeed you will mostly use Search (or SlimSearch) templates, which are search-specialized subclass of templates, easier to use. Partial Templates are used to generate repeating structures (similar to the ERB Rails partials) or dynamic structures.
 
 ### Flex Generic Templates
 
@@ -82,7 +82,7 @@ As you see in the previous example, the template definitions are basically named
 * request body (optional data structure understood by elasticsearch)
 * variables (optional list of hashes)
 
-Flex uses the Generic Templates internally, in order to implement the elasticsearch API methods and as the base class for the more specialized and less verbose Search Templates. You will probably never need to define Generic Templates directly, so from now on we will focus on Search Templates. If you need to recur to Generic Templates for any reason, take a look at the templates listed in the API Methods section {% see 2.1 %}.
+Flex uses the Generic Templates internally, in order to implement the elasticsearch API methods and as the base class for the more specialized and less verbose Search Templates. You will probably never need to define Generic Templates directly, so from now on we will focus on Search Templates. If you need to recur to Generic Templates for any reason, take a look at the templates listed in the API Methods section {% see 2.2 %}.
 
 ### Flex Search Templates
 
@@ -95,7 +95,7 @@ my_request:
       user_id: 25
 {% endhighlight %}
 
-Search Templates are basically named search queries written in `YAML` in a Source file {% see 2.2.2 %}. Comparing the above example with the Generic Template example, you can notice that we removed the path argument and also the index and the type segments with it, so how can we pass them now?
+Search Templates are basically named search queries written in `YAML` in a Source file {% see 2.3.2 %}. Comparing the above example with the Generic Template example, you can notice that we removed the path argument and also the index and the type segments with it, so how can we pass them now?
 
 It turns out that `:index` and `:type` are variables that can be set at different levels, and have a nice cascading behavior as any other variable in Flex. Just to give you the simpler (and lover level) example, you can set them contextually to the method call, by explicitly passing them:
 
@@ -103,7 +103,7 @@ It turns out that `:index` and `:type` are variables that can be set at differen
 results = MyClass.my_request :index => 'my_index', :type => 'my_type'
 {% endhighlight %}
 
-Notice however that, variables are very very flexible in Flex, so depending on your app, you can easily avoid to pass them at all, or hard-code them in the template itself. For example if your app uses one single index you may want to set it at a general level, so you will not have to pass it with each request. More about this topic in the Variables section {% see 2.2.4 %}.
+Notice however that, variables are very very flexible in Flex, so depending on your app, you can easily avoid to pass them at all, or hard-code them in the template itself. For example if your app uses one single index you may want to set it at a general level, so you will not have to pass it with each request. More about this topic in the Variables section {% see 2.3.4 %}.
 
 Search Templates are also loaded with a different statement, that specify that they are search sources (not just generic sources):
 
@@ -111,11 +111,11 @@ Search Templates are also loaded with a different statement, that specify that t
 flex.load_search_source 'your/template/search_source.yml'
 {% endhighlight %}
 
-{% see 2.2.2 %}
+{% see 2.3.2 %}
 
 #### Multi Search
 
-Flex implements also the elasticsearch multi-search capability with a very handy method that allows you to do multiple searches with one request {% see 2.1#YourClass_flex_multi_search MultiSearch %}
+Flex implements also the elasticsearch multi-search capability with a very handy method that allows you to do multiple searches with one request {% see 2.2#YourClass_flex_multi_search MultiSearch %}
 
 ### Flex Slim Search Templates
 
@@ -123,4 +123,4 @@ Slim Search Templates are just Search Templates that don't retrieve the document
 
 ### Flex Partial Templates
 
-{% see 2.2.6 %}
+{% see 2.3.6 %}

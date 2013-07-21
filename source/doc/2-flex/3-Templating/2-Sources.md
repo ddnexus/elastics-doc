@@ -5,7 +5,7 @@ title: flex - Template Sources
 
 # Template Sources
 
-Notice: you should know about Templates before reading this section {% see 2.2.1 %}.
+Notice: you should know about Templates before reading this section {% see 2.3.1 %}.
 
 Flex Template Sources are just `YAML` files that can contain multiple template definitions (being the keys the template names). For example:
 

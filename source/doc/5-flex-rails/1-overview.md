@@ -70,7 +70,7 @@ While at it you can get info about the method and the usage of `get_mapping` by 
 >> Flex.doc :get_mapping
 {% endhighlight %}
 
-{% see 2.4 %}
+{% see 2.5 %}
 
 ### 4. Run `rake flex:index:create` or `rake flex:import`
 
@@ -78,7 +78,7 @@ You sould use either `rake flex:index:create` or `rake flex:import` (if you alre
 
 ### 5. Customize the `app/flex/*`
 
-Usually contains your search classes (those that include any of `Flex::Templates`, `Flex::ModelIndexer`, etc.) and your Tempates Sources {% see 2.2.2 %}. Average applications usually have just one class and one source template file but your mileage may vary. Here you can also add your Result Extenders modules {% see 2.3 %}, so keeping all the Flex related files together.
+Usually contains your search classes (those that include any of `Flex::Templates`, `Flex::ModelIndexer`, etc.) and your Tempates Sources {% see 2.3.2 %}. Average applications usually have just one class and one source template file but your mileage may vary. Here you can also add your Result Extenders modules {% see 2.4 %}, so keeping all the Flex related files together.
 
 ## Rails 3 and 4
 
