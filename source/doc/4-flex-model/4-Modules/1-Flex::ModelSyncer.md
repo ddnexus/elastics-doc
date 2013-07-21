@@ -8,7 +8,7 @@ title: flex-model - Flex::ModelSyncer
 > __Notice__: Syncing is not needed if you use other external means to sync (like rivers or background jobs).
 
 
-The `Flex::ModelSyncer` model is included in `Flex::ModelIndexer` which is included in `Flex::ActiveModel`, so they all include the sync-related methods {% see 4.4.1#methods %}. However you may need to explicitly include the `Flex::ModelSyncer` {% see 4.4.1#including_flexmodelsyncer Including Flex::ModelSyncer %}.
+The `Flex::ModelSyncer` model is included in `Flex::ModelIndexer` which is included in `Flex::ActiveModel`, so they all include the sync-related methods {% see 4.4.1#class_methods, 4.4.1#instance_methods %}. However you may need to explicitly include the `Flex::ModelSyncer` {% see 4.4.1#including_flexmodelsyncer Including Flex::ModelSyncer %}.
 
 ## Syncing self
 

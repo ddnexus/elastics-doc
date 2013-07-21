@@ -85,4 +85,4 @@ first_in_range = in_range_scope.first
 
 Flex scopes are cool tools, very useful in most situations, particularly when the search criteria are quite simple, however, when the search criteria get more complex, using templates may be a cleaner technique {% see 2.2.2 %}.
 
-For that reason, the `flex-scopes` gem is not a complete interface to elasticsearch: it's just a handy tool, useful to simplify and reuse the most common searching needs.
+For that reason, the `flex-scopes` gem is not a complete interface to the elasticsearch search API: it's just a handy tool, useful to simplify and reuse the most common searching needs.

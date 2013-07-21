@@ -16,7 +16,7 @@ The `flex-scope` gems implements only a few of the most commonly used elasticsea
 
 ## Variable Scopes
 
-These scopes are a direct interface on the variables used to query. All the Variable Scopes return a `Flex::Scope` object.
+These scopes are a direct interface for the variables used to query. All the Variable Scopes return a `Flex::Scope` object.
 
 {% slim variable_scopes_table.slim %}
 

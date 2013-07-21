@@ -9,9 +9,9 @@ alias: /doc
 
 Flex is the ultimate ruby client for [elasticsearch][], it is powerful, fast and efficient, easy to use and customize.
 
-It covers ALL the elasticsearch API, and transparently integrates it with your app and its components (like `Rails`, `ActiveRecord`, `Mongoid`, `ActiveModel`, `will_paginate`, `kaminari`, `elasticsearch-mapper-attachments`, ...).
+It covers ALL the elasticsearch API, and transparently integrates it with your app and its components, like `Rails`, `ActiveRecord`, `Mongoid`, `ActiveModel`, `will_paginate`, `kaminari`, `elasticsearch-mapper-attachments`, ...
 
-It also implement and integrates very advanced features, (like chainable scopes, live-reindex, cross-model syncing, query fragment reuse, parent/child relationships, templating, self-documentation tools, detailed debugging, ...).
+It also implements and integrates very advanced features like chainable scopes, live-reindex, cross-model syncing, query fragment reuse, parent/child relationships, templating, self-documenting tools, detailed debugging, ...
 
 
 * __Easy to use even for beginners__<br>

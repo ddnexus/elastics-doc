@@ -12,6 +12,7 @@ html
       - /_assets/css/toc.css.sass
       - /_assets/css/arrows.sass
       - /_assets/css/doc.css.sass
+      - /_assets/css/google-search.sass
       {% endcss_asset_tag %}
 
     | {% javascript_asset_tag global %}
@@ -39,10 +40,23 @@ html
 
     #page-nav
       | {% nav_menu %}
-
+      #google-search
+        javascript:
+          (function() {
+            var cx = '001168365143071728136:5dk0aq3wpwg';
+            var gcse = document.createElement('script');
+            gcse.type = 'text/javascript';
+            gcse.async = true;
+            gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+                '//www.google.com/cse/cse.js?cx=' + cx;
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(gcse, s);
+          })();
+        <gcse:search>&nbsp;</gcse:search>
     #page-toc
 
     #content
+
       .breadcrumb
         | {% breadcrumb %}
       | {{ content }}

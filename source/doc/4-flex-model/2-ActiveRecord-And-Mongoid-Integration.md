@@ -24,7 +24,7 @@ __Flex allows you to decouple the design of your indices from the structure of y
 
 For example you may have a relational structure with a few tables and you may want to index that data into one single elasticsearch type, skipping some record that wouldn't be useful in the index, indexing only certain related fields from different tables, eventually add some calculated attributes, and certainly, you want also to get the index updated each time any of your table get changed.
 
-Flex allows to do so very easily, by adding a few simple decalartions at the model level and/or a few methods to your models, provided by the `Flex::ModelSyncer` or `Flex::ModelIndexer` modules.
+Flex allows to do so very easily, by adding a few simple declarations at the model level and/or a few methods to your models, provided by the `Flex::ModelSyncer` or `Flex::ModelIndexer` modules.
 
 ## Indexing
 
