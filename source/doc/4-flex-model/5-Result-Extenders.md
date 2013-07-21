@@ -47,7 +47,10 @@ loaded_collection = result.loaded_collection
   Applies to documents that contain (at least, but not limited to) `_index`, `_type`, `_id`. It adds the following method:
 
   * __`document.load`__<br>
-    Maps the document back to the original model and class and retrieves it from the DB:
+    Maps the document back to the original model and class and retrieves it from the DB.
+
+  * __`document.load!`__<br>
+    Like `document.load` but raises a `Flex::DocumentMappingError` if it cannot find the model class for the document.
 
 * __`Flex::Result::ActiveModel`__<br>
     It extends the results when the `context` class (your class) includes `Flex::ActiveModel`. It adds the following methods:
