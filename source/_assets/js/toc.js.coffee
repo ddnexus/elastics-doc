@@ -125,5 +125,8 @@ $ ->
 
   # when the page loads and has an anchor
   if location.hash
-    $(scrollElem).scrollTop $(location.hash).offset().top - window.scrollOffset
-    animateHighlighted(location.hash)
+    # webkit needs a delay or the scroll will be lost
+    fun = ->
+          $(scrollElem).scrollTop $(location.hash).offset().top - window.scrollOffset
+          animateHighlighted(location.hash)
+    setTimeout(fun, 200)

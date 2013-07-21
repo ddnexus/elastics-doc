@@ -71,7 +71,7 @@ By including `Flex::ActiveModel` you include also the `ActiveAttr::Model`. It pr
 
 ### Versioning and optimistic lock updating
 
-`Flex::ActiveModel` adds the versioning to your models (see [elasticsearch Versioning](http://www.elasticsearch.org/blog/2011/02/08/versioning.html), so your model has always a `_version` attribute. Besides, it implements the lock updating throught the method `lock_update` {% see 4.4.3#lock_update %}.
+`Flex::ActiveModel` adds the versioning to your models (see [elasticsearch Versioning](http://www.elasticsearch.org/blog/2011/02/08/versioning.html), so your model has always a `_version` attribute. Besides, it implements the lock updating throught the method `lock_update` {% see 4.4.3#safe_update %}.
 
 ### Finders, Scopes and Templates
 

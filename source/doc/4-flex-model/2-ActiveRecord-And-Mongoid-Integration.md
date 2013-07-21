@@ -18,7 +18,7 @@ end
 
 > Notice that we will use `ActiveRecord` models in these examples, but you can do the same with `Mongoid` models
 
-But most of the times, you need to search just one fraction of the data your app uses, so you don't need to index it all, and you may want to <u>make the index simple to query</u> by organizing it in the most suitable way to ease and improve the performances of your searches.
+But most of the times, you need to search just one fraction of the data your app uses, so you don't need to index it all, and you may want to make the index simple to query and easy to display by organizing it in the most suitable way to ease and improve the performances of your searches/views.
 
 __Flex allows you to decouple the design of your indices from the structure of your DBs by completely controlling which data get indexed and how and where it gets indexed.__
 
@@ -38,7 +38,7 @@ class Post < ActiveRecord::Base
 end
 {% endhighlight %}
 
-In this example we set the elasticsearch `index` and `type` explicitly, but we could also omit that and let Flex use the defaults. For example if your application uses just one index named `'forum'`, and you set it in the initializer file, you can omit to declare it in all models. Also the default type for the model class `Post` is `'post'`, so again you can omit to delare it explicitly {% see 2.2.4 %} and `Model.flex.type` in Modules for more details about defaults).
+In this example we set the elasticsearch `index` and `type` explicitly, but we could also omit that and let Flex use the defaults. For example if your application uses just one index named `'forum'`, and you set it in the initializer file, you can omit to declare it in all models. Also the default type for the model class `Post` is `'post'`, so again you can omit to delare it explicitly {% see 2.2.4, 4.4.2#class_methods %}.
 
 ### elasticsearch Parent/Children Relations
 
