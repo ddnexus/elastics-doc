@@ -5,7 +5,7 @@ title: How to migrate from flex 0.x
 
 # {{ page.title }}
 
-Flex 1.x has changed quite a lot from version 0.x but you need just to rename a few things in order to upgrade it. You can do it in a couple of minutes with just a few search and replace.  If you miss any change, flex will work anyway, but will emit a deprecation warning, so keep an eye on the log.
+Flex 1.x has changed quite a lot from version 0.x but you need just to rename a few things in order to upgrade it. You should be able to do it in a couple of minutes with just a few search and replace.  If you miss any change, flex will work anyway, but will emit a deprecation warning, so keep an eye on the log.
 
 ## Changes
 
@@ -27,7 +27,13 @@ If you used model related functionality, you will be required to load the `flex-
 
 `raise_proc` > `http_client.raise_proc`
 
-### 3. Method Renaming
+### 3. Special Variables
+
+`vars[:size]` is not a special variable anymore, so it will not be automatically converted to the `vars[:params][:size]` param anymore. You must set it as a standard param: `:params => {:size => size}`.
+
+> Flex will not emit any warning if you still use the old `vars[:size]` variable with the intention to change the `vars[:params][:size]` param: it will just not set the param. If you used the `<<size>>` tag in any template it will work as long as a `:size` variable is set. Remember that tags can now refer to nested variables, so you could refer to the `vars[:size]` param in any template with `<<params.size>>`.
+
+### 4. Method Renaming
 
 `add` > `deep_merge!` for all variables receivers
 
@@ -43,7 +49,7 @@ If you used model related functionality, you will be required to load the `flex-
 
 `Flex.delete_collection(collection)` > `Flex.post_bulk_collection(collection, :action => "delete")`
 
-### 4. Modules Renaming
+### 5. Modules Renaming
 
 `Flex::Loader` > `Flex::Templates`
 
@@ -51,7 +57,7 @@ If you used model related functionality, you will be required to load the `flex-
 
 `Flex::RelatedModel` > `Flex::ModelSyncer`
 
-### 5. Rake Tasks Renaming
+### 6. Rake Tasks Renaming
 
 `flex:create_indices` > `flex:index:create`
 
