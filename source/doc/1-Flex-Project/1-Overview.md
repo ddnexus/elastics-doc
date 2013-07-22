@@ -7,7 +7,7 @@ alias: /doc
 
 # {{ page.title }}
 
-Flex is the ultimate ruby client for [elasticsearch][], it is powerful, fast and efficient, easy to use and customize.
+Flex is the ultimate ruby client for [elasticsearch][]. It is powerful, fast and efficient, easy to use and customize.
 
 It covers ALL the elasticsearch API, and transparently integrates it with your app and its components, like `Rails`, `ActiveRecord`, `Mongoid`, `ActiveModel`, `will_paginate`, `kaminari`, `elasticsearch-mapper-attachments`, ...
 
