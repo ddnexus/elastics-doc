@@ -54,7 +54,7 @@ This method accepts a `collection` of objects as the first argument and a hash o
 
 ### Flex.build_bulk_string
 
-Accepts an object as the first argument and a hash of options. The object can be a `Hash` in the same format of the elasticsearch document results, or a `Flex::ModelIndexer` / `Flex::ActiveModel` instance.
+Accepts an object as the first argument and a hash of options. The object can be a `Hash` in the same format of the elasticsearch document results, or a record/document (flex-model instance).
 
  You can pass an `:action` option that can be `'index'` (default), `'create'`, `'update'` or `'delete'`. It will return the bulk string understood by the [elasticsearch bulk API](http://www.elasticsearch.org/guide/reference/api/bulk/), that can be joined with other bulk strings in order to collect the complete bulk string to pass to the `Flex.post_bulk_string` method.
 

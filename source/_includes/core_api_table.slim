@@ -654,7 +654,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
         {% shighlight ruby %}
         Flex.search_by_id :id      => id,    # required
                           :type    => nil,
-                          :index   => "flex_test_index",
+                          :index   => "flex_test_index"
         {% endshighlight %}
 
       markdown:
@@ -699,7 +699,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       code  Flex.dump_all
     td
       markdown:
-        Like `Flex.scan_all`, with added `{:params => {:fields => '*,_source'}}`. Used to include all the relevant fields from a document:
+        It `flush_index` and call `scan_all`, with added `{:params => {:fields => '*,_source'}}`. Used to include all the relevant fields from a document:
 
       markdown:
         **Usage**
@@ -709,4 +709,21 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
         Flex.dump_all(my_vars) do |batch|
           batch.each{|d|do_something_with(d)}
         end
+        {% endshighlight %}
+
+  tr
+    td
+      code  Flex.dump_one
+    td
+      markdown:
+        It `flush_index` and call `search_by_id`, with added `{:params => {:fields => '*,_source'}}`. Used to include all the relevant fields from the document:
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Flex.dump_one :id      => id,    # required
+                      :type    => nil,
+                      :index   => "flex_test_index"
         {% endshighlight %}
