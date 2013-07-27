@@ -175,7 +175,7 @@ table.code-topics#config cellspacing=0 cellpadding=0
         | app_id
     td
       markdown:
-        An unique string used to identify your app. Default: `nil` or the uderscored rails application name, plus the environment in rails. It must be set if you use any `reindex` method. Used by the flex-reindex feature defined in the `flex-model` gem {% see 4.6 %}.
+        An unique string used to identify your app. Default: `nil` or the uderscored rails application name, plus the environment in rails. It must be set if you use any `reindex` method. Used by the flex-reindex feature {% see 2.7 %}.
 
   tr
     td
@@ -183,13 +183,13 @@ table.code-topics#config cellspacing=0 cellpadding=0
         | redis
     td
       markdown:
-        The redis client object. Default: `$redis || Redis.current`. Used by the flex-reindex feature defined in the `flex-model` gem {% see 4.6 %}.
+        The redis client object. Default: `$redis || Redis.current`. Used by the flex-reindex feature {% see 2.7 %}.
 
   tr
     td
       code
-        | stop_indexing_proc
+        | on_stop_indexing
     td
       markdown:
-        A proc that should ensure to stop/suspend all the actions that would produce any change in the indices being live-reindexed. Used by the flex-reindex feature defined in the `flex-model` gem, overridden by the live-reindex method options {% see 4.6 %}.
+        A proc that should ensure to stop/suspend all the actions that would produce any change in the indices being live-reindexed. Used by the flex-reindex feature and overridden by the `on_stop_indexing` block {% see 2.7#id1 on_stop_indexing %}.
 

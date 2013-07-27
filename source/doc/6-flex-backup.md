@@ -7,7 +7,7 @@ title: flex-backup
 
 This gem provides the `flex-backup` executable  to `dump`, `load` and `stat` and eventually rename any [elasticsearch][] index. It also provides a few rake tasks to do the same {% see 1.4 %}.
 
-> __Notice__: If you need to migrate data or alter the index while you have a live app that uses it, the flex live-reindexing feature may suit better to your need {% see 4.6 %}.
+> __Notice__: If you need to migrate data or alter the index while you have a live app that uses it, the flex live-reindexing feature may suit better to your need {% see 2.7 %}.
 
     $ flex-backup --help
     flex-backup 1.0.0 (c) 2012-2013 by Domizio Demichelis

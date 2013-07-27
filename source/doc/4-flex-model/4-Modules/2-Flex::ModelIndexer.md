@@ -14,7 +14,7 @@ Flex avoids polluting your models with many methods: indeed it adds just 1 class
 * `record.flex_source`
 * `record.flex_indexable?`
 
-Besides you can define a `Model.flex_result` method in order to customize the results {% see 2.4 %}
+Besides you can define a `Model.flex_result` method in order to customize the results {% see 2.4#modelflex_resultresult Model.flex_result %}
 
 ## Class Methods
 

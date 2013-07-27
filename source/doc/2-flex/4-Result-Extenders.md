@@ -67,7 +67,7 @@ The `flex` gem comes with a few extenders (documented here) and more are added b
     Shortcuts methods pointing to `document['_index']`, `document['_type']`, `document['_id']`
 
   * __`document.index_basename`__<br>
-    Returns the unprefixed index name:  `my_index` for the `20130608103457_my_index` index {% see 4.6#index_renaming %}.
+    Returns the unprefixed index name:  `my_index` for the `20130608103457_my_index` index {% see 2.7#index_renaming %}.
 
   * __`method_missing`__<br>
     This module extends the `_source` by supplying object-like readers methods. It also exposes the meta fields like \_id, \_source, etc. For example:
@@ -159,8 +159,6 @@ It all depends whether you want to put the logic of what you are doing. Personal
 If your context class defines it, it is internally called by flex just before returning the result, so you can change it as you prefer, maybe creating objects, extending, checking, whatever. You have also access to the final variables through the passed result. For example:
 
 {% highlight ruby %}
-include Flex::Templates
-
 def self.flex_result(result)
   vars = result.variables
   vars[:my_class_wrapper] ? vars[:my_class_wrapper].new(result) : result

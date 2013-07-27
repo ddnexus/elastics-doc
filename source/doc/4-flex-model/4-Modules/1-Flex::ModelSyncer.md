@@ -35,7 +35,7 @@ class Child
 end
 {% endhighlight %}
 
-That means that besides to syncing it`self`, Flex will also sync the `:parent` parent record.
+That means that besides syncing `self`, Flex will also sync the `:parent` parent record.
 
 ## Propagation
 
