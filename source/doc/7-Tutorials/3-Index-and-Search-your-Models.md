@@ -91,11 +91,11 @@ That will create the default index and will import all the `Blog` and `Comment` 
 
 So how can your search your new indexed data now? Flex offers 2 different ways to search your data: flex scopes and flex templates. You can use them separately or toghether, inside your models and/or inside your `FlexSearch` module in any combination suits your needs. So let's analyze the pros and the cons of each combination so you will be able to easily pick the best one for you.
 
-### Adding to your models or your FlexSearch module?
+### Adding to the models or to the FlexSearch module?
 
 You can add flex scopes and flex template to your own models. That is a good option if all your searches are scoped to one single model/type at a time, and you use different criteria to search different models, since it will keep the search logic within the model logic, and in that case it will be cleaner.
 
-However if you need to search more than one model at a time, you should move scopes and templates from your models to the `FlexSearch` module that the flex generator created. That will keep the searching logic in a single place but separated from the application logic and will not suffer of limitation of searching only one specific model/type.
+However if you need to search more than one model at a time, you should move scopes and templates from your models to the `FlexSearch` module that the flex generator created. That will keep the search logic in a single place but separated from the application logic and will not suffer the limitation of searching only one specific model/type.
 
 Since it is the most common and versatile option, in this tutorial we will add our flex scopes and templates to the `FlexSearch` module.
 
@@ -103,7 +103,7 @@ Since it is the most common and versatile option, in this tutorial we will add o
 
 ### Using flex scopes or templates?
 
-Flex scopes are a very easy way to search your data in pure ruby and almost without any knowledge of elasticsearch. They work very similarly to the ActiveRecord scopes, and are perfect for simple search criteria that can make your code very simple, readable and reusable. You have plenty of predefined scopes ready to use, you can chain them together to create more elaborated search criteria, and you can define custom named scopes that can encapsulate many search criteria in one single scope. All that done in pure and clear simple ruby.
+Flex scopes are a very easy way to search your data in pure ruby and almost without any knowledge of elasticsearch. They work very similarly to the `ActiveRecord` scopes, and are perfect for simple search criteria that can make your code very simple, readable and reusable. You have plenty of predefined scopes ready to use, you can chain them together to create more elaborated search criteria, and you can define custom named scopes that can encapsulate many search criteria in one single scope. All that done in pure, clear and simple ruby.
 
 However, they are not an all purpose searching tool: they are just an easy to use tool. Indeed they tend to be less useful or even useless, when your search logic starts to require very complex queries.
 
@@ -126,13 +126,13 @@ If you want to add your own custom scope, just do so in the `flex/flex_search.rb
 
 ### Adding Flex Templates
 
-The `FlexSearch` loads also one predefined template. It is defined in the `flex/flex_search.yml` file. It is ready to use as the scopes:
+The `FlexSearch` loads also one predefined template. It is defined in the `flex/flex_search.yml` file. It is ready to use:
 
 {% highlight irb %}
 >> FlexSearch.search(:cleanable_query => 'ruby AND rails')
 {% endhighlight %}
 
-But sometimes your searching needs are not so simple: may be you need to run some quite complex query that you find in internet, and you need to transform it into some method to use in your app. For example, you may find a json query that is exactly what you need: how could you transform it in a ready to use method?
+But usually your searching needs are not so simple: may be you need to run some quite complex query that you find in internet, and you need to transform it into some method to use in your app. For example, you may find a json query that is exactly what you need: how could you transform it in a ready to use method?
 
 That's easy with the flex Templates. The first thing you should do is making it a little easier to manage, by transforming it in `YAML`. You can do so very easily by using the `Flex.json2yaml` utility method in the console.
 

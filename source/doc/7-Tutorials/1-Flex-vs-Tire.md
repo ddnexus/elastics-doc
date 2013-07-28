@@ -22,17 +22,7 @@ This is just a quick overview showing the main differences between the 2 project
 
 I had to refactor a few quite similar Rails apps that were using Tire to index a few ActiveRecord and Mongoid models. At that time I didn't have any experience with Tire, so I just assumed everything was OK and I focused only on removing the mess in the ruby code. There were lots of `Tire.search('lots,of,indices'){lots{of{nested{blocks}}}}` scattered everywhere in the apps. That didn't look nice nor easy to maintain, so as the first step, I decided to create a central module, moving all the search logic in one single place, hopefully trying to reduce the duplications with well designed methods.
 
-In place of all that nested blocks in classes and controllers, I wanted to see just method calls passing the parameters to the search module, making the controller actions simpler to read by relegating the actual search logic inside that module. I mean something like:
-
-{% highlight ruby %}
-@result = MySearch.contents_with(:query => params[:query])
-@tags   = MySearch.related_tags(:tag => params[:tag])
-# or even lazier
-@result = MySearch.contents_with(params)
-@tags   = MySearch.related_tags(params)
-{% endhighlight %}
-
-After working on that first step, the controllers were cleaner, but the search module looked like a bunch of long wrapper methods: one per each `Tire.search` calls extracted from the controllers. There was a lot of duplicated or very similar code inside that blocks, so I though I could extract the common parts to some helper method, but I soon discovered that that is a problem with Tire.
+After working on that first step, the controllers were cleaner, but the search module looked like a bunch of long wrapper methods: one per each `Tire.search` calls extracted from the controllers. There was a lot of duplicated or very similar code inside that blocks, so I though I could extract the common parts to some helper method, but I soon discovered that it's a problem with Tire.
 
 ### The Tire DSL
 
@@ -91,7 +81,7 @@ As if that alone wouldn't be enough complex even without variables, at some poin
 
 #### Hard Coded Limitations
 
-Tire creates a search object each time you search anything. The search object expects a fixed number of possible data parts and uses that parts to compose the query. That strategy has many limitations (as you have just read), but in particular, it is limited to what the search class explicitly allows and is aware of. For example, you cannot use any query not explicitly known by Tire (and if I am not mistaken, they are just about 7 at the moment of this writing, which means that you don't have access to the 80% of the elasticsearch search queries). Besides, if you need any other elasticsearch feature not explicitly known by Tire, you are on your own. And if you are serious with elasticsearch and need to use its most advanced features, you are on your own most of the times with Tire.
+Tire creates a search object each time you search anything. The search object expects a fixed number of possible data parts and uses that parts to compose the query. That strategy has many limitations (as you have just read), but in particular, it is limited to what the search class explicitly allows and is aware of. For example, you cannot use any query not explicitly known by Tire, and if I am not mistaken, they are just about 7 at the moment of this writing, which means that you don't have access to the 80% of the elasticsearch search queries. Besides, if you need any other elasticsearch feature not explicitly known by Tire, you are on your own.
 
 IMO Elasticsearch is very powerful and rich: limiting it is sort of defeating the very reason you choose it.
 
@@ -111,12 +101,12 @@ All that reverse-engineering effort... only to make Tire generate the same simpl
 
 I can guess that the goal behind the Tire DSL is simplifying the elasticsearch query structure and making it more ruby-like, so - at least in a few places - you could simplify the elasticsearch structure a bit. For example with Tire you can "just" write `{|search| search.query {|query| query.string @query }}` instead of `{query: {query_string: {query: @query}}}` as you whould do with elasticsearch.
 
-> If you are seeking simplicity, with `flex-scopes` you can just write `query(@query)` to express the same, and you can even chain it to other scopes at any time {% see 3 %}.
+> If you are seeking simplicity, with `flex-scopes` you can just write `query(@query)` to express the same, and you can even chain it to other scopes at any time, so easily merging search criteria {% see 3 %}.
 
  The Tire DSL looks more verbose and less elegant of the original elasticsearch structure that it's supposed to simplify, however, if you carefully count the brackets, you can spot that Tire saved one nesting level, so maybe that one is the advantage. Anyway, it looks like the cons are overwhelmingly more than the pros (if any). Indeed the Tire DSL forces you to renounce to a lot of benefits:
 
 - lost match with the original and documented elasticsearch structure (reverse-engineering needed)
-- lost direct options coming from the elasticsearch level that Tire removes
+- lost direct options coming from the elasticsearch nested level that Tire removes
 - lost easy variable interpolation
 - lost merging and reuse of partial structures
 - lost all the queries that the Tire DSL doesn't explicitly know
@@ -155,7 +145,7 @@ That suggests that the index structure should play an application-global role, r
 
 Surprisingly, the Tire's defaults generate one index per model, each index populated by one single type. That means that - by default - you have a completely _model-centric_ design, instead of a more useful _application-centric_ design (as already outlined in the previous topic). Beside there is another surprise if you run multiple applications that have some model class with the same name. By default, your indices will be shared among different applications because they define the same model classes. I don't think you want to index the posts of the "Racing Forum" app in the same index of the "Furniture Forum" app just because they are both managed by a `Post` model.
 
-That doesn't look like the best default design to start an application with. For example, a simple and basic "one index per app, one type per model" default would do for most apps: it would be _application-centric_ and would avoid unwanted index sharing. Besides, that's similar to the familiar concept "one DB per app, one table per model".
+That doesn't look like the best default design to start an application with. For example, a simple and basic "one index per app, one type per model" default would do for most apps: it would be _application-centric_ and would avoid unwanted index sharing by default. Besides, that's similar to the familiar concept "one DB per app, one table per model".
 
 > Flex is application-centric by default: it embraces "one index per app, one type per model" design to start with, however, if your particular app needs to split apart the index or manage the indices dynamically, it's just a matter of adding a simple definition in the model {% see 4.4.2#overriding_flex_metafields %}.
 
@@ -181,7 +171,7 @@ Now, after one year of active usage and development, the current version of flex
 
 It's easier to use also for elasticsearch beginners, since it implements `ActiveRecord`-like chainable scopes for easy searching and reusability, plus the `ActiveModel` integration to manage elasticsearch as it were an `ActiveRecord` DB.
 
-It's also more powerful for experts, since it covers all the elasticsearch APIs {% see 2.2 %} and offers a lot of useful tools like index dumping and loading {% see 6 %}, a very advanced live-reindex feature {% see 2.7 %}, very detailed debugging info, high configurable logging, a self documentation tool, a lot of out of the box integrations, and a better documentation with some tutorial {% see 1.1 %}.
+It's also more powerful for experts, since it covers all the elasticsearch APIs {% see 2.2 %} and offers a lot of useful tools like index dumping and loading {% see 6 %}, a very advanced live-reindex feature {% see 2.7 %}, very detailed debugging info, high configurable logging, a self documenting tool, a lot of out of the box integrations, and a better documentation with some tutorial {% see 1.1 %}.
 
 > Flex does not have a dedicated testing suite yet: its testing is still embedded in a few applications that exploit its features. If you have some spare time, please, contribute.
 
