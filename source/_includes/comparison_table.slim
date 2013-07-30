@@ -21,6 +21,10 @@ table#comparison cellspacing=0 cellpadding=0
     td.orange Standard one-line logging
 
   tr
+    td.green The original and complete elasticsearch response (extended with useful methods) is always accessible
+    td.red N/A
+
+  tr
     td.green Uses meta-programming to automatically define query methods in your own classes, complete with variable checks and feedback
     td.red N/A
 
@@ -30,6 +34,14 @@ table#comparison cellspacing=0 cellpadding=0
 
   tr
     td.green Implements ActiveRecord-like scopes, for easy search and reuse in pure ruby
+    td.red N/A
+
+  tr
+    td.green Implements parent/child relationships, also polymorphic, transparently managing mapping, routing and parent
+    td.red N/A
+
+  tr
+    td.green Supports cross-syncing (i.e. you can declare that a model change will sync other models with the index)
     td.red N/A
 
   tr
@@ -58,22 +70,6 @@ table#comparison cellspacing=0 cellpadding=0
 
   tr
     td.green Integrates with elasticsearch-mapper-attachment plugin
-    td.red N/A
-
-  tr
-    td.green Enforces a clean separation between the elasticsearch logic and the application logic
-    td.red N/A
-
-  tr
-    td.green The original and complete elasticsearch response (extended with useful methods) is always accessible
-    td.red N/A
-
-  tr
-    td.green Implements parent/child relationships, also polymorphic, transparently managing mapping, routing and parent
-    td.red N/A
-
-  tr
-    td.green Supports cross-syncing (i.e. you can declare that a model change will sync another models with the index)
     td.red N/A
 
   tr

@@ -49,7 +49,7 @@ That block looks pretty verbose, isn't it? Specially if you know that the only t
 
 > It gets even worse if you add other stuff, like order or facets, but this simple example is enough to get the point.
 
-So do we really need a ruby DSL to express that? Isn't a ruby hash more simple, more clear and more effective? Indeed. The elasticsearch API is very clear and simple because it is expressed by basic data structures, that are simpler to write, read and merge with variables or other structures. A ruby DSL seems just to make everything more difficult.
+The elasticsearch API is very clear and simple because it is expressed by basic data structures, that are simple to write, read and merge with variables or other structures. A ruby DSL seems just to make these simple things more difficult without adding any benefit.
 
 > Flex variable interpolation is really a no-brainer with its simple placeholder tags, placed right in the queries where they have to be interpolated {% see 7.3#adding_flex_templates %}.
 
@@ -81,7 +81,7 @@ As if that alone wouldn't be enough complex even without variables, at some poin
 
 #### Hard Coded Limitations
 
-Tire creates a search object each time you search anything. The search object expects a fixed number of possible data parts and uses that parts to compose the query. That strategy has many limitations (as you have just read), but in particular, it is limited to what the search class explicitly allows and is aware of. For example, you cannot use any query not explicitly known by Tire, and if I am not mistaken, they are just about 7 at the moment of this writing, which means that you don't have access to the 80% of the elasticsearch search queries. Besides, if you need any other elasticsearch feature not explicitly known by Tire, you are on your own.
+Tire creates a search object each time you search anything. The search object expects a fixed number of possible data parts and uses that parts to compose the query. That strategy has many limitations (as you have just read), but in particular, it is limited to what the search class explicitly allows and is aware of. For example, you cannot use any query not explicitly known by Tire, and if I am not mistaken, they are just about 7 at the moment of this writing, which means that you don't have access to the 80% of the elasticsearch search queries. Besides, if you need any other elasticsearch API or feature not explicitly known by Tire, you are on your own.
 
 IMO Elasticsearch is very powerful and rich: limiting it is sort of defeating the very reason you choose it.
 
@@ -99,7 +99,7 @@ All that reverse-engineering effort... only to make Tire generate the same simpl
 
 #### Pros and Cons
 
-I can guess that the goal behind the Tire DSL is simplifying the elasticsearch query structure and making it more ruby-like, so - at least in a few places - you could simplify the elasticsearch structure a bit. For example with Tire you can "just" write `{|search| search.query {|query| query.string @query }}` instead of `{query: {query_string: {query: @query}}}` as you whould do with elasticsearch.
+I can guess that the goal behind the Tire DSL is simplifying the elasticsearch query structure and making it more ruby-like, so you could simplify the elasticsearch structure a bit. For example with Tire you can "just" write `{|search| search.query {|query| query.string @query }}` instead of `{query: {query_string: {query: @query}}}` as you whould do with elasticsearch.
 
 > If you are seeking simplicity, with `flex-scopes` you can just write `query(@query)` to express the same, and you can even chain it to other scopes at any time, so easily merging search criteria {% see 3 %}.
 
@@ -178,6 +178,6 @@ It's also more powerful for experts, since it covers all the elasticsearch APIs 
 
 ### Conclusion
 
-Flex is very different from Tire: it enforces almost the opposite concepts in most areas, it's easier to use and implements more tools and features. So which one should you choose for your elasticsearch interactions?
+Flex is very different from Tire: it enforces almost the opposite concepts in most areas. In its basic usage it is easier to use than Tire, and in its advanced usage ii implements a lot more tools and features. So which one should you choose for your elasticsearch interactions?
 
 I honestly don't see any reason to choose Tire, while I see plenty of compelling reasons to choose Flex, but I may be biased, so if you have a different opinion I would like to know it and possibly learn from you. Please, don't hesitate to send me your comments on this writeup. Thanks.
