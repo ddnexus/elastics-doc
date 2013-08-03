@@ -178,6 +178,6 @@ It's also more powerful for experts, since it covers all the elasticsearch APIs 
 
 ### Conclusion
 
-Flex is very different from Tire: it enforces almost the opposite concepts in most areas. In its basic usage it is easier to use than Tire, and in its advanced usage ii implements a lot more tools and features. So which one should you choose for your elasticsearch interactions?
+Flex is very different from Tire: it enforces almost the opposite concepts in most areas. In its basic usage it is easier to use than Tire, and in its advanced usage it implements a lot more tools and features. So which one should you choose for your elasticsearch interactions?
 
 I honestly don't see any reason to choose Tire, while I see plenty of compelling reasons to choose Flex, but I may be biased, so if you have a different opinion I would like to know it and possibly learn from you. Please, don't hesitate to send me your comments on this writeup. Thanks.

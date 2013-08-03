@@ -27,7 +27,7 @@ The live-reindex feature is very easy to use, but reindexing while the indices a
 
 The live reindexing should be the last step of your new deployment, performed just before you swap the old code with the new one. It will take care of reindex your data in new index/indices, including the changes being made during the reindexing itself.
 
-> If you deploy with `capistrano`, you you should run the reindex method (perhaps in a migration) right before the `creating_symlink`
+> If you deploy with `capistrano`, you should run the reindex method (perhaps in a migration) right before the `create_symlink`
 
 ### Index Renaming
 
@@ -79,7 +79,7 @@ So in order to ensure that consistency the live-reindex feature needs to stop th
 
 The `on_stop_indexing` proc will be called (almost) at the end of the live-reindexing, just before the index swap. Just remember that the reindex methods will: 1) reindex, 2) call the `on_stop_indexing` proc to stop the indexing and 3) swap the old index with the new one. After that you must: 1) swap the old code with the new one and 2) resume the indexing that your proc stopped (or maybe just restart the new deployed app).
 
-> If you deploy with `capistrano`, you should resume the indexing right after the `creating_symlink`
+> If you deploy with `capistrano`, you should resume the indexing right after the `create_symlink`
 
 You can set the `on_stop_indexing` as a configuration setting in the flex initializer file:
 
@@ -210,8 +210,10 @@ end
 In case you want to limit the reindexing to a few models (that really changed), you can pass an array of `:models`, but in that case you should also pass the `:ensure_indices` option that will ensure the completeness of the indices being reindexed.
 
 {% highlight ruby %}
-Flex::LiveReindex.reindex_models :models         => [ MyModelA, MyModelB ],
-                                 :ensure_indices => [ 'my_index' ]
+Flex::LiveReindex.reindex_models( :models         => [ MyModelA, MyModelB ],
+                                  :ensure_indices => [ 'my_index' ] ) do
+  ...
+end
 {% endhighlight %}
 
 The `:ensure_indices` option ensures 2 things:
@@ -222,7 +224,6 @@ The `:ensure_indices` option ensures 2 things:
 > Don't use partial reindex to fix a corrupted index, because the `:ensure_indices` option will copy the old (and corrupted) indices first, and reindexing on that copy may not fix the corruption.
 
 > You can also pass other options, that will be forwarded to the `import` task. You can use the symbolic version of the env options (e.g.: `MODELS` > `:models`) {% see 1.4#flex_import flex:import %}.
-
 
 ### `reindex_active_models`
 
@@ -238,7 +239,20 @@ The full reindex reindexes all the `Flex::Configuration.flex_active_models` and 
 
 The `on_each_change` block will be used to pass __ALL__ the documents being reindexed __AND__ the tracked changes at the end of the reindexing. If you don't configure any block, the index will be copied verbatim into the new index.
 
-You can pass the `:indices` option to limit the indices to migrate: if you don't pass any `:indices` option the default indices of your app will be used. (the `:models` is ignored by this method).
+You can pass the `:indices` option to limit the indices to migrate: if you don't pass any `:indices` option the default indices of your app will be used (the `:models` option is obviously ignored by this method). For example:
+
+{% highlight ruby %}
+# reindex and swap all the known indices without doing any change (not very useful)
+Flex::LiveReindex.reindex_indices
+
+# reindex and swap only the 'my_index' and 'my_other_index' indices, changing them with the on_each_change block
+Flex::LiveReindex.reindex_indices(:indices => ['my_index', 'my_other_index']) do
+  on_each_change do |action, raw_document_hash|
+    ...
+  end
+end
+{% endhighlight %}
+
 
 ### `reindex`
 
@@ -267,6 +281,16 @@ Flex::LiveReindex.reindex(my_options) do |config|
 
 end
 {% endhighlight %}
+
+## Reindexing from another host
+
+You may want to reindex from another host rather than the host of your live app. The live-reindex needs to connect with the 3 data storages your live app is connected to: elasticsearch, DB(s) and redis. If the reindex host has a transparent replication of all 3 data storages you can use the live-reindex as it were run from the live app host, otherwise you may need to change:
+
+- the `Flex::Configuration.http_client.base_uri`
+- the `Flex::Configuration.redis` redis client
+- the connection settings for your DBs (if you are reindexing `ActiveRecord` or `Mongoid` models)
+
+If you are using `Rails` you can set it all in a specific environment, that you will use for the reindexing from that host.
 
 ## Important Warnings
 
