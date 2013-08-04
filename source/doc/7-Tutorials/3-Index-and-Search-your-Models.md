@@ -19,7 +19,7 @@ Elasticsearch must be installed and running. If you are on a Mac you can just in
 $ brew install elasticsearch
 {% endhighlight %}
 
-If you are on any other OS, just read [elasticsearch installation](http://www.elasticsearch.org/guide/reference/setup/installation/)
+If you are on any other OS, read [elasticsearch installation](http://www.elasticsearch.org/guide/reference/setup/installation/)
 
 ## Setup
 
