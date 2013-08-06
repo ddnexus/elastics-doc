@@ -99,7 +99,7 @@ All that reverse-engineering effort... only to make Tire generate the same simpl
 
 #### Pros and Cons
 
-I can guess that the goal behind the Tire DSL is simplifying the elasticsearch query structure and making it more ruby-like, so you could simplify the elasticsearch structure a bit. For example with Tire you can "just" write `{|search| search.query {|query| query.string @query }}` instead of `{query: {query_string: {query: @query}}}` as you whould do with elasticsearch.
+I can guess that the goal behind the Tire DSL is simplifying the elasticsearch query structure and making it more ruby-like, so to simplify the elasticsearch structure a bit. For example with Tire you can "just" write `{|search| search.query {|query| query.string @query }}` instead of `{query: {query_string: {query: @query}}}` as you whould do with elasticsearch.
 
 > If you are seeking simplicity, with `flex-scopes` you can just write `query(@query)` to express the same, and you can even chain it to other scopes at any time, so easily merging search criteria {% see 3 %}.
 
