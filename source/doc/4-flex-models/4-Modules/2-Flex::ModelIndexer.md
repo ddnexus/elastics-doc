@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: flex-model - Flex::ModelIndexer
+title: flex-models - Flex::ModelIndexer
 ---
 
 # Flex::ModelIndexer

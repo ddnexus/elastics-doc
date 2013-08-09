@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: flex-model - Flex::ActiveModel
+title: flex-models - Flex::ActiveModel
 ---
 
 # Flex::ActiveModel

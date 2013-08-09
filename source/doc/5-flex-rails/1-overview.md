@@ -6,7 +6,7 @@ alias_index: true
 
 # {{ page.title }}
 
-The `flex-rails` gem provides the engine and generators to integrate the flex gems with `Rails`. It also loads the `flex`, `flex-scopes` and `flex-model` gems, so you don't have to explicitly include them in the Gemfile, unless you need to force some special version or commit.
+The `flex-rails` gem provides the engine and generators to integrate the flex gems with `Rails`. It also loads the `flex`, `flex-scopes` and `flex-models` gems, so you don't have to explicitly include them in the Gemfile, unless you need to force some special version or commit.
 
 ## Setup
 

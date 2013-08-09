@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: flex-model - Flex::ModelSyncer
+title: flex-models - Flex::ModelSyncer
 ---
 
 # Flex::ModelSyncer

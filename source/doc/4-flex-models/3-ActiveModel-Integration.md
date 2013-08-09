@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: flex-model - ActiveModel Integration
+title: flex-models - ActiveModel Integration
 ---
 
 # ActiveModel Integration

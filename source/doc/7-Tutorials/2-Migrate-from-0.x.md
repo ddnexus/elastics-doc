@@ -17,7 +17,7 @@ You have to change `gem 'flex', :require => 'flex/rails'` to simply `gem 'flex-r
 
 #### Non Rails Apps
 
-If you used model related functionality, you will be required to load the `flex-model` gem that is now separated by the `flex` core gem.
+If you used model related functionality, you will be required to load the `flex-models` gem that is now separated by the `flex` core gem.
 
 ### 2. Configuration Renaming
 

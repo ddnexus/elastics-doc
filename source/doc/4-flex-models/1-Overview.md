@@ -1,12 +1,12 @@
 ---
 layout: doc
-title: flex-model - Overview
+title: flex-models - Overview
 alias_index: true
 ---
 
 # {{ page.title }}
 
-The `flex-model` gem provides the means to map and sync your data to elasticsearch. Its interface tries to be as minimalistic and declarative as possible and can integrate your models with elasticsearch basically in 2 ways, handy in different contexts.
+The `flex-models` gem provides the means to map and sync your data to elasticsearch. Its interface tries to be as minimalistic and declarative as possible and can integrate your models with elasticsearch basically in 2 ways, handy in different contexts.
 
 ## 1. Transparent integration with ActiveRecord and Mongoid models
 

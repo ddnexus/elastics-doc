@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: flex-model - Live Reindex
+title: flex-models - Live Reindex
 ---
 
 # {{ page.title }}
@@ -27,7 +27,7 @@ $ brew install redis
 
 If you are on any other OS, read [redis installation](http://www.redis.io/download).
 
-The `reindex_models` and the `reindex_active_models` methods require the `flex-model` gem.
+The `reindex_models` and the `reindex_active_models` methods require the `flex-models` gem.
 
 ## Usage
 
@@ -114,7 +114,7 @@ end
 
 The `on_each_change` block will receive the action (`'index'` or `'delete'`) as the first argument, and the hash document pulled from elasticsearch. It is expected to optionally change the passed document and return one of the following:
 
-- a Hash with a single key/value pair of action/document: `{ action => document }`, where `document` can be a hash in the same elasticsearch format received by the block or a record/document (flex-model instance) to index/delete.
+- a Hash with a single key/value pair of action/document: `{ action => document }`, where `document` can be a hash in the same elasticsearch format received by the block or a record/document (flex-models instance) to index/delete.
 - an array of Hashes like the above (when you need to split one single action into a few different actions): `[ { action => document },{ action => document }, ... ]`
 - a nil value (when you want to skip the indexing/deletion for a particular document)
 
@@ -181,7 +181,7 @@ If you don't pass any configuration block, the reindex methods will use specific
 
 ## Reindexing Methods
 
-There are 4 different reindexing methods, useful in different contexts but working quite similarly. 2 methods are added by the `flex-model` gem: `reindex_models` and `reindex_active_models`. The other 2 methods are the `reindex_indices` and the generic and advanced `reindex` method. You can use only one of the 4 methods and only one time in one live-reindex session, then you have to swap the code and deploy. If you need to use more than one method, you must do it in different deploys.
+There are 4 different reindexing methods, useful in different contexts but working quite similarly. 2 methods are added by the `flex-models` gem: `reindex_models` and `reindex_active_models`. The other 2 methods are the `reindex_indices` and the generic and advanced `reindex` method. You can use only one of the 4 methods and only one time in one live-reindex session, then you have to swap the code and deploy. If you need to use more than one method, you must do it in different deploys.
 
 > If you try to use more than one of the reindexing method in the same session, the execution of the second method will raise a `MultipleReindexError` error. In that case the first reindexing execution took place regularly (and the error will tell you the new index/indices that have been swapped successfully), but the other reindexing(s) have been aborted so you have still the old index/indices in place. If the code-changes that you were about to deploy rely on the successive reindexings that have been aborted, your app may fail, so you should complete the other reindexing in single successive deploys ASAP.
 >
@@ -191,7 +191,7 @@ If any other (not `MultipleReindexError`) error is raised during the process, th
 
 ### `reindex_models`
 
-> This method is added by the `flex-model` gem: use it to import/reimport `ActiveRecord` and `Mongoid` models.
+> This method is added by the `flex-models` gem: use it to import/reimport `ActiveRecord` and `Mongoid` models.
 
 The `on_each_change` block will receive __ONLY__ the tracked changes at the end of the reindexing.
 
@@ -235,7 +235,7 @@ The `:ensure_indices` option ensures 2 things:
 
 ### `reindex_active_models`
 
-> This method is added by the `flex-model` gem: use it for indexed `ActiveModel` models.
+> This method is added by the `flex-models` gem: use it for indexed `ActiveModel` models.
 
 This method works similarly to the `reindex_models` for the options `:models` and `:ensure_indices` and similarly to the `reindex_indices` for the `on_each_change` block. Indeed the `on_each_change` block will be used to pass __ALL__ the documents being reindexed __AND__ the tracked changes at the end of the reindexing. If you don't configure any `on_each_change` block, the index will be copied verbatim into the new index.
 
