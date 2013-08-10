@@ -37,7 +37,7 @@ html
 
   body
 
-    #page-nav
+    #page-nav.nocontent
       | {% nav_menu %}
       #google-search
         javascript:
@@ -56,14 +56,14 @@ html
 
     #content
 
-      .breadcrumb
+      .breadcrumb.nocontent
         | {% breadcrumb %}
       | {{ content }}
       br
-      .breadcrumb
+      .breadcrumb.nocontent
         | {% breadcrumb %}
 
-    #footer
+    #footer.nocontent
       ' Copyright &copy; 2012-2013 by
       a href='mailto://dd.nexus@gmail.com' Domizio Demichelis
       '  &mdash; Sponsored by
