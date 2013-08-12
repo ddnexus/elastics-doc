@@ -6,7 +6,7 @@ alias_index: true
 
 # {{ page.title }}
 
-The `flex-rails` gem provides the engine and generators to integrate the flex gems with `Rails`. It also loads the `flex`, `flex-scopes` and `flex-models` gems, so you don't have to explicitly include them in the Gemfile, unless you need to force some special version or commit.
+The `flex-rails` gem provides the engine and generators to integrate the flex gems with `Rails`. It also loads the `flex`, `flex-scopes` and `flex-models` gems, so you don't have to explicitly include them in the Gemfile, unless you need to force some special version or commit. On the other hand you may want to add the `flex-admin` gem which is optional.
 
 ## Setup
 
@@ -21,6 +21,8 @@ gem 'patron'
 # pure ruby http client - more compatible
 # gem 'rest-client'
 gem 'flex-rails'
+# use flex-admin if you need to dump/load/rename/live-reindex
+# gem 'flex-admin'
 {% endhighlight %}
 
 > __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use `gem 'patron', '0.4.18', :git => 'https://github.com/ddnexus/patron.git'` or download [patron-0.4.18.flex.gem]({{site.baseurl}}/patron-0.4.18.flex.gem), install it with `gem install /path/to/patron-0.4.18.flex.gem --local` and be sure your app will use that version, or switch to the `rest-client` gem.
