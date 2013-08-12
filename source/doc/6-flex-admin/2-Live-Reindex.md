@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: flex-models - Live Reindex
+title: Live Reindex
 ---
 
 # {{ page.title }}

@@ -1,6 +1,6 @@
 ---
 layout: doc
-title: Flex Overview
+title: Project Overview
 alias_index: true
 alias: /doc
 ---
