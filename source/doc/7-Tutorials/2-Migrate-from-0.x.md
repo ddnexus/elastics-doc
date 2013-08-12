@@ -67,4 +67,4 @@ If you used model related functionality, you will be required to load the `flex-
 
 ## Additions
 
-You may want to check the new documentation in order to take advantage of the new features of the gems. For example, you may want to add `Flex::Scopes` to some of your classes, or you may want to use the new `flex-backup` binary and tasks, or live-reindexing your code/index changes, or fine-tuning the configuration of the new flex logger etc. {% see 1.1, 1.2 %}
+You may want to check the new documentation in order to take advantage of the new features of the gems. For example, you may want to add `Flex::Scopes` to some of your classes, or you may want to use the new `flex-admin` binary and tasks, or live-reindexing your code/index changes, or fine-tuning the configuration of the new flex logger etc. {% see 1.1, 1.2 %}

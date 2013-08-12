@@ -27,11 +27,11 @@ $ brew install redis
 
 If you are on any other OS, read [redis installation](http://www.redis.io/download).
 
-The `reindex_models` and the `reindex_active_models` methods require the `flex-models` gem.
+The `reindex_models` and the `reindex_active_models` methods require the `flex-models` gem (if you use `flex-rails` it is automatically required).
 
 ## Usage
 
-The live-reindex feature is very easy to use, but reindexing while the indices and the DBs change is a tricky process, so you must understand the basics about how it works in order to use it properly, or you might corrupt your indices {% see 2.7#important_warnings %}.
+The live-reindex feature is very easy to use, but reindexing while the indices and the DBs change is a tricky process, so you must understand the basics about how it works in order to use it properly, or you might corrupt your indices {% see 6.2#important_warnings %}.
 
 The live reindexing should be the last step of your new deployment, performed just before you swap the old code with the new one. It will take care of reindex your data in new index/indices, including the changes being made during the reindexing itself.
 
@@ -51,7 +51,7 @@ When the reindex will be completed each old index involved in the reindexing wil
 
 ### Tracking Changes
 
-During the reindexing, your live app may change some document in the old index/indices. The changes made to the old index/indices by the live processes are tracked in a redis list and will be indexed at the end of the reindexing. If you configure an `on_each_change` block within the reindex method it will receive (also) the changes done during the reindexing, so giving you the chance to update the new index/indices consistently with the change in the old index/indices {% see 2.7#id2 on_each_change %}.
+During the reindexing, your live app may change some document in the old index/indices. The changes made to the old index/indices by the live processes are tracked in a redis list and will be indexed at the end of the reindexing. If you configure an `on_each_change` block within the reindex method it will receive (also) the changes done during the reindexing, so giving you the chance to update the new index/indices consistently with the change in the old index/indices {% see 6.2#id2 on_each_change %}.
 
 > All the index, delete and bulk operations made by the process that is running the live-reindex are not tracked because they are performed directly on the new index/indices.
 
@@ -177,7 +177,7 @@ If you don't pass any configuration block, the reindex methods will use specific
 
 ### `on_reindex`
 
-{% see 2.7#id7 reindex %}
+{% see 6.2#id7 reindex %}
 
 ## Reindexing Methods
 
@@ -195,7 +195,7 @@ If any other (not `MultipleReindexError`) error is raised during the process, th
 
 The `on_each_change` block will receive __ONLY__ the tracked changes at the end of the reindexing.
 
-If you don't configure any `on_each_change` block a default proc will be used. It will simply pull the current record/document from the DB and index it in the new index, or delete the elasticsearch document from the new index in case of a `'delete'` action. That's fine when you don't change the structure of your models, and change only the `flex_source` method for example. But if you delete or rename models, it will fail. In that case you could alias the models or split the changes in 2 deploys, or you  must configure an explicit `on_each_change` block that will receive as usual the action and the document hash pulled from the old elasticsearch index at the moment of the change: you must do the changes in the document (like changing the type for example, or reindexing some other record, etc.) and return the proper result {% see 2.7#id2 on_each_change %}.
+If you don't configure any `on_each_change` block a default proc will be used. It will simply pull the current record/document from the DB and index it in the new index, or delete the elasticsearch document from the new index in case of a `'delete'` action. That's fine when you don't change the structure of your models, and change only the `flex_source` method for example. But if you delete or rename models, it will fail. In that case you could alias the models or split the changes in 2 deploys, or you  must configure an explicit `on_each_change` block that will receive as usual the action and the document hash pulled from the old elasticsearch index at the moment of the change: you must do the changes in the document (like changing the type for example, or reindexing some other record, etc.) and return the proper result {% see 6.2#id2 on_each_change %}.
 
 #### Full Reindex
 
@@ -312,4 +312,4 @@ When you live-reindex, the `Flex::Configuration.app_id` should be set and match 
 
 ### Safe live-reindex
 
-Live-reindexing is a potentially dangerous process because it deletes the old indices after a "successful" reindexing. Flex considers as "successful" a reindexing that raised no errors, but if you have a bug in any configuration block or forget the couple of warnings above, you may lose or corrupt part of the indices. For that reasons __you should always backup your indices before proceed__, or at least dump the data with the `flex:backup:dump` task. That's very important especially with `Flex::ActiveModel` models, that don't have the data mirrored in a DB. Besides, this is a very new implementation that lacks the time to be tested thoroughly yet, so please, do backup your indices before live-reindexing.
+Live-reindexing is a potentially dangerous process because it deletes the old indices after a "successful" reindexing. Flex considers as "successful" a reindexing that raised no errors, but if you have a bug in any configuration block or forget the couple of warnings above, you may lose or corrupt part of the indices. For that reasons __you should always backup your indices before proceed__, or at least dump the data with the `flex:admin:dump` task. That's very important especially with `Flex::ActiveModel` models, that don't have the data mirrored in a DB. Besides, this is a very new implementation that lacks the time to be tested thoroughly yet, so please, do backup your indices before live-reindexing.

@@ -18,7 +18,7 @@ It also implements and integrates very advanced features like chainable scopes, 
 If you have almost no elasticsearch knowledge, fear not! You can populate and search the elasticsearch index as it were an `ActiveRecord` DB, using very familiar chainable scopes and finders, validation and callbacks that you are used to master in your models {% see 3, 4.3 %}
 
 * __Powerful for experts__<br>
-Flex provides 6 different ways to interact with elasticsearch, useful in different contexts. From a fully automatic integration, to a very low-level manual interaction; a clever and powerful templating system that covers all the elaticsearch API {% see 2.3 %}; <u>all</u> the standard elasticsearch API as ready to use methods; very detailed debugging info, high configurable logging, etc. {% see 1.2 %}, very easy to use live-reindexing {% see 2.7 %}
+Flex provides 6 different ways to interact with elasticsearch, useful in different contexts. From a fully automatic integration, to a very low-level manual interaction; a clever and powerful templating system that covers all the elaticsearch API {% see 2.3 %}; <u>all</u> the standard elasticsearch API as ready to use methods; very detailed debugging info, high configurable logging, etc. {% see 1.2 %}, very easy to use live-reindexing {% see 6.2 %}
 
 * __Easy to learn__<br>
 Flex doesn't try to create any "powerful DSL" on top of the elasticsearch API: it just transparently uses the elasticsearch API, so you will never have to learn anything twice or adapt any elasticsearch query to use with ruby, a very common practice needed with other clients {% see 7.1 %}.

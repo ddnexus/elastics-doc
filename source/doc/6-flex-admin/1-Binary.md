@@ -1,22 +1,23 @@
 ---
 layout: doc
-title: flex-backup
+title: flex-admin - Binary
+alias_index: true
 ---
 
 # {{ page.title }}
 
-This gem provides the `flex-backup` executable  to `dump`, `load` and `stat` and eventually rename any [elasticsearch][] index. It also provides a few rake tasks to do the same {% see 1.4 %}.
+This gem provides the `flex-admin` executable  to `dump`, `load` and `stat` and eventually rename any [elasticsearch][] index. It also provides a few rake tasks to do the same {% see 1.4 %}, plus the live-reindex feature.
 
-> __Notice__: If you need to migrate data or alter the index while you have a live app that uses it, the flex live-reindexing feature may suit better to your need {% see 2.7 %}.
+> __Notice__: If you need to migrate data or alter the index while you have a live app that uses it, the flex live-reindexing feature may suit better to your need {% see 6.2 %}.
 
-    $ flex-backup --help
-    flex-backup 1.0.0 (c) 2012-2013 by Domizio Demichelis
+    $ flex-admin --help
+    flex-admin 1.0.1 (c) 2012-2013 by Domizio Demichelis
 
-        flex-backup:
+        flex-admin:
             Generic binary tool to dump/load data from/to any elasticsearch index (no app needed).
             If you need to migrate data, use the flex live-reindexing.
         Usage:
-            flex-backup <command> [options]
+            flex-admin <command> [options]
         <command>:
             dump    dumps the data from one or more elasticsearch indices
             load    loads a dumpfile
@@ -27,7 +28,7 @@ This gem provides the `flex-backup` executable  to `dump`, `load` and `stat` and
                 application, which will also recreate the mapping.
 
     Common options:
-        -f, --file [FILE]                The path of the dumpfile (default: './flex-backup.dump')
+        -f, --file [FILE]                The path of the dumpfile (default: './flex.dump')
         -r, --[no-]verbose               Run verbosely (default: 'true')
 
     Dump options:

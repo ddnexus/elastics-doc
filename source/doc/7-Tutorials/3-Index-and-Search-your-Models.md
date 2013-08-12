@@ -85,7 +85,7 @@ $ rake flex:import_models
 
 That will create the default index and will import all the `Blog` and `Comment` records in it.
 
-> During the development you can use the same rake task to reindex from scratch each time you change something that will affect the structure of the index (just pass `FORCE=true` to also delete the old index). When your app will be in production, the problem will get more complex, so you should use the live-reindex feature that allows a lot smoother transition {% see 2.7 %}.
+> During the development you can use the same rake task to reindex from scratch each time you change something that will affect the structure of the index (just pass `FORCE=true` to also delete the old index). When your app will be in production, the problem will get more complex, so you should use the live-reindex feature that allows a lot smoother transition {% see 6.2 %}.
 
 ## How to Search
 

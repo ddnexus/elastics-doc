@@ -67,7 +67,7 @@ The `flex` gem comes with a few extenders (documented here) and more are added b
     Shortcuts methods pointing to `document['_index']`, `document['_type']`, `document['_id']`
 
   * __`document.index_basename`__<br>
-    Returns the unprefixed index name:  `my_index` for the `20130608103457_my_index` index {% see 2.7#index_renaming %}.
+    Returns the unprefixed index name:  `my_index` for the `20130608103457_my_index` index {% see 6.2#index_renaming %}.
 
   * __`method_missing`__<br>
     This module extends the `_source` by supplying object-like readers methods. It also exposes the meta fields like \_id, \_source, etc. For example:

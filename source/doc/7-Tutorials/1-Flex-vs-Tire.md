@@ -171,7 +171,7 @@ Now, after one year of active usage and development, the current version of flex
 
 It's easier to use also for elasticsearch beginners, since it implements `ActiveRecord`-like chainable scopes for easy searching and reusability, plus the `ActiveModel` integration to manage elasticsearch as it were an `ActiveRecord` DB.
 
-It's also more powerful for experts, since it covers all the elasticsearch APIs {% see 2.2 %} and offers a lot of useful tools like index dumping and loading {% see 6 %}, a very advanced live-reindex feature {% see 2.7 %}, very detailed debugging info, high configurable logging, a self documenting tool, a lot of out of the box integrations, and a better documentation with some tutorial {% see 1.1 %}.
+It's also more powerful for experts, since it covers all the elasticsearch APIs {% see 2.2 %} and offers a lot of useful tools like index dumping and loading {% see 6 %}, a very advanced live-reindex feature {% see 6.2 %}, very detailed debugging info, high configurable logging, a self documenting tool, a lot of out of the box integrations, and a better documentation with some tutorial {% see 1.1 %}.
 
 > Flex does not have a dedicated testing suite yet: its testing is still embedded in a few applications that exploit its features. If you have some spare time, please, contribute.
 

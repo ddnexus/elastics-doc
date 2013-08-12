@@ -36,7 +36,7 @@ gem 'flex-rails'
 Add the `include Flex::<some_model_module>` to the model that need it {% see 4 %}.
 
 - Each time you include a `Flex::ModelIndexer` or `Flex::ActiveModel` you should add its name to the `config/initializers/flex.rb`
-- Each time you alter the way your models generate the source that will be indexed (for example by changing your `flex_source` methods or adding/changing a `flex.parent` relation in a model) you should reindex your DB(s) {% see 2.7 %}
+- Each time you alter the way your models generate the source that will be indexed (for example by changing your `flex_source` methods or adding/changing a `flex.parent` relation in a model) you should reindex your DB(s) {% see 6.2 %}
 
 ### 2. Customize the `config/initializers/flex.rb`
 
