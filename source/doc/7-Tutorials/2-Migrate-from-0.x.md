@@ -32,7 +32,7 @@ If you used model related functionality, you will be required to load the `flex-
 
 `vars[:size]` is not a special variable anymore, so it will not be automatically converted to the `vars[:params][:size]` param anymore. You must set it as a standard param: `:params => {:size => size}`.
 
-> Flex will not emit any warning if you still use the old `vars[:size]` variable with the intention to change the `vars[:params][:size]` param: it will just not set the param. If you used the `<<size>>` tag in any template it will work as long as a `:size` variable is set. Remember that tags can now refer to nested variables, so you could refer to the `vars[:size]` param in any template with `<<params.size>>`.
+> Flex will not emit any warning if you still use the old `vars[:size]` variable with the intention to change the `vars[:params][:size]` param: it will just not set the param. If you used the `<<size>>` tag in any template it will work as long as a `:size` variable is set. Remember that tags can now refer to nested variables, so you could refer to the `vars[:params][:size]` param in any template with `<<params.size>>`.
 
 ### 4. Method Renaming
 

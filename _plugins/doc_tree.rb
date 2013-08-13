@@ -48,7 +48,7 @@ class DocTree < Tree::TreeNode
     doc_source_path = Pathname.new configuration['doc_source_path']
     source_path     = Pathname.new Jekyll.configuration({})['source']
     doc_path        = '/' + doc_source_path.relative_path_from(source_path).to_s
-    tree            = DocTree.new(doc_path, {:title => 'FlexDoc'})
+    tree            = DocTree.new(doc_path, {:title => Jekyll.configuration({})['name']})
     Find.find(doc_source_path) do |p|
       next if doc_source_path == p   # discard root
       path      = Pathname.new p
