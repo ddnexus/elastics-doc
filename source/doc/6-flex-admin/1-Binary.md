@@ -6,7 +6,7 @@ alias_index: true
 
 # {{ page.title }}
 
-This gem provides the `flex-admin` executable  to `dump`, `load` and `stat` and eventually rename any [elasticsearch][] index. It also provides a few rake tasks to do the same {% see 1.4 %}, plus the live-reindex feature.
+This gem provides the `flex-admin` executable  to `dump`, `load` and `stat` and eventually rename any [elasticsearch][] index. It also provides a few rake tasks to do the same {% see 1.4 %}, plus the live-reindex feature {% see 6.2 %}.
 
 > __Notice__: If you need to migrate data or alter the index while you have a live app that uses it, the flex live-reindexing feature may suit better to your need {% see 6.2 %}.
 
