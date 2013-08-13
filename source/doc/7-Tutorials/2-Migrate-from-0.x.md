@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex
 title: How to migrate from flex 0.x
 ---
 

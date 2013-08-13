@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex-rails
 title: flex-rails - Result Extenders
 ---
 

@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex-admin
 title: flex-admin - Binary
 alias_index: true
 ---

@@ -56,6 +56,9 @@ html
 
     #content
 
+      a#badge href='https://badge.fury.io/rb/{{page.badge}}'
+        img src='https://badge.fury.io/rb/{{page.badge}}.png'
+
       .breadcrumb.nocontent
         | {% breadcrumb %}
       | {{ content }}

@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex
 title: Index and Search External Data
 ---
 

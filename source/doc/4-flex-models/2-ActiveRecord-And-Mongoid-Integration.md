@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex-models
 title: flex-models - ActiveRecord And Mongoid Integration
 ---
 

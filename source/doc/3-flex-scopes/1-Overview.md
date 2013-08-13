@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex-scopes
 title: flex-scopes - Overview
 alias_index: true
 ---

@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex-rails
 title: flex-rails - Overview
 alias_index: true
 ---

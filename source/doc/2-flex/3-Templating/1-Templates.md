@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex
 title: flex - Templates
 alias_index: true
 ---

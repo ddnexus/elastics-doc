@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex
 title: Why you should use Flex rather than Tire
 alias_index: true
 ---

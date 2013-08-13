@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex-admin
 title: Live Reindex
 ---
 

@@ -1,5 +1,6 @@
 ---
 layout: doc
+badge: flex
 title: flex - Self Documentation
 ---
 
