@@ -82,6 +82,14 @@ first_in_range = in_range_scope.first
 
 {% see 3.2#scope scope, 3.2#scoped scoped%}
 
+## Flex Module
+
+The `flex-scopes` gem automatically extends also the `Flex` module, so you can use any scope directly on `Flex`. For example:
+
+{% highlight ruby %}
+Flex.query('big AND red').first(:index => 'my_index', :type => 'my_type')
+{% endhighlight %}
+
 ## Chosing the right tool
 
 Flex scopes are cool tools, very useful in most situations, particularly when the search criteria are quite simple, however, when the search criteria get more complex, using templates may be a cleaner technique {% see 2.3.2 %}.
