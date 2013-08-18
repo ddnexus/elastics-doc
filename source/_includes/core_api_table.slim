@@ -9,7 +9,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.store
+      code Elastic.store
     td
       markdown:
         Stores a document into the index using `PUT`.
@@ -28,9 +28,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.store :id    => id,               # required
-                   :type  => nil,
-                   :index => "flex_test_index"
+        Elastic.store :id    => id,               # required
+                      :type  => nil,
+                      :index => "elastic_test_index"
         {% endshighlight %}
 
       markdown:
@@ -38,14 +38,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.put_store
+      code Elastic.put_store
     td
       markdown:
-        Alias of `Flex.store` (defined for symmetry with `Flex.post_store`)
+        Alias of `Elastic.store` (defined for symmetry with `Elastic.post_store`)
 
   tr
     td
-      code Flex.post_store
+      code Elastic.post_store
     td
       markdown:
         Stores a document into the index using `POST`: the `:id` is assigned by elasticsearch.
@@ -64,8 +64,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.post_store :index => "flex_test_index",
-                        :type  => nil
+        Elastic.post_store :index => "elastic_test_index",
+                           :type  => nil
         {% endshighlight %}
 
       markdown:
@@ -80,7 +80,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.remove
+      code Elastic.remove
     td
       markdown:
         Removes a document from the index.
@@ -99,9 +99,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.remove :id    => id,               # required
-                    :type  => nil,
-                    :index => "flex_test_index"
+        Elastic.remove :id    => id,               # required
+                       :type  => nil,
+                       :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -113,7 +113,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.get
+      code Elastic.get
     td
       markdown:
         Retrieves a document from the index.
@@ -132,14 +132,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.get :id    => id,               # required
-                 :type  => nil,
-                 :index => "flex_test_index"
+        Elastic.get :id    => id,               # required
+                    :type  => nil,
+                    :index => "elastic_test_index"
         {% endshighlight %}
 
   tr
     td
-      code Flex.get_source
+      code Elastic.get_source
     td
       markdown:
         Retrieves the source of a document from the index.
@@ -158,9 +158,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.get_source :id    => id,               # required
-                        :type  => nil,
-                        :index => "flex_test_index"
+        Elastic.get_source :id    => id,               # required
+                           :type  => nil,
+                           :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -172,7 +172,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.multi_get
+      code Elastic.multi_get
     td
       markdown:
         Retrieves multiple documents
@@ -192,9 +192,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.multi_get :ids   => ids,              # required
-                       :type  => nil,
-                       :index => "flex_test_index"
+        Elastic.multi_get :ids   => ids,              # required
+                          :type  => nil,
+                          :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -206,7 +206,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.update
+      code Elastic.update
     td
       markdown:
         Updates a document based on a script provided.
@@ -226,9 +226,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.update :id    => id,    # required
-                    :type  => nil,
-                    :index => "flex_test_index"
+        Elastic.update :id    => id,    # required
+                       :type  => nil,
+                       :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -243,7 +243,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       code YourClass.your_custom_search
     td
       markdown:
-        The Search API is completely covered by the Flex Templating system and mostly covered by the `flex-scopes` gem.
+        The Search API is completely covered by the Elastic Templating system and mostly covered by the `elastic-scopes` gem.
       == Helper.see('2.3,3')
 
 
@@ -256,11 +256,11 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code YourClass.flex.multi_search
+      code YourClass.elastic.multi_search
     td
       markdown:
 
-        > This method is documented here because it is an elasticsearch API method, however it is defined into your `flex` proxy included by `Flex::Templates`.
+        > This method is documented here because it is an elasticsearch API method, however it is defined into your `elastic` proxy included by `Elastic::Templates`.
 
         The method allows you to do multi-searching by using multiple templates defined by your class. It takes 2 arguments. The first is a required hash with the templates names as the keys and the variable hash as the values. You can also use an array of arrays. The second is an optional hash of variables that will be used to render the `multi_search` template. The array of responses is available as `responses` method.
 
@@ -278,9 +278,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        result = MyClass.flex.multi_search({:my_search_a => {:a_var => 'foo'},
-                                            :my_search_b => {:another_var => 'bar'},
-                                           {:index => 'another_index'})
+        result = MyClass.elastic.multi_search({:my_search_a => {:a_var => 'foo'},
+                                               :my_search_b => {:another_var => 'bar'},
+                                              {:index => 'another_index'})
 
         result.responses.each{|r| r.do_something }
         {% endshighlight %}
@@ -294,7 +294,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.put_percolator
+      code Elastic.put_percolator
     td
       markdown:
         Registers a named percolator query against an index.
@@ -313,13 +313,13 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.put_percolator :percolator => percolator,       # required
-                            :index      => "flex_test_index"
+        Elastic.put_percolator :percolator => percolator,       # required
+                               :index      => "elastic_test_index"
         {% endshighlight %}
 
   tr
     td
-      code Flex.delete_percolator
+      code Elastic.delete_percolator
     td
       markdown:
         Unregisters a named percolator.
@@ -338,13 +338,13 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.delete_percolator :percolator => percolator,       # required
-                               :index      => "flex_test_index"
+        Elastic.delete_percolator :percolator => percolator,       # required
+                                  :index      => "elastic_test_index"
         {% endshighlight %}
 
   tr
     td
-      code Flex.percolate
+      code Elastic.percolate
     td
       markdown:
         Percolates a document.
@@ -363,8 +363,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.percolate :index => "flex_test_index",
-                       :type  => nil
+        Elastic.percolate :index => "elastic_test_index",
+                          :type  => nil
         {% endshighlight %}
 
       markdown:
@@ -379,7 +379,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.post_bulk_string
+      code Elastic.post_bulk_string
     td
       markdown:
         Performs many index/create/update/delete operations in a single API call.
@@ -399,14 +399,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.post_bulk_string :bulk_string => bulk_string   # required
+        Elastic.post_bulk_string :bulk_string => bulk_string   # required
         {% endshighlight %}
 
       markdown:
         It may return `nil` if you pass a blank `:bulk_string`
 
       br
-      == Helper.see('1.4#flex_import flex:import,2.6#bulk_support')
+      == Helper.see('1.4#elastic_import elastic:import,2.6#bulk_support')
 
 
 
@@ -417,7 +417,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.count
+      code Elastic.count
     td
       markdown:
         Gets the number of matches for a query.
@@ -436,8 +436,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.count :index => "flex_test_index",
-                   :type  => nil
+        Elastic.count :index => "elastic_test_index",
+                      :type  => nil
         {% endshighlight %}
 
 
@@ -449,7 +449,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.delete_by_query
+      code Elastic.delete_by_query
     td
       markdown:
         Allows to delete documents from one or more indices and one or more types based on a query.
@@ -468,8 +468,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.delete_by_query :index => "flex_test_index",
-                             :type  => nil
+        Elastic.delete_by_query :index => "elastic_test_index",
+                                :type  => nil
         {% endshighlight %}
 
       markdown:
@@ -484,7 +484,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.more_like_this
+      code Elastic.more_like_this
     td
       markdown:
         Allows to get documents that are "like" a specified document.
@@ -503,9 +503,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.more_like_this :id    => id,          # required
-                            :index => "flex_test_index",
-                            :type  => nil
+        Elastic.more_like_this :id    => id,          # required
+                               :index => "elastic_test_index",
+                               :type  => nil
         {% endshighlight %}
 
       markdown:
@@ -513,10 +513,10 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code  Flex.mlt
+      code  Elastic.mlt
     td
       markdown:
-        Alias for `Flex.more_like_this`
+        Alias for `Elastic.more_like_this`
 
 
 
@@ -527,7 +527,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.validate
+      code Elastic.validate
     td
       markdown:
         Allows to validate a potentially expensive query without executing it.
@@ -546,8 +546,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.validate :index => "flex_test_index",
-                      :type  => nil
+        Elastic.validate :index => "elastic_test_index",
+                         :type  => nil
         {% endshighlight %}
 
       markdown:
@@ -563,7 +563,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.explain
+      code Elastic.explain
     td
       markdown:
         Computes a score explanation for a query and a specific document.
@@ -582,9 +582,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.explain :id    => id,    # required
-                     :type  => nil,
-                     :index => "flex_test_index"
+        Elastic.explain :id    => id,    # required
+                        :type  => nil,
+                        :index => "elastic_test_index"
         {% endshighlight %}
 
       markdown:
@@ -595,13 +595,13 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   ///////////////////////////////////////////////////////////////////////////
   tr
-    th colspan=2 id='flex_additions'
-      | Flex Additions
+    th colspan=2 id='elastic_additions'
+      | Elastic Additions
 
 
   tr
     td
-      code  Flex.match_all
+      code  Elastic.match_all
     td
       markdown:
 
@@ -623,14 +623,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.match_all :index => "flex_test_index",
-                       :type  => nil
+        Elastic.match_all :index => "elastic_test_index",
+                          :type  => nil
         {% endshighlight %}
 
 
   tr
     td
-      code  Flex.search_by_id
+      code  Elastic.search_by_id
     td
       markdown:
         Get a document without using the get API (which doesn't support fields '\*')
@@ -652,17 +652,17 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.search_by_id :id      => id,    # required
-                          :type    => nil,
-                          :index   => "flex_test_index"
+        Elastic.search_by_id :id      => id,    # required
+                             :type    => nil,
+                             :index   => "elastic_test_index"
         {% endshighlight %}
 
       markdown:
-        > This method uses the search API, which is not real-time like the get API. You may want to refresh the index with `Flex.refresh_index`, before calling it.
+        > This method uses the search API, which is not real-time like the get API. You may want to refresh the index with `Elastic.refresh_index`, before calling it.
 
   tr
     td
-      code  Flex.scan_search
+      code  Elastic.scan_search
     td
       markdown:
         Generic implementation of the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`. It passes the raw result to the block.
@@ -672,14 +672,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.scan_search(:my_template, my_vars) do |result|
+        Elastic.scan_search(:my_template, my_vars) do |result|
           result['hits']['hits'].each{|d|do_something_with(d)}
         end
         {% endshighlight %}
 
   tr
     td
-      code  Flex.scan_all
+      code  Elastic.scan_all
     td
       markdown:
         Specific implementation of the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`, applied to the `match_all` template/query. It passes an array of documents to the block.
@@ -689,14 +689,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.scan_all(my_vars) do |batch|
+        Elastic.scan_all(my_vars) do |batch|
           batch.each{|d|do_something_with(d)}
         end
         {% endshighlight %}
 
   tr
     td
-      code  Flex.dump_all
+      code  Elastic.dump_all
     td
       markdown:
         It `flush_index` and call `scan_all`, with added `{:params => {:fields => '*,_source'}}`. Used to include all the relevant fields from a document:
@@ -706,14 +706,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.dump_all(my_vars) do |batch|
+        Elastic.dump_all(my_vars) do |batch|
           batch.each{|d|do_something_with(d)}
         end
         {% endshighlight %}
 
   tr
     td
-      code  Flex.dump_one
+      code  Elastic.dump_one
     td
       markdown:
         It `flush_index` and call `search_by_id`, with added `{:params => {:fields => '*,_source'}}`. Used to include all the relevant fields from the document:
@@ -723,7 +723,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.dump_one :id      => id,    # required
-                      :type    => nil,
-                      :index   => "flex_test_index"
+        Elastic.dump_one :id      => id,    # required
+                         :type    => nil,
+                         :index   => "elastic_test_index"
         {% endshighlight %}

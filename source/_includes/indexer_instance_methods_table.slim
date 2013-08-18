@@ -1,95 +1,95 @@
 table.code-topics#indexer-instance-methods cellspacing=0 cellpadding=0
   tr
     td
-      code flex
+      code elastic
     td
       markdown:
-        The `flex` instance object is mostly used internally, however you can access all the Flex features included in your records through it. It implements the methods to manage the elasticsearch document related to your record.
+        The `elastic` instance object is mostly used internally, however you can access all the Elastic features included in your records through it. It implements the methods to manage the elasticsearch document related to your record.
 
   tr
     td
-      code flex.index
+      code elastic.index
     td
       markdown:
         The index for this record.
 
   tr
     td
-      code flex.type
+      code elastic.type
     td
       markdown:
         The document type for this record.
 
   tr
     td
-      code flex.store
+      code elastic.store
     td
       markdown:
-        Indexes the `flex_source` of this record. It is used internally and you don't need to use this directly if you use `Model.flex.sync` on this model.
+        Indexes the `elastic_source` of this record. It is used internally and you don't need to use this directly if you use `Model.elastic.sync` on this model.
 
   tr
     td
-      code flex.remove
+      code elastic.remove
     td
       markdown:
-        Removes the elasticsearch document for this record. It is used internally and you don't need to use this directly if you use `Model.flex.sync` on this model.
+        Removes the elasticsearch document for this record. It is used internally and you don't need to use this directly if you use `Model.elastic.sync` on this model.
 
   tr
     td
-      code flex.sync
+      code elastic.sync
     td
       markdown:
-        Implemented by the `Flex::ModelSyncer` module {% see 4.4.1#flexsync flex.sync %}.
+        Implemented by the `Elastic::ModelSyncer` module {% see 4.4.1#elasticsync elastic.sync %}.
 
   tr
     td
-      code flex.get
+      code elastic.get
     td
       markdown:
-        Retrieves the elasticsearch document from the index. The result is extended as usual {% see 2.4 Flex Extenders,4.5 Flex Model Extenders, 5.2 Flex Rails Extenders %}. Mostly useful in the console to inspect the elasticsearch related document.
+        Retrieves the elasticsearch document from the index. The result is extended as usual {% see 2.4 Elastic Extenders,4.5 Elastic Model Extenders, 5.2 Elastic Rails Extenders %}. Mostly useful in the console to inspect the elasticsearch related document.
       | {% shighlight irb %}
         >> comment = Comment.first
-        >> comment.flex.get
+        >> comment.elastic.get
         => {"_index"=>"my_index", "_type"=>"review_comment","_id"=>"4f15d2712c16bf4337000012", ... }
         {% endshighlight  %}
 
   tr
     td
-      code flex_source
+      code elastic_source
     td
       markdown:
         {% see 4.2#indexing_records %}
 
   tr
     td
-      code flex_indexable?
+      code elastic_indexable?
     td
       markdown:
         {% see 4.2#indexing_fields %}
 
 
   tr
-    th colspan=2 id='overriding_flex_metafields'
-      | Overriding Flex Metafields
+    th colspan=2 id='overriding_elastic_metafields'
+      | Overriding Elastic Metafields
 
   tr
     td
-      code flex_id
+      code elastic_id
       ' ,
-      code flex_index
+      code elastic_index
       ' ,
-      code flex_type
+      code elastic_type
       ' ,
-      code flex_parent
+      code elastic_parent
       ' ,
-      code flex_routing
+      code elastic_routing
     td
       markdown:
 
         __Use only if you know what you are doing!__
 
-        > You define any of this methods in your model, if you want to override the `flex.id`, `flex.index`, `flex.type`, `flex.parent` and/or `flex.routing` generation.
+        > You define any of this methods in your model, if you want to override the `elastic.id`, `elastic.index`, `elastic.type`, `elastic.parent` and/or `elastic.routing` generation.
 
-        The `flex_index` should be used if you want to implement dynamic indices in your model.
+        The `elastic_index` should be used if you want to implement dynamic indices in your model.
 
 

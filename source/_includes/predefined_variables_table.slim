@@ -29,7 +29,7 @@ table.code-topics cellspacing=0 cellpadding=0 style="width: 100%"
         | :cleanable_query
     td
       markdown:
-        This variable is used to pass query_string queries and it is treated in a special way by Flex. For example: if you pass a search field content from a web form directly to a query_string query, you may easily get some nasty error by elasticsearch. Indeed there are a few special characters that can break the Lucene syntax, so they should either be escaped/removed or used in a proper way. If you pass the query_string as the `:cleanable_query` variable, Flex tries to search with its content as is first (so allowing your power users to use advanced queries). But if it gets an error from elasticsearch, then it removes the offending characters from the string, and performs a second search with the cleaned string, and finally returns the result.
+        This variable is used to pass query_string queries and it is treated in a special way by Elastic. For example: if you pass a search field content from a web form directly to a query_string query, you may easily get some nasty error by elasticsearch. Indeed there are a few special characters that can break the Lucene syntax, so they should either be escaped/removed or used in a proper way. If you pass the query_string as the `:cleanable_query` variable, Elastic tries to search with its content as is first (so allowing your power users to use advanced queries). But if it gets an error from elasticsearch, then it removes the offending characters from the string, and performs a second search with the cleaned string, and finally returns the result.
 
         > See [Lucene Query Parser Syntax](<http://lucene.apache.org/core/old_versioned_docs/versions/3_5_0/queryparsersyntax.html>)
 

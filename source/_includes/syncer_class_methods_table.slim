@@ -1,34 +1,34 @@
 table.code-topics#syncer-class-methods cellspacing=0 cellpadding=0
   tr
     td
-      code flex.sync(*synced)
+      code elastic.sync(*synced)
     td
       markdown:
-        With this method you actually define the callback needed to keep the index in sync when the record change, and set the `flex.synced` array.
+        With this method you actually define the callback needed to keep the index in sync when the record change, and set the `elastic.synced` array.
 
         It accepts `self`, symbols and strings. For example:
 
       | {% highlight ruby %}
-        flex.sync self, :review, 'blog'
+        elastic.sync self, :review, 'blog'
         {% endhighlight %}
 
       markdown:
-        * `self` will sync the record itself (it is required only for `Flex::ModelIndexer` models, it's illegal for `Flex::ModelSyncer` models and already included for `Flex::ActiveModel` models)
+        * `self` will sync the record itself (it is required only for `Elastic::ModelIndexer` models, it's illegal for `Elastic::ModelSyncer` models and already included for `Elastic::ActiveModel` models)
         * `:review` is a symbol which identifies a method of the record, which is supposed to return another (relating) record. It is usually a `belongs_to` association symbol name, but it could be any method that you defined
         * `'blog'` is a string which is supposed to be a parent name, as defined in a parent-child map {% see 4.2#elasticsearch_parentchildren_relations elasticsearch Parent/Child Relationship %}
 
-        When a record of this model changes, it is synced with its related elasticsearch-document, then the record returned by the `record.review` (must be a flex model) is synced as well, and finally the parent record (defined in the parent/child relationship) is synced IF its type is `blog`.
+        When a record of this model changes, it is synced with its related elasticsearch-document, then the record returned by the `record.review` (must be a elastic model) is synced as well, and finally the parent record (defined in the parent/child relationship) is synced IF its type is `blog`.
 
   tr
     td
-      code flex.synced
+      code elastic.synced
     td
       markdown:
-        Attribute accessor for the Array of items to sync. You may need to set this Array only in the very special case that you want to sync the record manually. In that case you should not use the `flex.sync` that does it automatically. (see also `record.flex.sync` below). If you use `Model.flex.sync` you can ignore this.
+        Attribute accessor for the Array of items to sync. You may need to set this Array only in the very special case that you want to sync the record manually. In that case you should not use the `elastic.sync` that does it automatically. (see also `record.elastic.sync` below). If you use `Model.elastic.sync` you can ignore this.
 
   tr
     td
-      code flex.refresh_index
+      code elastic.refresh_index
     td
       markdown:
-       It refreshes the index by using `Flex.refresh_index` API method. For automatic refresh you can also use `Flex::RefreshCallback` {% see 4.4.3#flexrefreshcallback Flex::RefreshCallback %}.
+       It refreshes the index by using `Elastic.refresh_index` API method. For automatic refresh you can also use `Elastic::RefreshCallback` {% see 4.4.3#elasticrefreshcallback Elastic::RefreshCallback %}.

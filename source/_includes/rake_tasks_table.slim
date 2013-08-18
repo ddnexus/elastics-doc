@@ -1,26 +1,26 @@
 table.code-topics cellspacing="0" cellpadding="0"
   tr
     td
-      code flex:index:create
+      code elastic:index:create
     td
       markdown:
 
-        This rake task reads the configuration `flex.yml` file with your custom mappings, merges it with the internally generated mapping and routings, and creates the index. It is important to run this task when you start a new app, specially if you use the `flex-models` gem with parent/child relationships {% see 4 %}.
+        This rake task reads the configuration `elastic.yml` file with your custom mappings, merges it with the internally generated mapping and routings, and creates the index. It is important to run this task when you start a new app, specially if you use the `elastic-models` gem with parent/child relationships {% see 4 %}.
 
         #### Environment variables
 
         This task can be customized with the following environment variables:
 
         * `FORCE` Deletes the existing indices before running. Default `false`.
-        * `INDEX` String representing one or a list of indices to create. Default: `Flex::Configuration.variables[:index]`.
+        * `INDEX` String representing one or a list of indices to create. Default: `Elastic::Configuration.variables[:index]`.
 
       | {% shighlight sh %}
-        $ rake flex:index:create INDEX=foo,bar
+        $ rake elastic:index:create INDEX=foo,bar
         {% endshighlight %}
 
   tr
     td
-      code flex:index:delete
+      code elastic:index:delete
     td
       markdown:
 
@@ -30,15 +30,15 @@ table.code-topics cellspacing="0" cellpadding="0"
 
         This task can be customized with the following environment variables:
 
-        * `INDEX` String representing one or a list of indices to delete. Default: `Flex::Configuration.variables[:index]`.
+        * `INDEX` String representing one or a list of indices to delete. Default: `Elastic::Configuration.variables[:index]`.
 
   tr
     td
-      code flex:import
+      code elastic:import
     td
       markdown:
 
-        > This is a specific task provided by the `flex-models` gem.
+        > This is a specific task provided by the `elastic-models` gem.
 
         It imports all or any of the models of your application.
 
@@ -50,43 +50,43 @@ table.code-topics cellspacing="0" cellpadding="0"
         * `BATCH_SIZE` The batch size used to retrieve the records and bulk post to the elasticsearch server. Default `1000`.
         * `TIMEOUT` The HTTP-client timeout. Default `20` for this task. (it is usually `5` for regular queries as set in `Configuration.http_client_options[:timeout]`). You might need a higher timeout if you raise the `BATCH_SIZE`.
         * `IMPORT_OPTIONS` A query string like string representing a hash of options to be used with the `find_in_batches` methods.
-        * `CONFIG_FILE` The configuration file. Default `Flex::Configuration.config_file`
-        * `MODELS` Array like string representing a list of model classes. Default `Flex::Configuration.flex_models`.
+        * `CONFIG_FILE` The configuration file. Default `Elastic::Configuration.config_file`
+        * `MODELS` Array like string representing a list of model classes. Default `Elastic::Configuration.elastic_models`.
 
       | {% shighlight sh %}
-        $ rake flex:import MODELS=Foo,Bar
+        $ rake elastic:import MODELS=Foo,Bar
         {% endshighlight %}
 
   tr
     td
-      code flex:admin:dump
+      code elastic:admin:dump
     td
       markdown:
 
-        > This is a specific task provided by the `flex-admin` gem.
+        > This is a specific task provided by the `elastic-admin` gem.
 
-        It dumps the index/indices to a dump file, which can be feed to the `flex:admin:load` task to reload/restore the index.
+        It dumps the index/indices to a dump file, which can be feed to the `elastic:admin:load` task to reload/restore the index.
 
         #### Environment variables
 
         This task can be customized with the following environment variables:
 
-        * `FILE` The path to the dump file. Default: `'./flex.dump'`
-        * `INDEX` String representing one or a list of indices to dump. Default: `Flex::Configuration.variables[:index]`
-        * `TYPE` String representing one or a list of types to dump.  Default: `Flex::Configuration.variables[:type]`
+        * `FILE` The path to the dump file. Default: `'./elastic.dump'`
+        * `INDEX` String representing one or a list of indices to dump. Default: `Elastic::Configuration.variables[:index]`
+        * `TYPE` String representing one or a list of types to dump.  Default: `Elastic::Configuration.variables[:type]`
         * `SCROLL` elasticsearch option for the scan_type search performed to retrieve the documents. Default: `'5m'`
         * `SIZE` Represents the number of documents per shard dumped at a time. Default: `50`
         * `VERBOSE` Prints informations during the process. Default: `true`
 
   tr
     td
-      code flex:admin:load
+      code elastic:admin:load
     td
       markdown:
 
-        > This is a specific task provided by the `flex-admin` gem.
+        > This is a specific task provided by the `elastic-admin` gem.
 
-        It reload/restore the index by loading a dump file (produced by the the `flex:admin:dump`)
+        It reload/restore the index by loading a dump file (produced by the the `elastic:admin:dump`)
 
         > __Notice__: It loads the data into the original index name. If you want to reload the data into another index, you must set the `INDEX_MAP` variable.
 
@@ -94,7 +94,7 @@ table.code-topics cellspacing="0" cellpadding="0"
 
         This task can be customized with the following environment variables:
 
-        * `FILE` The path to the dump file. Default: `'./flex.dump'`
+        * `FILE` The path to the dump file. Default: `'./elastic.dump'`
         * `BATCH_SIZE` The document batch size used to import the dump file to the elasticsearch server. Default `1000`.
         * `INDEX_MAP`  The index rename map (example: -m=dumped_index_name:loaded_index_name,a:b).
         * `TIMEOUT` The HTTP-client timeout. Default `20` for this task. (it is usually `5` for regular queries as set in `Configuration.http_client_options[:timeout]`).  You might need a higher timeout if you raise the `BATCH_SIZE`.

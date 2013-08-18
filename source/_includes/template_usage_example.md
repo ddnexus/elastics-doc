@@ -1,4 +1,4 @@
-Define the Flex source `my_source.yml`: it's just a `YAML` document containing a few elasticsearch queries and placeholder tags:
+Define the Elastic source `my_source.yml`: it's just a `YAML` document containing a few elasticsearch queries and placeholder tags:
 
 {% highlight yaml %}
 my_template:
@@ -14,8 +14,8 @@ Create a class and load the source in the class:
 
 {% highlight ruby %}
 class MySearch
-  include Flex::Templates
-  flex.load_search_source 'my_source.yml'
+  include Elastic::Templates
+  elastic.load_search_source 'my_source.yml'
 end
 {% endhighlight %}
 

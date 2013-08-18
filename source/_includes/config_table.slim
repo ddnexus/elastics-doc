@@ -8,19 +8,19 @@ table.code-topics#config cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        # flex gem
-        [ Flex::Result::Document,
-          Flex::Result::Search,
-          Flex::Result::MultiGet,
-          Flex::Result::Bulk ]
+        # elastic gem
+        [ Elastic::Result::Document,
+          Elastic::Result::Search,
+          Elastic::Result::MultiGet,
+          Elastic::Result::Bulk ]
 
-        # flex-models gem
-        [ Flex::Result::DocumentLoader,
-          Flex::Result::SearchLoader,
-          Flex::Result::ActiveModel ]
+        # elastic-models gem
+        [ Elastic::Result::DocumentLoader,
+          Elastic::Result::SearchLoader,
+          Elastic::Result::ActiveModel ]
 
-        # flex-scopes gem
-        [ Flex::Result::Scope ]
+        # elastic-scopes gem
+        [ Elastic::Result::Scope ]
         {% endshighlight %}
 
       markdown:
@@ -31,7 +31,7 @@ table.code-topics#config cellspacing=0 cellpadding=0
       code logger
     td
       markdown:
-        The Flex logger. Default `Logger.new(STDERR)`
+        The Elastic logger. Default `Logger.new(STDERR)`
 
   tr
     td
@@ -74,7 +74,7 @@ table.code-topics#config cellspacing=0 cellpadding=0
       code logger.log_to_rails_logger
     td
       markdown:
-        > This is a specific configuration for the `flex-rails` gem.
+        > This is a specific configuration for the `elastic-rails` gem.
 
         Boolean. If `true` it forwards the messages to the `Rails.logger`. Defaut `true` unless in Rails Console.
 
@@ -83,50 +83,50 @@ table.code-topics#config cellspacing=0 cellpadding=0
       code logger.log_to_stdout
     td
       markdown:
-        > This is a specific configuration for the `flex-rails` gem.
+        > This is a specific configuration for the `elastic-rails` gem.
 
-        Boolean. Option added by flex-rails. If `true` prints the log to `STDOUT`. Default `false` unless in Rails Console.
-
-  tr
-    td
-      code flex_models
-    td
-      markdown:
-        > This is a specific configuration for the `flex-models` gem.
-
-        An array of model classes (or model class names) that your app will index. This is the only required configuration setting if you use the `Flex::ModelIndexer` integration, since it is used to generate the default mappings and the default models for the `import` task.
+        Boolean. Option added by elastic-rails. If `true` prints the log to `STDOUT`. Default `false` unless in Rails Console.
 
   tr
     td
-      code flex_active_models
+      code elastic_models
     td
       markdown:
-        > This is a specific configuration for the `flex-models` gem.
+        > This is a specific configuration for the `elastic-models` gem.
 
-        An array of ActiveModel classes (or model class names) that your app defines. This is the only required configuration setting if you use the `Flex::ActiveModel` integration, since it is used to generate the default mappings.
+        An array of model classes (or model class names) that your app will index. This is the only required configuration setting if you use the `Elastic::ModelIndexer` integration, since it is used to generate the default mappings and the default models for the `import` task.
 
   tr
     td
-      code flex_dir
+      code elastic_active_models
     td
       markdown:
-        The path where Flex searches for source files. Default `'./flex'` or `"\#{Rails.root}/app/flex"` in Rails.
+        > This is a specific configuration for the `elastic-models` gem.
+
+        An array of ActiveModel classes (or model class names) that your app defines. This is the only required configuration setting if you use the `Elastic::ActiveModel` integration, since it is used to generate the default mappings.
+
+  tr
+    td
+      code elastic_dir
+    td
+      markdown:
+        The path where Elastic searches for source files. Default `'./elastic'` or `"\#{Rails.root}/app/elastic"` in Rails.
 
   tr
     td
       code config_file
     td
       markdown:
-        A YAML file usually containing the custom index mapping. Default `'./config/flex.yml'` or `"\#{Rails.root}/config/flex.yml"` in Rails.
+        A YAML file usually containing the custom index mapping. Default `'./config/elastic.yml'` or `"\#{Rails.root}/config/elastic.yml"` in Rails.
 
   tr
     td
       code http_client
     td
       markdown:
-        The flex client instance. Default an object of class `Flex::HttpClients::Patron` or `Flex::HttpClients::RestClient`, depending on which gem you have installed (`patron` or `rest-client`). If you create a custom client class you must set it.
+        The HTTP client instance. Default an object of class `Elastic::HttpClients::Patron` or `Elastic::HttpClients::RestClient`, depending on which gem you have installed (`patron` or `rest-client`). If you create a custom client class you must set it.
 
-        > __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use `gem 'patron', '0.4.18', :git => 'https://github.com/ddnexus/patron.git'` or download [patron-0.4.18.flex.gem]({{site.baseurl}}/patron-0.4.18.flex.gem), install it with `gem install /path/to/patron-0.4.18.flex.gem --local` and be sure your app will use that version, or switch to the `rest-client` gem.
+        > __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use `gem 'patron', '0.4.18', :git => 'https://github.com/ddnexus/patron.git'` or download [patron-0.4.18.elastic.gem]({{site.baseurl}}/patron-0.4.18.elastic.gem), install it with `gem install /path/to/patron-0.4.18.elastic.gem --local` and be sure your app will use that version, or switch to the `rest-client` gem.
 
   tr
     td
@@ -155,17 +155,17 @@ table.code-topics#config cellspacing=0 cellpadding=0
       code variables
     td
       markdown:
-        The `Flex::Variable` object (Hash subclass) of interpolation variables used as the lowest default level. Default:
+        The `Elastic::Variable` object (Hash subclass) of interpolation variables used as the lowest default level. Default:
       |
         {% shighlight ruby %}
-        Flex::Variables.new :index      => nil,
-                            :type       => nil,
-                            :params     => {},
-                            :no_pruning => []
+        Elastic::Variables.new :index      => nil,
+                               :type       => nil,
+                               :params     => {},
+                               :no_pruning => []
         {% endshighlight  %}
 
       markdown:
-        > The `flex-rails` gem sets the default `variables[:index]` as the `app_id` (see below).
+        > The `elastic-rails` gem sets the default `variables[:index]` as the `app_id` (see below).
 
         {% see 2.3.4 %}
 
@@ -175,7 +175,7 @@ table.code-topics#config cellspacing=0 cellpadding=0
         | app_id
     td
       markdown:
-        An unique string used to identify your app. Default: `nil` or the uderscored rails application name, plus the environment in rails. It must be set if you use any `reindex` method. Used by the flex-reindex feature {% see 6.2 %}.
+        An unique string used to identify your app. Default: `nil` or the uderscored rails application name, plus the environment in rails. It must be set if you use any `reindex` method. Used by the elastic-reindex feature {% see 6.2 %}.
 
   tr
     td
@@ -183,7 +183,7 @@ table.code-topics#config cellspacing=0 cellpadding=0
         | redis
     td
       markdown:
-        The redis client object. Default: `$redis || Redis.current`. Used by the flex-reindex feature {% see 6.2 %}.
+        The redis client object. Default: `$redis || Redis.current`. Used by the live-reindex feature {% see 6.2 %}.
 
   tr
     td
@@ -191,5 +191,5 @@ table.code-topics#config cellspacing=0 cellpadding=0
         | on_stop_indexing
     td
       markdown:
-        A proc that should ensure to stop/suspend all the actions that would produce any change in the indices being live-reindexed. Used by the flex-reindex feature and overridden by the `on_stop_indexing` block {% see 6.2#id1 on_stop_indexing %}.
+        A proc that should ensure to stop/suspend all the actions that would produce any change in the indices being live-reindexed. Used by the live-reindex feature and overridden by the `on_stop_indexing` block {% see 6.2#id1 on_stop_indexing %}.
 

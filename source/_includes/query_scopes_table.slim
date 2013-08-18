@@ -22,7 +22,7 @@ table.code-topics#query-scopes cellspacing=0 cellpadding=0 style="width: 100%"
 
       | {% shighlight ruby %}
         red_scope.first
-        MyFlexActiveModel.first
+        MyElasticActiveModel.first
         {% endshighlight %}
 
   tr
@@ -34,7 +34,7 @@ table.code-topics#query-scopes cellspacing=0 cellpadding=0 style="width: 100%"
 
       | {% shighlight ruby %}
         red_scope.last
-        MyFlexActiveModel.last
+        MyElasticActiveModel.last
         {% endshighlight %}
 
   tr
@@ -46,7 +46,7 @@ table.code-topics#query-scopes cellspacing=0 cellpadding=0 style="width: 100%"
 
       | {% shighlight ruby %}
         red_scope.all
-        MyFlexActiveModel.all
+        MyElasticActiveModel.all
         {% endshighlight %}
 
   tr
@@ -59,7 +59,7 @@ table.code-topics#query-scopes cellspacing=0 cellpadding=0 style="width: 100%"
       | {% shighlight ruby %}
         red_scope.delete
         # deletes all the documents
-        MyFlexActiveModel.delete
+        MyElasticActiveModel.delete
         {% endshighlight %}
 
   tr
@@ -71,7 +71,7 @@ table.code-topics#query-scopes cellspacing=0 cellpadding=0 style="width: 100%"
 
       | {% shighlight ruby %}
         red_scope.each{|d| do_something_with(d)}
-        MyFlexActiveModel.each{|d| do_something_with(d)}
+        MyElasticActiveModel.each{|d| do_something_with(d)}
         {% endshighlight %}
 
   tr
@@ -86,7 +86,7 @@ table.code-topics#query-scopes cellspacing=0 cellpadding=0 style="width: 100%"
           batch.each {|d| do_something_with(d)}
         end
 
-         MyFlexActiveModel.scan_all do |batch|
+         MyElasticActiveModel.scan_all do |batch|
            batch.each {|d| do_something_with(d)}
          end
         {% endshighlight %}
@@ -109,5 +109,5 @@ table.code-topics#query-scopes cellspacing=0 cellpadding=0 style="width: 100%"
 
       | {% shighlight ruby %}
         red_scope.count
-        MyFlexActiveModel.count
+        MyElasticActiveModel.count
         {% endshighlight %}

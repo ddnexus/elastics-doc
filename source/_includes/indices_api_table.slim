@@ -9,7 +9,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.post_index_aliases
+      code Elastic.post_index_aliases
     td
       markdown:
         The index aliases API allow to alias an index with a name, with all APIs automatically converting the alias name to the actual index name.
@@ -28,7 +28,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.post_index_aliases
+        Elastic.post_index_aliases
         {% endshighlight %}
 
       markdown:
@@ -37,7 +37,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.get_index_aliases
+      code Elastic.get_index_aliases
     td
       markdown:
         Returns all indices with all aliases, or just for specific indices. (pre 0.90.1).
@@ -56,14 +56,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.get_index_aliases :index => "flex_test_index"
+        Elastic.get_index_aliases :index => "elastic_test_index"
         {% endshighlight %}
 
 
 
   tr
     td
-      code Flex.add_index_alias
+      code Elastic.add_index_alias
     td
       markdown:
         Adds an index alias.
@@ -82,8 +82,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.add_index_alias :alias => alias,  # required
-                             :index => "flex_test_index"
+        Elastic.add_index_alias :alias => alias,  # required
+                                :index => "elastic_test_index"
         {% endshighlight %}
 
       markdown:
@@ -92,7 +92,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.delete_index_alias
+      code Elastic.delete_index_alias
     td
       markdown:
         Deletes an index alias.
@@ -111,14 +111,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.delete_index_alias :alias => alias,  # required
-                                :index => "flex_test_index"
+        Elastic.delete_index_alias :alias => alias,  # required
+                                   :index => "elastic_test_index"
         {% endshighlight %}
 
 
   tr
     td
-      code Flex.get_index_alias
+      code Elastic.get_index_alias
     td
       markdown:
         Allows to filter by alias name and index name.
@@ -137,8 +137,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.get_index_alias :index => "flex_test_index",
-                             :alias => "*"
+        Elastic.get_index_alias :index => "elastic_test_index",
+                                :alias => "*"
         {% endshighlight %}
 
 
@@ -150,7 +150,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.analyze_index
+      code Elastic.analyze_index
     td
       markdown:
         Performs the analysis process on a text and return the tokens breakdown of the text.
@@ -169,7 +169,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.analyze_index :index => "flex_test_index"
+        Elastic.analyze_index :index => "elastic_test_index"
         {% endshighlight %}
 
       markdown:
@@ -185,7 +185,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.create_index
+      code Elastic.create_index
     td
       markdown:
         Allows to instantiate an index. (Uses `PUT`)
@@ -207,21 +207,21 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.create_index :index              => "flex_test_index",
-                          :number_of_shards   => 5,
-                          :number_of_replicas => 1
+        Elastic.create_index :index              => "elastic_test_index",
+                             :number_of_shards   => 5,
+                             :number_of_replicas => 1
         {% endshighlight %}
 
   tr
     td
-      code Flex.put_index
+      code Elastic.put_index
     td
       markdown:
-       Alias for `Flex.create_index` (defined for symmetry with `Flex.post_index`)
+       Alias for `Elastic.create_index` (defined for symmetry with `Elastic.post_index`)
 
   tr
     td
-      code Flex.post_index
+      code Elastic.post_index
     td
       markdown:
         Allows to instantiate an index. (Uses `POST`)
@@ -243,9 +243,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.post_index :index              => "flex_test_index",
-                        :number_of_shards   => 5,
-                        :number_of_replicas => 1
+        Elastic.post_index :index              => "elastic_test_index",
+                           :number_of_shards   => 5,
+                           :number_of_replicas => 1
         {% endshighlight %}
 
 
@@ -257,7 +257,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.delete_index
+      code Elastic.delete_index
     td
       markdown:
         Allows to delete an existing index.
@@ -276,7 +276,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.delete_index :index => "flex_test_index"
+        Elastic.delete_index :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -288,7 +288,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.close_index
+      code Elastic.close_index
     td
       markdown:
         Allows to close an index.
@@ -307,13 +307,13 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.close_index :index => "flex_test_index"
+        Elastic.close_index :index => "elastic_test_index"
         {% endshighlight %}
 
 
   tr
     td
-      code Flex.open_index
+      code Elastic.open_index
     td
       markdown:
         Allows to open an index.
@@ -332,7 +332,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.open_index :index => "flex_test_index"
+        Elastic.open_index :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -344,7 +344,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.get_index_settings
+      code Elastic.get_index_settings
     td
       markdown:
         Allows to retrieve settings of index/indices.
@@ -363,15 +363,15 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.get_index_settings :index => "flex_test_index"
+        Elastic.get_index_settings :index => "elastic_test_index"
         {% endshighlight %}
 
   tr
     td
-      code Flex.get_settings
+      code Elastic.get_settings
     td
       markdown:
-        Alias for `Flex.get_index_settings`. (Flex-backward compatible)
+        Alias for `Elastic.get_index_settings`. (Backward compatible)
 
 
 
@@ -382,7 +382,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.get_index_mapping
+      code Elastic.get_index_mapping
     td
       markdown:
         Allows to retrieve the mapping of index/indices.
@@ -401,15 +401,15 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.get_index_mapping :index => "flex_test_index"
+        Elastic.get_index_mapping :index => "elastic_test_index"
         {% endshighlight %}
 
   tr
     td
-      code Flex.get_mapping
+      code Elastic.get_mapping
     td
       markdown:
-        Alias for `Flex.get_index_mapping`. (Flex-backward compatible)
+        Alias for `Elastic.get_index_mapping`. (Backward compatible)
 
 
 
@@ -420,7 +420,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.put_index_mapping
+      code Elastic.put_index_mapping
     td
       markdown:
         Allows to register specific mapping definition for a specific type.
@@ -441,17 +441,17 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.put_index_mapping :properties => properties,  # required
-                               :type       => nil,
-                               :index      => "flex_test_index"
+        Elastic.put_index_mapping :properties => properties,  # required
+                                  :type       => nil,
+                                  :index      => "elastic_test_index"
         {% endshighlight %}
 
   tr
     td
-      code Flex.put_mapping
+      code Elastic.put_mapping
     td
       markdown:
-        Alias for `Flex.put_index_mapping`. (Flex-backward compatible)
+        Alias for `Elastic.put_index_mapping`. (Backward compatible)
 
 
 
@@ -462,7 +462,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.delete_index_mapping
+      code Elastic.delete_index_mapping
     td
       markdown:
         Allows to delete the mapping of an index/type.
@@ -481,16 +481,16 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.delete_index_mapping :index => "flex_test_index",
-                                  :type  => nil
+        Elastic.delete_index_mapping :index => "elastic_test_index",
+                                     :type  => nil
         {% endshighlight %}
 
   tr
     td
-      code Flex.delete_mapping
+      code Elastic.delete_mapping
     td
       markdown:
-        Alias for `Flex.delete_index_mapping`. (Flex-backward compatible)
+        Alias for `Elastic.delete_index_mapping`. (Backward compatible)
 
 
 
@@ -501,7 +501,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.refresh_index
+      code Elastic.refresh_index
     td
       markdown:
         Allows to explicitly refresh one or more index.
@@ -520,7 +520,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.refresh_index :index => "flex_test_index"
+        Elastic.refresh_index :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -532,7 +532,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.optimize_index
+      code Elastic.optimize_index
     td
       markdown:
         Allows to optimize one or more index.
@@ -551,7 +551,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.optimize_index :index => "flex_test_index"
+        Elastic.optimize_index :index => "elastic_test_index"
         {% endshighlight %}
 
       markdown:
@@ -566,7 +566,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.flush_index
+      code Elastic.flush_index
     td
       markdown:
         Allows to flush one or more index.
@@ -585,7 +585,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.flush_index :index => "flex_test_index"
+        Elastic.flush_index :index => "elastic_test_index"
         {% endshighlight %}
 
       markdown:
@@ -600,7 +600,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.gateway_snapshot
+      code Elastic.gateway_snapshot
     td
       markdown:
         Allows to explicitly perform a snapshot through the gateway of one or more indices (backup them).
@@ -619,7 +619,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.gateway_snapshot :index => "flex_test_index"
+        Elastic.gateway_snapshot :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -631,7 +631,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.update_index_settings
+      code Elastic.update_index_settings
     td
       markdown:
         Change specific index level settings in real time.
@@ -650,7 +650,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.update_index_settings :index => "flex_test_index"
+        Elastic.update_index_settings :index => "elastic_test_index"
         {% endshighlight %}
 
       markdown:
@@ -665,7 +665,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.put_index_template
+      code Elastic.put_index_template
     td
       markdown:
         Creates a template that will automatically be applied to new indices created.
@@ -684,7 +684,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.put_index_template :template => template  # required
+        Elastic.put_index_template :template => template  # required
         {% endshighlight %}
 
       markdown:
@@ -693,7 +693,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.delete_index_template
+      code Elastic.delete_index_template
     td
       markdown:
         Deletes an existing template.
@@ -712,13 +712,13 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.delete_index_template :template => template  # required
+        Elastic.delete_index_template :template => template  # required
         {% endshighlight %}
 
 
   tr
     td
-      code Flex.get_index_template
+      code Elastic.get_index_template
     td
       markdown:
         Retrieves an existing template.
@@ -737,7 +737,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.get_index_template :template => template  # required
+        Elastic.get_index_template :template => template  # required
         {% endshighlight %}
 
 
@@ -749,7 +749,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.put_index_warmer
+      code Elastic.put_index_warmer
     td
       markdown:
         Creates a warmer to warm up the index before it is available for search.
@@ -768,9 +768,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.put_warmer :warmer => warmer,  # required
-                        :type   => nil,
-                        :index  => "flex_test_index"
+        Elastic.put_warmer :warmer => warmer,  # required
+                           :type   => nil,
+                           :index  => "elastic_test_index"
         {% endshighlight %}
 
       markdown:
@@ -779,7 +779,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.delete_index_warmer
+      code Elastic.delete_index_warmer
     td
       markdown:
         Deletes an existing warmer.
@@ -798,14 +798,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-         Flex.delete_warmer :index  => "flex_test_index",
-                            :warmer => nil
+         Elastic.delete_warmer :index  => "elastic_test_index",
+                               :warmer => nil
         {% endshighlight %}
 
 
   tr
     td
-      code Flex.get_index_warmer
+      code Elastic.get_index_warmer
     td
       markdown:
         Retrieves an existing warmer.
@@ -824,7 +824,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.get_warmer :index  => "flex_test_index",
+        Elastic.get_warmer :index  => "elastic_test_index",
                         :warmer => nil
         {% endshighlight %}
 
@@ -837,7 +837,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.index_stats
+      code Elastic.index_stats
     td
       markdown:
         Provides statistics on different operations happening on an index.
@@ -856,17 +856,17 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.index_stats :index    => "flex_test_index",
-                         :endpoint => nil,
-                         :type     => nil
+        Elastic.index_stats :index    => "elastic_test_index",
+                            :endpoint => nil,
+                            :type     => nil
         {% endshighlight %}
 
   tr
     td
-      code Flex.stats
+      code Elastic.stats
     td
       markdown:
-        Alias for `Flex.index_stats`. (Flex-backward compatible)
+        Alias for `Elastic.index_stats`. (Backward compatible)
 
 
 
@@ -877,7 +877,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.index_status
+      code Elastic.index_status
     td
       markdown:
         Provides a comprehensive status information of one or more indices.
@@ -896,7 +896,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.index_status :index => "flex_test_index"
+        Elastic.index_status :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -908,7 +908,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.index_segments
+      code Elastic.index_segments
     td
       markdown:
         Provides low level segments information that a Lucene index (shard level) is built with.
@@ -927,7 +927,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.index_segments :index => "flex_test_index"
+        Elastic.index_segments :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -939,7 +939,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.index_clearcache
+      code Elastic.index_clearcache
     td
       markdown:
         Clears either all caches or specific cached associated with one ore more indices.
@@ -958,7 +958,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.index_clearcache :index => "flex_test_index"
+        Elastic.index_clearcache :index => "elastic_test_index"
         {% endshighlight %}
 
 
@@ -970,7 +970,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.indices_exists
+      code Elastic.indices_exists
     td
       markdown:
         Checks if the index/indices exists.
@@ -989,7 +989,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.indices_exists :index => "flex_test_index"
+        Elastic.indices_exists :index => "elastic_test_index"
         {% endshighlight %}
 
       markdown:
@@ -997,10 +997,10 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.exist?
+      code Elastic.exist?
     td
       markdown:
-        Alias for `Flex.indices_exists`. (Flex-backward compatible)
+        Alias for `Elastic.indices_exists`. (Elastic-backward compatible)
 
 
 
@@ -1011,7 +1011,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.types_exists
+      code Elastic.types_exists
     td
       markdown:
         Checks if the type/types exists in an index/indices.
@@ -1030,7 +1030,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Flex.types_exists :index => "flex_test_index",
+        Elastic.types_exists :index => "elastic_test_index",
                           :type  => nil
         {% endshighlight %}
 
@@ -1039,10 +1039,10 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Flex.exist?
+      code Elastic.exist?
     td
       markdown:
-        Alias for `Flex.indices_exists`. (Flex-backward compatible)
+        Alias for `Elastic.indices_exists`. (Backward compatible)
 
 
 
