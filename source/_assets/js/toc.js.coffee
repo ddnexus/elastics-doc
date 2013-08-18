@@ -42,7 +42,7 @@ window.Toc = class Toc
       li = $('<li/>').addClass('toc-' + $h[0].tagName.toLowerCase())
                      .append(a)
       ul.append li
-    @toc.html ul
+    @toc.append ul
 
 
   highlightOnScroll: (e) =>
@@ -78,7 +78,7 @@ $ ->
   animateHighlighted = (el) ->
     $el = $(el)
     old_b = $el.css('backgroundColor')
-    $el.animate backgroundColor: '#9F9', 700
+    $el.animate backgroundColor: '#F99', 700
     $el.animate backgroundColor: old_b, 700
 
   filterPath = (string) ->

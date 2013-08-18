@@ -6,6 +6,7 @@
 body
   padding: .7em 2.1em
   min-width: 60em
+  background-color: #FAF0E8 //#F5EAE2 //EBE3D1
   #content
     margin-top: 3.125em
     margin-bottom: 3.125em
@@ -13,13 +14,15 @@ body
     color: $text
 
 a
-  color: $base6
+  color: $base9
 
 #badge
   float: right
 
 blockquote
   font-style: italic
+  border-left: 4px solid $text-rubysh
+  color: $text-rubysh
 
 table
   font-size: 14px
@@ -29,9 +32,11 @@ table
 
   border: 1px solid $base-gray
   border-radius: 5px
-
   tr
     border: 1px solid $base-gray
+    background-color: #FDFBFB
+    &:nth-child(2n)
+      background-color: #FAF3F0
     th
       border: 0 none
       background-color: $base-gray
@@ -46,13 +51,20 @@ h2
   border-bottom: 1px solid $base-gray
 
 h1, h2, h3, h4, h5, h6
-  color: $base4
+  color: $base8
 
-code, tt, .highlight pre
+code, tt, .highlight pre, pre
   background-color:  $base-gray-light
   border-color: $base-gray
+  border-radius: 5px
   font-size: 13px
   line-height: 19px
+
+code
+  border-radius: 3px
+
+.highlight
+  background: none
 
 .highlight .s1, .highlight .s2, .highlight .sh, .l-Scalar-Plain
   color: $base7
@@ -61,17 +73,21 @@ code, tt, .highlight pre
 .breadcrumb
   font-size: 13px
   line-height: 19px
-  color: $base-gray
+  color: $text-rubysh
+  border-radius: 19px
+  display: inline-block
+  padding: 2px 10px 1px
+  background-color: #FFFDFD
   span
-    border: 1px solid $base-gray
-    border-radius: 19px
-    margin: 0 2px
-    padding: 4px 12px 2px
+    //border: 2px solid $baseA
+    //border-radius: 19px
+    //margin: 0 2px
+    padding: 2px // 12px 2px
     white-space: nowrap
     display: inline-block
-    +menu-highlighted
-    box-shadow: inset 0 1px 4px 0 $base-gray
-    background-color: white
+    //+menu-highlighted
+    //box-shadow: inset 0 1px 2px 0 $baseA
+    background-color: transparent
 
 #footer
   z-index: 1101
@@ -79,7 +95,7 @@ code, tt, .highlight pre
   bottom: 0
   left: 0
   background-color: $base4
-  color: $baseA
+  color: $text-rubysh
   height: 17px
   padding: 5px
   width: 100%
@@ -88,7 +104,7 @@ code, tt, .highlight pre
   text-align: center
   font-size: 12px
   a, a:hover
-    color: $baseA
+    color: $text-rubysh
 
 .broken-link
   color: red
