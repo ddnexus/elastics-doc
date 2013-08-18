@@ -156,7 +156,7 @@ At a certain point of that refactoring I get tired of complaining about Tire, an
 
 Here is the list of requirements for the first version of flex, and how they have been implemented.
 
-{% slim flex_requirements_table.slim %}
+{% slim elastic_requirements_table.slim %}
 
 ### Migrating from Tire to Flex
 
