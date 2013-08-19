@@ -5,7 +5,7 @@ table.code-topics cellspacing=0 cellpadding=0
         | :context
     td
       markdown:
-        This variable contain the context class, which is usually the class where you included some Elastic module (like `Elastic::Templates`, `Elastic::Scopes`, `Elastic::ModelIndexer`, etc.). It is used by the `elastic-scopes` gem.
+        This variable contain the context class, which is usually the class where you included some Elastics module (like `Elastics::Templates`, `Elastics::Scopes`, `Elastics::ModelIndexer`, etc.). It is used by the `elastics-scopes` gem.
 
   tr
     td
@@ -29,7 +29,7 @@ table.code-topics cellspacing=0 cellpadding=0
         | :params
     td
       markdown:
-        The params are a hash of key/value pairs. Elastic will transform them in the query string part of the path (all what comes after the `?`), so you will probably use it quite often.
+        The params are a hash of key/value pairs. Elastics will transform them in the query string part of the path (all what comes after the `?`), so you will probably use it quite often.
 
   tr
     td
@@ -53,5 +53,5 @@ table.code-topics cellspacing=0 cellpadding=0
         | :raw_result
     td
       markdown:
-        Boolean. `true` will return the raw result as returned by elasticsearch. It is mostly useful to skip the automatic casting provided by the `Elastic::ActiveModel` module, or skip your own post processing of the result {% see 2.4#modelelastic_resultresult elastic_result %}.
+        Boolean. `true` will return the raw result as returned by elasticsearch. It is mostly useful to skip the automatic casting provided by the `Elastics::ActiveModel` module, or skip your own post processing of the result {% see 2.4#modelelastics_resultresult elastics_result %}.
 

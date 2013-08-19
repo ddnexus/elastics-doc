@@ -1,56 +1,56 @@
 table.code-topics#indexer-class-methods cellspacing=0 cellpadding=0
   tr
     td
-      code elastic
+      code elastics
     td
       markdown:
-        You access all the Elastic features included in your model through the `elastic` proxy object. It implements the methods to map your models to the elasticsearch index, define parent/child relationships and sync.
+        You access all the Elastics features included in your model through the `elastics` proxy object. It implements the methods to map your models to the elasticsearch index, define parent/child relationships and sync.
 
   tr
     td
-      code elastic.index
+      code elastics.index
     td
       markdown:
-        By default the index used for all the models in your app is the `Elastic::Configuration.variables[:index]`. In a rails app that gets set before initializing the app {% see 1.3 %}. You can map your model to another index by explicitly setting it in your class.
+        By default the index used for all the models in your app is the `Elastics::Configuration.variables[:index]`. In a rails app that gets set before initializing the app {% see 1.3 %}. You can map your model to another index by explicitly setting it in your class.
       | {% shighlight ruby %}
-        elastic.index = 'foo'
+        elastics.index = 'foo'
         {% endshighlight  %}
 
   tr
     td
-      code elastic.type
+      code elastics.type
     td
       markdown:
         By default the type used for your model is the full-underscored class name. For example `MyModel::SuperSpecial` will generate `my_model__super_special`. Notice the double underscore in place of the commonly used slash, which avoids url conflicts. You can map your model to another type by explicitly setting it in your class:
 
       | {% highlight ruby %}
-        elastic.type = 'bar'
+        elastics.type = 'bar'
         {% endhighlight %}
 
   tr
     td
-      code elastic.parent
+      code elastics.parent
     td
       markdown:
         Defines elasticsearch parent/child relations {% see 4.2#indexing_records %}.
 
   tr
     td
-      code elastic.sync(*synced)
+      code elastics.sync(*synced)
     td
       markdown:
-        Implemented by the `Elastic::ModelSyncer` module {% see 4.4.1#elastic_sync__synced_ elastic.sync %}.
+        Implemented by the `Elastics::ModelSyncer` module {% see 4.4.1#elastics_sync__synced_ elastics.sync %}.
 
   tr
     td
-      code elastic.synced
+      code elastics.synced
     td
       markdown:
-       Implemented by the `Elastic::ModelSyncer` module {% see 4.4.1#elastic_synced elastic.synced %}.
+       Implemented by the `Elastics::ModelSyncer` module {% see 4.4.1#elastics_synced elastics.synced %}.
 
   tr
     td
-      code elastic_result(result)
+      code elastics_result(result)
     td
       markdown:
-       Custom defined method {% see 2.4#modelelastic_resultresult Model.elastic_result %}.
+       Custom defined method {% see 2.4#modelelastics_resultresult Model.elastics_result %}.

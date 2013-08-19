@@ -1,95 +1,95 @@
 table.code-topics#indexer-instance-methods cellspacing=0 cellpadding=0
   tr
     td
-      code elastic
+      code elastics
     td
       markdown:
-        The `elastic` instance object is mostly used internally, however you can access all the Elastic features included in your records through it. It implements the methods to manage the elasticsearch document related to your record.
+        The `elastics` instance object is mostly used internally, however you can access all the Elastics features included in your records through it. It implements the methods to manage the elasticsearch document related to your record.
 
   tr
     td
-      code elastic.index
+      code elastics.index
     td
       markdown:
         The index for this record.
 
   tr
     td
-      code elastic.type
+      code elastics.type
     td
       markdown:
         The document type for this record.
 
   tr
     td
-      code elastic.store
+      code elastics.store
     td
       markdown:
-        Indexes the `elastic_source` of this record. It is used internally and you don't need to use this directly if you use `Model.elastic.sync` on this model.
+        Indexes the `elastics_source` of this record. It is used internally and you don't need to use this directly if you use `Model.elastics.sync` on this model.
 
   tr
     td
-      code elastic.remove
+      code elastics.remove
     td
       markdown:
-        Removes the elasticsearch document for this record. It is used internally and you don't need to use this directly if you use `Model.elastic.sync` on this model.
+        Removes the elasticsearch document for this record. It is used internally and you don't need to use this directly if you use `Model.elastics.sync` on this model.
 
   tr
     td
-      code elastic.sync
+      code elastics.sync
     td
       markdown:
-        Implemented by the `Elastic::ModelSyncer` module {% see 4.4.1#elasticsync elastic.sync %}.
+        Implemented by the `Elastics::ModelSyncer` module {% see 4.4.1#elasticsync elastics.sync %}.
 
   tr
     td
-      code elastic.get
+      code elastics.get
     td
       markdown:
-        Retrieves the elasticsearch document from the index. The result is extended as usual {% see 2.4 Elastic Extenders,4.5 Elastic Model Extenders, 5.2 Elastic Rails Extenders %}. Mostly useful in the console to inspect the elasticsearch related document.
+        Retrieves the elasticsearch document from the index. The result is extended as usual {% see 2.4 Elastics Extenders,4.5 Elastics Model Extenders, 5.2 Elastics Rails Extenders %}. Mostly useful in the console to inspect the elasticsearch related document.
       | {% shighlight irb %}
         >> comment = Comment.first
-        >> comment.elastic.get
+        >> comment.elastics.get
         => {"_index"=>"my_index", "_type"=>"review_comment","_id"=>"4f15d2712c16bf4337000012", ... }
         {% endshighlight  %}
 
   tr
     td
-      code elastic_source
+      code elastics_source
     td
       markdown:
         {% see 4.2#indexing_records %}
 
   tr
     td
-      code elastic_indexable?
+      code elastics_indexable?
     td
       markdown:
         {% see 4.2#indexing_fields %}
 
 
   tr
-    th colspan=2 id='overriding_elastic_metafields'
-      | Overriding Elastic Metafields
+    th colspan=2 id='overriding_elastics_metafields'
+      | Overriding Elastics Metafields
 
   tr
     td
-      code elastic_id
+      code elastics_id
       ' ,
-      code elastic_index
+      code elastics_index
       ' ,
-      code elastic_type
+      code elastics_type
       ' ,
-      code elastic_parent
+      code elastics_parent
       ' ,
-      code elastic_routing
+      code elastics_routing
     td
       markdown:
 
         __Use only if you know what you are doing!__
 
-        > You define any of this methods in your model, if you want to override the `elastic.id`, `elastic.index`, `elastic.type`, `elastic.parent` and/or `elastic.routing` generation.
+        > You define any of this methods in your model, if you want to override the `elastics.id`, `elastics.index`, `elastics.type`, `elastics.parent` and/or `elastics.routing` generation.
 
-        The `elastic_index` should be used if you want to implement dynamic indices in your model.
+        The `elastics_index` should be used if you want to implement dynamic indices in your model.
 
 

@@ -9,7 +9,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.store
+      code Elastics.store
     td
       markdown:
         Stores a document into the index using `PUT`.
@@ -28,9 +28,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.store :id    => id,               # required
+        Elastics.store :id    => id,               # required
                       :type  => nil,
-                      :index => "elastic_test_index"
+                      :index => "elastics_test_index"
         {% endshighlight %}
 
       markdown:
@@ -38,14 +38,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.put_store
+      code Elastics.put_store
     td
       markdown:
-        Alias of `Elastic.store` (defined for symmetry with `Elastic.post_store`)
+        Alias of `Elastics.store` (defined for symmetry with `Elastics.post_store`)
 
   tr
     td
-      code Elastic.post_store
+      code Elastics.post_store
     td
       markdown:
         Stores a document into the index using `POST`: the `:id` is assigned by elasticsearch.
@@ -64,7 +64,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.post_store :index => "elastic_test_index",
+        Elastics.post_store :index => "elastics_test_index",
                            :type  => nil
         {% endshighlight %}
 
@@ -80,7 +80,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.remove
+      code Elastics.remove
     td
       markdown:
         Removes a document from the index.
@@ -99,9 +99,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.remove :id    => id,               # required
+        Elastics.remove :id    => id,               # required
                        :type  => nil,
-                       :index => "elastic_test_index"
+                       :index => "elastics_test_index"
         {% endshighlight %}
 
 
@@ -113,7 +113,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.get
+      code Elastics.get
     td
       markdown:
         Retrieves a document from the index.
@@ -132,14 +132,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.get :id    => id,               # required
+        Elastics.get :id    => id,               # required
                     :type  => nil,
-                    :index => "elastic_test_index"
+                    :index => "elastics_test_index"
         {% endshighlight %}
 
   tr
     td
-      code Elastic.get_source
+      code Elastics.get_source
     td
       markdown:
         Retrieves the source of a document from the index.
@@ -158,9 +158,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.get_source :id    => id,               # required
+        Elastics.get_source :id    => id,               # required
                            :type  => nil,
-                           :index => "elastic_test_index"
+                           :index => "elastics_test_index"
         {% endshighlight %}
 
 
@@ -172,7 +172,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.multi_get
+      code Elastics.multi_get
     td
       markdown:
         Retrieves multiple documents
@@ -192,9 +192,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.multi_get :ids   => ids,              # required
+        Elastics.multi_get :ids   => ids,              # required
                           :type  => nil,
-                          :index => "elastic_test_index"
+                          :index => "elastics_test_index"
         {% endshighlight %}
 
 
@@ -206,7 +206,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.update
+      code Elastics.update
     td
       markdown:
         Updates a document based on a script provided.
@@ -226,9 +226,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.update :id    => id,    # required
+        Elastics.update :id    => id,    # required
                        :type  => nil,
-                       :index => "elastic_test_index"
+                       :index => "elastics_test_index"
         {% endshighlight %}
 
 
@@ -243,7 +243,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       code YourClass.your_custom_search
     td
       markdown:
-        The Search API is completely covered by the Elastic Templating system and mostly covered by the `elastic-scopes` gem.
+        The Search API is completely covered by the Elastics Templating system and mostly covered by the `elastics-scopes` gem.
       == Helper.see('2.3,3')
 
 
@@ -256,11 +256,11 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code YourClass.elastic.multi_search
+      code YourClass.elastics.multi_search
     td
       markdown:
 
-        > This method is documented here because it is an elasticsearch API method, however it is defined into your `elastic` proxy included by `Elastic::Templates`.
+        > This method is documented here because it is an elasticsearch API method, however it is defined into your `elastics` proxy included by `Elastics::Templates`.
 
         The method allows you to do multi-searching by using multiple templates defined by your class. It takes 2 arguments. The first is a required hash with the templates names as the keys and the variable hash as the values. You can also use an array of arrays. The second is an optional hash of variables that will be used to render the `multi_search` template. The array of responses is available as `responses` method.
 
@@ -278,9 +278,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        result = MyClass.elastic.multi_search({:my_search_a => {:a_var => 'foo'},
-                                               :my_search_b => {:another_var => 'bar'},
-                                              {:index => 'another_index'})
+        result = MyClass.elastics.multi_search({:my_search_a => {:a_var => 'foo'},
+                                                :my_search_b => {:another_var => 'bar'},
+                                               {:index => 'another_index'})
 
         result.responses.each{|r| r.do_something }
         {% endshighlight %}
@@ -294,7 +294,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.put_percolator
+      code Elastics.put_percolator
     td
       markdown:
         Registers a named percolator query against an index.
@@ -313,13 +313,13 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.put_percolator :percolator => percolator,       # required
-                               :index      => "elastic_test_index"
+        Elastics.put_percolator :percolator => percolator,       # required
+                                :index      => "elastics_test_index"
         {% endshighlight %}
 
   tr
     td
-      code Elastic.delete_percolator
+      code Elastics.delete_percolator
     td
       markdown:
         Unregisters a named percolator.
@@ -338,13 +338,13 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.delete_percolator :percolator => percolator,       # required
-                                  :index      => "elastic_test_index"
+        Elastics.delete_percolator :percolator => percolator,       # required
+                                   :index      => "elastics_test_index"
         {% endshighlight %}
 
   tr
     td
-      code Elastic.percolate
+      code Elastics.percolate
     td
       markdown:
         Percolates a document.
@@ -363,8 +363,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.percolate :index => "elastic_test_index",
-                          :type  => nil
+        Elastics.percolate :index => "elastics_test_index",
+                           :type  => nil
         {% endshighlight %}
 
       markdown:
@@ -379,7 +379,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.post_bulk_string
+      code Elastics.post_bulk_string
     td
       markdown:
         Performs many index/create/update/delete operations in a single API call.
@@ -399,14 +399,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.post_bulk_string :bulk_string => bulk_string   # required
+        Elastics.post_bulk_string :bulk_string => bulk_string   # required
         {% endshighlight %}
 
       markdown:
         It may return `nil` if you pass a blank `:bulk_string`
 
       br
-      == Helper.see('1.4#elastic_import elastic:import,2.6#bulk_support')
+      == Helper.see('1.4#elastics_import elastics:import,2.6#bulk_support')
 
 
 
@@ -417,7 +417,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.count
+      code Elastics.count
     td
       markdown:
         Gets the number of matches for a query.
@@ -436,8 +436,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.count :index => "elastic_test_index",
-                      :type  => nil
+        Elastics.count :index => "elastics_test_index",
+                       :type  => nil
         {% endshighlight %}
 
 
@@ -449,7 +449,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.delete_by_query
+      code Elastics.delete_by_query
     td
       markdown:
         Allows to delete documents from one or more indices and one or more types based on a query.
@@ -468,8 +468,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.delete_by_query :index => "elastic_test_index",
-                                :type  => nil
+        Elastics.delete_by_query :index => "elastics_test_index",
+                                 :type  => nil
         {% endshighlight %}
 
       markdown:
@@ -484,7 +484,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.more_like_this
+      code Elastics.more_like_this
     td
       markdown:
         Allows to get documents that are "like" a specified document.
@@ -503,9 +503,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.more_like_this :id    => id,          # required
-                               :index => "elastic_test_index",
-                               :type  => nil
+        Elastics.more_like_this :id    => id,          # required
+                                :index => "elastics_test_index",
+                                :type  => nil
         {% endshighlight %}
 
       markdown:
@@ -513,10 +513,10 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code  Elastic.mlt
+      code  Elastics.mlt
     td
       markdown:
-        Alias for `Elastic.more_like_this`
+        Alias for `Elastics.more_like_this`
 
 
 
@@ -527,7 +527,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.validate
+      code Elastics.validate
     td
       markdown:
         Allows to validate a potentially expensive query without executing it.
@@ -546,8 +546,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.validate :index => "elastic_test_index",
-                         :type  => nil
+        Elastics.validate :index => "elastics_test_index",
+                          :type  => nil
         {% endshighlight %}
 
       markdown:
@@ -563,7 +563,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.explain
+      code Elastics.explain
     td
       markdown:
         Computes a score explanation for a query and a specific document.
@@ -582,9 +582,9 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.explain :id    => id,    # required
-                        :type  => nil,
-                        :index => "elastic_test_index"
+        Elastics.explain :id    => id,    # required
+                         :type  => nil,
+                         :index => "elastics_test_index"
         {% endshighlight %}
 
       markdown:
@@ -595,13 +595,13 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   ///////////////////////////////////////////////////////////////////////////
   tr
-    th colspan=2 id='elastic_additions'
-      | Elastic Additions
+    th colspan=2 id='elastics_additions'
+      | Elastics Additions
 
 
   tr
     td
-      code  Elastic.match_all
+      code  Elastics.match_all
     td
       markdown:
 
@@ -623,14 +623,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.match_all :index => "elastic_test_index",
-                          :type  => nil
+        Elastics.match_all :index => "elastics_test_index",
+                           :type  => nil
         {% endshighlight %}
 
 
   tr
     td
-      code  Elastic.search_by_id
+      code  Elastics.search_by_id
     td
       markdown:
         Get a document without using the get API (which doesn't support fields '\*')
@@ -652,17 +652,17 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.search_by_id :id      => id,    # required
-                             :type    => nil,
-                             :index   => "elastic_test_index"
+        Elastics.search_by_id :id      => id,    # required
+                              :type    => nil,
+                              :index   => "elastics_test_index"
         {% endshighlight %}
 
       markdown:
-        > This method uses the search API, which is not real-time like the get API. You may want to refresh the index with `Elastic.refresh_index`, before calling it.
+        > This method uses the search API, which is not real-time like the get API. You may want to refresh the index with `Elastics.refresh_index`, before calling it.
 
   tr
     td
-      code  Elastic.scan_search
+      code  Elastics.scan_search
     td
       markdown:
         Generic implementation of the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`. It passes the raw result to the block.
@@ -672,14 +672,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.scan_search(:my_template, my_vars) do |result|
+        Elastics.scan_search(:my_template, my_vars) do |result|
           result['hits']['hits'].each{|d|do_something_with(d)}
         end
         {% endshighlight %}
 
   tr
     td
-      code  Elastic.scan_all
+      code  Elastics.scan_all
     td
       markdown:
         Specific implementation of the [elasticsearch search_type API](http://www.elasticsearch.org/guide/reference/api/search/search-type) of type `scan`, applied to the `match_all` template/query. It passes an array of documents to the block.
@@ -689,14 +689,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.scan_all(my_vars) do |batch|
+        Elastics.scan_all(my_vars) do |batch|
           batch.each{|d|do_something_with(d)}
         end
         {% endshighlight %}
 
   tr
     td
-      code  Elastic.dump_all
+      code  Elastics.dump_all
     td
       markdown:
         It `flush_index` and call `scan_all`, with added `{:params => {:fields => '*,_source'}}`. Used to include all the relevant fields from a document:
@@ -706,14 +706,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.dump_all(my_vars) do |batch|
+        Elastics.dump_all(my_vars) do |batch|
           batch.each{|d|do_something_with(d)}
         end
         {% endshighlight %}
 
   tr
     td
-      code  Elastic.dump_one
+      code  Elastics.dump_one
     td
       markdown:
         It `flush_index` and call `search_by_id`, with added `{:params => {:fields => '*,_source'}}`. Used to include all the relevant fields from the document:
@@ -723,7 +723,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.dump_one :id      => id,    # required
-                         :type    => nil,
-                         :index   => "elastic_test_index"
+        Elastics.dump_one :id      => id,    # required
+                          :type    => nil,
+                          :index   => "elastics_test_index"
         {% endshighlight %}

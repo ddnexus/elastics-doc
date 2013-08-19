@@ -9,7 +9,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.cluster_health
+      code Elastics.cluster_health
     td
       markdown:
         Gets a very simple status on the health of the cluster.
@@ -28,7 +28,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.cluster_health :index => "elastic_test_index"
+        Elastics.cluster_health :index => "elastics_test_index"
         {% endshighlight %}
 
       markdown:
@@ -43,7 +43,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.cluster_state
+      code Elastics.cluster_state
     td
       markdown:
         Gets a comprehensive state information of the whole cluster.
@@ -62,7 +62,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.cluster_state
+        Elastics.cluster_state
         {% endshighlight %}
 
       markdown:
@@ -77,7 +77,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.put_cluster_settings
+      code Elastics.put_cluster_settings
     td
       markdown:
         Updates cluster wide specific settings.
@@ -96,7 +96,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.put_cluster_settings
+        Elastics.put_cluster_settings
         {% endshighlight %}
 
       markdown:
@@ -104,7 +104,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.get_cluster_settings
+      code Elastics.get_cluster_settings
     td
       markdown:
         Retrieves cluster settings.
@@ -123,7 +123,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.get_cluster_settings
+        Elastics.get_cluster_settings
         {% endshighlight %}
 
 
@@ -135,7 +135,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.cluster_nodes_info
+      code Elastics.cluster_nodes_info
     td
       markdown:
         Retrieves one or more (or all) of the cluster nodes information.
@@ -154,8 +154,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.cluster_nodes_info :nodes    => nil,
-                                   :endpoint => nil
+        Elastics.cluster_nodes_info :nodes    => nil,
+                                    :endpoint => nil
         {% endshighlight %}
 
 
@@ -167,7 +167,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.cluster_nodes_info
+      code Elastics.cluster_nodes_info
     td
       markdown:
         Retrieves one or more (or all) of the cluster nodes statistics.
@@ -186,8 +186,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.cluster_nodes_stats :nodes    => nil,
-                                    :endpoint => nil
+        Elastics.cluster_nodes_stats :nodes    => nil,
+                                     :endpoint => nil
         {% endshighlight %}
 
 
@@ -199,7 +199,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.cluster_nodes_shutdown
+      code Elastics.cluster_nodes_shutdown
     td
       markdown:
         Shutdown one or more (or all) nodes in the cluster.
@@ -218,7 +218,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.cluster_nodes_shutdown :nodes => nil
+        Elastics.cluster_nodes_shutdown :nodes => nil
         {% endshighlight %}
 
 
@@ -230,7 +230,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.cluster_nodes_hot_threads
+      code Elastics.cluster_nodes_hot_threads
     td
       markdown:
         Gets the current hot threads on each node in the cluster.
@@ -249,7 +249,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.cluster_nodes_hot_threads :nodes => nil
+        Elastics.cluster_nodes_hot_threads :nodes => nil
         {% endshighlight %}
 
 
@@ -261,7 +261,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
   tr
     td
-      code Elastic.cluster_reroute
+      code Elastics.cluster_reroute
     td
       markdown:
         Explicitly execute a cluster reroute allocation command including specific commands.
@@ -280,7 +280,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastic.cluster_reroute
+        Elastics.cluster_reroute
         {% endshighlight %}
 
       markdown:

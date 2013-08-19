@@ -4,7 +4,7 @@ table.code-topics#activemodel-class-methods cellspacing=0 cellpadding=0
       code attribute :properties
     td
       markdown:
-        The `attribute` method is implemented by [active_attr](https://github.com/cgriego/active_attr). `Elastic::ActiveModel` extends it so it accepts a `:properties` argument that is used to generate the mapping.
+        The `attribute` method is implemented by [active_attr](https://github.com/cgriego/active_attr). `Elastics::ActiveModel` extends it so it accepts a `:properties` argument that is used to generate the mapping.
       | {% shighlight ruby %}
         attribute :price, :properties => {'type' => 'float'}, :default => 0
         {% endshighlight %}
@@ -14,7 +14,7 @@ table.code-topics#activemodel-class-methods cellspacing=0 cellpadding=0
       code attribute :analyzed
     td
       markdown:
-        The `attribute` method is implemented by [active_attr](https://github.com/cgriego/active_attr). `Elastic::ActiveModel` extends it so it accepts a `:analyzed` argument that is expanded to `:properties => { 'type' => 'string', 'index' => 'not_analyzed' }` and used to generate the mapping.
+        The `attribute` method is implemented by [active_attr](https://github.com/cgriego/active_attr). `Elastics::ActiveModel` extends it so it accepts a `:analyzed` argument that is expanded to `:properties => { 'type' => 'string', 'index' => 'not_analyzed' }` and used to generate the mapping.
 
       | {% shighlight ruby %}
         attribute :code, :analyzed => false

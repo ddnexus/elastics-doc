@@ -8,19 +8,19 @@ table.code-topics#config cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        # elastic gem
-        [ Elastic::Result::Document,
-          Elastic::Result::Search,
-          Elastic::Result::MultiGet,
-          Elastic::Result::Bulk ]
+        # elastics gem
+        [ Elastics::Result::Document,
+          Elastics::Result::Search,
+          Elastics::Result::MultiGet,
+          Elastics::Result::Bulk ]
 
-        # elastic-models gem
-        [ Elastic::Result::DocumentLoader,
-          Elastic::Result::SearchLoader,
-          Elastic::Result::ActiveModel ]
+        # elastics-models gem
+        [ Elastics::Result::DocumentLoader,
+          Elastics::Result::SearchLoader,
+          Elastics::Result::ActiveModel ]
 
-        # elastic-scopes gem
-        [ Elastic::Result::Scope ]
+        # elastics-scopes gem
+        [ Elastics::Result::Scope ]
         {% endshighlight %}
 
       markdown:
@@ -31,7 +31,7 @@ table.code-topics#config cellspacing=0 cellpadding=0
       code logger
     td
       markdown:
-        The Elastic logger. Default `Logger.new(STDERR)`
+        The Elastics logger. Default `Logger.new(STDERR)`
 
   tr
     td
@@ -74,7 +74,7 @@ table.code-topics#config cellspacing=0 cellpadding=0
       code logger.log_to_rails_logger
     td
       markdown:
-        > This is a specific configuration for the `elastic-rails` gem.
+        > This is a specific configuration for the `elastics-rails` gem.
 
         Boolean. If `true` it forwards the messages to the `Rails.logger`. Defaut `true` unless in Rails Console.
 
@@ -83,50 +83,50 @@ table.code-topics#config cellspacing=0 cellpadding=0
       code logger.log_to_stdout
     td
       markdown:
-        > This is a specific configuration for the `elastic-rails` gem.
+        > This is a specific configuration for the `elastics-rails` gem.
 
-        Boolean. Option added by elastic-rails. If `true` prints the log to `STDOUT`. Default `false` unless in Rails Console.
-
-  tr
-    td
-      code elastic_models
-    td
-      markdown:
-        > This is a specific configuration for the `elastic-models` gem.
-
-        An array of model classes (or model class names) that your app will index. This is the only required configuration setting if you use the `Elastic::ModelIndexer` integration, since it is used to generate the default mappings and the default models for the `import` task.
+        Boolean. Option added by elastics-rails. If `true` prints the log to `STDOUT`. Default `false` unless in Rails Console.
 
   tr
     td
-      code elastic_active_models
+      code elastics_models
     td
       markdown:
-        > This is a specific configuration for the `elastic-models` gem.
+        > This is a specific configuration for the `elastics-models` gem.
 
-        An array of ActiveModel classes (or model class names) that your app defines. This is the only required configuration setting if you use the `Elastic::ActiveModel` integration, since it is used to generate the default mappings.
+        An array of model classes (or model class names) that your app will index. This is the only required configuration setting if you use the `Elastics::ModelIndexer` integration, since it is used to generate the default mappings and the default models for the `import` task.
 
   tr
     td
-      code elastic_dir
+      code elastics_active_models
     td
       markdown:
-        The path where Elastic searches for source files. Default `'./elastic'` or `"\#{Rails.root}/app/elastic"` in Rails.
+        > This is a specific configuration for the `elastics-models` gem.
+
+        An array of ActiveModel classes (or model class names) that your app defines. This is the only required configuration setting if you use the `Elastics::ActiveModel` integration, since it is used to generate the default mappings.
+
+  tr
+    td
+      code elastics_dir
+    td
+      markdown:
+        The path where Elastics searches for source files. Default `'./elastics'` or `"\#{Rails.root}/app/elastics"` in Rails.
 
   tr
     td
       code config_file
     td
       markdown:
-        A YAML file usually containing the custom index mapping. Default `'./config/elastic.yml'` or `"\#{Rails.root}/config/elastic.yml"` in Rails.
+        A YAML file usually containing the custom index mapping. Default `'./config/elastics.yml'` or `"\#{Rails.root}/config/elastics.yml"` in Rails.
 
   tr
     td
       code http_client
     td
       markdown:
-        The HTTP client instance. Default an object of class `Elastic::HttpClients::Patron` or `Elastic::HttpClients::RestClient`, depending on which gem you have installed (`patron` or `rest-client`). If you create a custom client class you must set it.
+        The HTTP client instance. Default an object of class `Elastics::HttpClients::Patron` or `Elastics::HttpClients::RestClient`, depending on which gem you have installed (`patron` or `rest-client`). If you create a custom client class you must set it.
 
-        > __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use `gem 'patron', '0.4.18', :git => 'https://github.com/ddnexus/patron.git'` or download [patron-0.4.18.elastic.gem]({{site.baseurl}}/patron-0.4.18.elastic.gem), install it with `gem install /path/to/patron-0.4.18.elastic.gem --local` and be sure your app will use that version, or switch to the `rest-client` gem.
+        > __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use `gem 'patron', '0.4.18', :git => 'https://github.com/elastics/patron.git'` or switch to the `rest-client` gem.
 
   tr
     td
@@ -155,17 +155,17 @@ table.code-topics#config cellspacing=0 cellpadding=0
       code variables
     td
       markdown:
-        The `Elastic::Variable` object (Hash subclass) of interpolation variables used as the lowest default level. Default:
+        The `Elastics::Variable` object (Hash subclass) of interpolation variables used as the lowest default level. Default:
       |
         {% shighlight ruby %}
-        Elastic::Variables.new :index      => nil,
+        Elastics::Variables.new :index      => nil,
                                :type       => nil,
                                :params     => {},
                                :no_pruning => []
         {% endshighlight  %}
 
       markdown:
-        > The `elastic-rails` gem sets the default `variables[:index]` as the `app_id` (see below).
+        > The `elastics-rails` gem sets the default `variables[:index]` as the `app_id` (see below).
 
         {% see 2.3.4 %}
 
@@ -175,7 +175,7 @@ table.code-topics#config cellspacing=0 cellpadding=0
         | app_id
     td
       markdown:
-        An unique string used to identify your app. Default: `nil` or the uderscored rails application name, plus the environment in rails. It must be set if you use any `reindex` method. Used by the elastic-reindex feature {% see 6.2 %}.
+        An unique string used to identify your app. Default: `nil` or the uderscored rails application name, plus the environment in rails. It must be set if you use any `reindex` method. Used by the elastics-reindex feature {% see 6.2 %}.
 
   tr
     td
