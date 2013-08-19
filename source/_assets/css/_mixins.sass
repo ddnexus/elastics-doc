@@ -13,6 +13,7 @@ $base9:   #902
 $baseA:   #B02
 $baseB:   #C02
 $baseC:   #D02
+$baseD:   #E02
 $baseF:   #F02
 
 $base-gray:       #ECDAD7 //#E8DAD7 //#D0C7C7
@@ -20,15 +21,16 @@ $base-gray-light: #FCF9F8
 
 $gray:      #999
 $dark-gray: #555
+$menu-text: #EFD5D0
 
 @mixin menu-base
-  background: $baseA
-  color: #FFC5CC //white
-  text-shadow: 1px 1px $base8
+  background: $base7
+  color: $menu-text //white
+  text-shadow: 1px 1px $base4
   text-decoration: none
   display: block
-  border-bottom: 1px solid $base9
-  box-shadow:  0 1px 4px 1px $baseB inset
+  border-bottom: 1px solid $base6
+  box-shadow:  0 1px 6px 1px $base8 inset
   padding:
     top: .6em
     bottom: .35em
@@ -37,12 +39,12 @@ $dark-gray: #555
 
 @mixin menu-neutral
   background: none
-  color: $base6
+  color: white //$base4
   text-shadow: none
 
 @mixin menu-highlighted
-  background: $baseF
-  color: $base6
+  background: $baseB
+  color: white // $base4
   text-shadow: none
-  box-shadow:  0 1px 14px 1px $baseC inset
+  box-shadow:  0 1px 14px 1px $base6 inset
 

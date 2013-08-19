@@ -8,7 +8,7 @@ alias: /doc
 
 # {{ page.title }}
 
-__Elastics__ _(used as a plural noun meaning "rubber bands")_ is a collection of ruby tools for [elasticsearch][]. It is powerful, fast and efficient, easy to use and customize.
+__Elastics__ _(used as a plural noun, meaning "rubber bands")_ is a collection of ruby tools for [elasticsearch][]. It is powerful, fast and efficient, easy to use and customize.
 
 It covers ALL the elasticsearch API, and transparently integrates it with your app and its components, like `Rails`, `ActiveRecord`, `Mongoid`, `ActiveModel`, `will_paginate`, `kaminari`, `elasticsearch-mapper-attachments`, ...
 
