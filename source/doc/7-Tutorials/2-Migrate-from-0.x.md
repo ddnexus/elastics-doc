@@ -1,12 +1,12 @@
 ---
 layout: doc
 badge: elastics-client
-title: How to migrate from elastics 0.x
+title: How to migrate from Flex 0.x
 ---
 
 # {{ page.title }}
 
-Elastics 1.x has changed quite a lot from version 0.x but you need just to rename a few things in order to upgrade it. You should be able to do it in a couple of minutes with just a few search and replace.  If you miss any change, elastics will work anyway, but will emit a deprecation warning, so keep an eye on the log.
+Elastics 1.x has changed quite a lot from Flex version 0.x but you need just to rename a few things in order to upgrade it. You should be able to do it in a couple of minutes with the help of the `elastics-legacy` gem and just a few search and replace.  If you miss any change, Elastics will work anyway, but will emit a deprecation warning, so keep an eye on the log.
 
 ## Changes
 
@@ -14,11 +14,11 @@ Elastics 1.x has changed quite a lot from version 0.x but you need just to renam
 
 #### Rails Apps
 
-You have to change `gem 'elastics', :require => 'elastics/rails'` to simply `gem 'elastics-rails'` in your `Gemfile`. Run a `bundle install` and your app should be able to start. Then it will emit the deprecation warnings for the other changes in the log.
+You have to change `gem 'flex', :require => 'flex/rails'` to simply `gem 'elastics-rails'` in your `Gemfile`. Then add `elastics-legacy` gem to your `Gemfile`. It will make it work almost as it is and it will allow a smoot migration. Run a `bundle install` and your app should be able to start. Then it will emit the deprecation warnings for the other changes in the log.
 
 #### Non Rails Apps
 
-If you used model related functionality, you will be required to load the `elastics-models` gem that is now separated by the `elastics-client` core gem.
+If you used model related functionality, you will be required to load the `elastics-models` gem that is now separated by the `elastics-client` core gem. You should require the `elastics-legacy` gem. It will make it work almost as it is and it will allow a smoot migration.
 
 ### 2. Configuration Renaming
 
@@ -42,29 +42,35 @@ If you used model related functionality, you will be required to load the `elast
 
 #### Bulk Support
 
-`Elastics.bulk(:lines => lines_bulk_string)` > `Elastics.post_bulk_string(:bulk_string => lines_bulk_string)`
+`Flex.bulk(:lines => lines_bulk_string)` > `Elastics.post_bulk_string(:bulk_string => lines_bulk_string)`
 
-`Elastics.process_bulk(:collection => collection)` > `Elastics.post_bulk_collection(collection, options)`
+`Flex.process_bulk(:collection => collection)` > `Elastics.post_bulk_collection(collection, options)`
 
-`Elastics.import_collection` > `Elastics.post_bulk_collection`
+`Flex.import_collection` > `Elastics.post_bulk_collection`
 
-`Elastics.delete_collection(collection)` > `Elastics.post_bulk_collection(collection, :action => "delete")`
+`Flex.delete_collection(collection)` > `Elastics.post_bulk_collection(collection, :action => "delete")`
 
 ### 5. Modules Renaming
 
-`Elastics::Loader` > `Elastics::Templates`
+`Flex::Loader` > `Elastics::Templates`
 
-`Elastics::Model` > `Elastics::ModelIndexer`
+`Flex::Model` > `Elastics::ModelIndexer`
 
-`Elastics::RelatedModel` > `Elastics::ModelSyncer`
+`Flex::RelatedModel` > `Elastics::ModelSyncer`
 
 ### 6. Rake Tasks Renaming
 
-`elastics:create_indices` > `elastics:index:create`
+> __Notice__: The following rake tasks have been renamed and are not available, so please, change their name acordingly. Besides some ENV variable used for other tasks, may also have been renamed {% see 1.4 %}
 
-`elastics:delete_indices` > `elastics:index:delete`
+`flex:create_indices` > `elastics:index:create`
 
-> __Notice__: some ENV variable used for the tasks, may also have been renamed {% see 1.4 %}
+`flex:delete_indices` > `elastics:index:delete`
+
+### 7. flex > elastics
+
+Search and replace in all your code `'flex'` for `'elastics'`. You must preserve the case so  for example `'Flex'` will be replaced by `'Elastics'` and `'flex_indexable?'` will be replaced by `'elastics_indexable?'` etc.
+
+Rename also the `'flex'` dir to `'elastics'` and the files `'flex.yml'` and `'flex.rb'` to `'elastics.yml'` and `'elastics.rb'`.
 
 ## Additions
 
