@@ -82,14 +82,6 @@ first_in_range = in_range_scope.first
 
 {% see 3.2#scope scope, 3.2#scoped scoped%}
 
-## Elastics Module
-
-The `elastics-scopes` gem automatically extends also the `Elastics` module, so you can use any scope directly on `Elastics`. For example:
-
-{% highlight ruby %}
-Elastics.query('big AND red').first(:index => 'my_index', :type => 'my_type')
-{% endhighlight %}
-
 ## Chosing the right tool
 
 Elastics scopes are cool tools, very useful in most situations, particularly when the search criteria are quite simple, however, when the search criteria get more complex, using templates may be a cleaner technique {% see 2.3.2 %}.
