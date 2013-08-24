@@ -94,7 +94,7 @@ The functionality of elastics are conveniently organized and integrated by a few
 1. Install the gem `patron` (faster, libcurl C based) or `rest-client` (pure ruby)
 2. Install the elastics gem(s) {% see 1.1#gems %}
 
-> __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use `gem 'patron', '0.4.18', :git => 'https://github.com/elastics/patron.git'` or switch to the `rest-client` gem.
+> __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use `gem 'patron', :git => 'https://github.com/patron/patron.git'` or switch to the `rest-client` gem.
 
 ### Out Of The Box Integrations
 

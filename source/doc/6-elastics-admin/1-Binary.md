@@ -40,8 +40,8 @@ This gem provides the `elastics-admin` executable  to `dump`, `load` and `stat` 
 
     Load options:
         -m, --index-map [INDEX_MAP]      The index rename map (example: -m=dumped_index_name:loaded_index_name,a:b)
-        -o, --timeout [SECONDS]          The http_client timeout for bulk loading (default: 20 seconds)
-        -b, --batch-size [BATCH_SIZE]    The batch size to load (default: 1000)
+        -o, --timeout [SECONDS]          The http_client timeout for bulk loading (default: 60 seconds)
+        -b, --batch-size [BATCH_SIZE]    The batch size to load (default: 500)
 
     Other options:
         -v, --version                    Shows the version and exits

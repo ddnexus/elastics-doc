@@ -26,7 +26,7 @@ gem 'elastics-rails'
 # gem 'elastics-admin'
 {% endhighlight %}
 
-> __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use `gem 'patron', '0.4.18', :git => 'https://github.com/elastics/patron.git'` or switch to the `rest-client` gem.
+> __Temporary Note__: The `patron` gem currently available on rubygem (v0.4.18) is missing the support for sending data with delete queries. As the result it fails with the `delete_by_query` elasticsearch API, when the query is the request body and not the param. If you want full support until a new version will be pushed to rubygems, you should use `gem 'patron', :git => 'https://github.com/patron/patron.git'` or switch to the `rest-client` gem.
 
 ### 2. Run `bundle install`
 

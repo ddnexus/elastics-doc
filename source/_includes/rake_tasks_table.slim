@@ -47,8 +47,8 @@ table.code-topics cellspacing="0" cellpadding="0"
         This task can be customized with the following environment variables:
 
         * `FORCE` Deletes the existing indices before reindexing. Default `false`.
-        * `BATCH_SIZE` The batch size used to retrieve the records and bulk post to the elasticsearch server. Default `1000`.
-        * `TIMEOUT` The HTTP-client timeout. Default `20` for this task. (it is usually `5` for regular queries as set in `Configuration.http_client_options[:timeout]`). You might need a higher timeout if you raise the `BATCH_SIZE`.
+        * `BATCH_SIZE` The batch size used to retrieve the records and bulk post to the elasticsearch server. Default `500`.
+        * `TIMEOUT` The HTTP-client timeout. Default `60` for this task. (it is usually `5` for regular queries as set in `Configuration.http_client_options[:timeout]`). You might need a higher timeout if you raise the `BATCH_SIZE`.
         * `IMPORT_OPTIONS` A query string like string representing a hash of options to be used with the `find_in_batches` methods.
         * `CONFIG_FILE` The configuration file. Default `Elastics::Configuration.config_file`
         * `MODELS` Array like string representing a list of model classes. Default `Elastics::Configuration.elastics_models`.
@@ -95,9 +95,9 @@ table.code-topics cellspacing="0" cellpadding="0"
         This task can be customized with the following environment variables:
 
         * `FILE` The path to the dump file. Default: `'./elastics.dump'`
-        * `BATCH_SIZE` The document batch size used to import the dump file to the elasticsearch server. Default `1000`.
+        * `BATCH_SIZE` The document batch size used to import the dump file to the elasticsearch server. Default `500`.
         * `INDEX_MAP`  The index rename map (example: -m=dumped_index_name:loaded_index_name,a:b).
-        * `TIMEOUT` The HTTP-client timeout. Default `20` for this task. (it is usually `5` for regular queries as set in `Configuration.http_client_options[:timeout]`).  You might need a higher timeout if you raise the `BATCH_SIZE`.
+        * `TIMEOUT` The HTTP-client timeout. Default `60` for this task. (it is usually `5` for regular queries as set in `Configuration.http_client_options[:timeout]`).  You might need a higher timeout if you raise the `BATCH_SIZE`.
         * `VERBOSE` Prints informations during the process. Default: `true`
 
 
