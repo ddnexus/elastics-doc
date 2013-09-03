@@ -6,15 +6,21 @@ title: Live Reindex
 
 # {{ page.title }}
 
-If you ever tried to reindex your production app while it is running you know that it might be quite a difficult task. You have the old code running and constantly updating the old index/indices, and you need to deploy some new search feature with the new code, that would produce and need a new index, so what should you do? If the production index/indices are small, you may shut-down your site for a few minutes in order to deploy the new code, reindex and restart the site. No big deal: problem solved! But quite typically your index/indices are big, so the reindexing would require you to shut down your site (or part of it) during a few hours, and that wouldn't be acceptable. If your app is making money, shutting it down would likely cost you a lot of bucks.
+If you ever tried to reindex your production app while it is running you know that it might be quite a difficult task. Maybe you have the old code running live and constantly updating the old index/indices, and you need to deploy some new search feature with the new code, that would produce and need a new index, so what should you do? If the production index/indices are small, you may shut-down your site for a few minutes in order to deploy the new code, reindex and restart the site. But quite typically your index/indices are big, so the reindexing would require you to shut down your site (or part of it) during a few hours, and that wouldn't be acceptable. If your app is making money, shutting it down would likely cost you a lot of bucks.
 
 So you could try a live update, i.e. re-import the data while the old data is still in place. From a commercial point of view, that solution is probably better than shutting down the site, but it is still a bad one from a technical point of view. Your index will stay in an inconsistent state during the time of the update, and that may probably cause both your old and new code to fail during the process. The "deploy-then-update" will not be better than the "update-then-deploy" technique: both will likely produce a quite bad user experience during the process - depending on the magnitude of your changes.
 
 The elastics live-reindex feature is what you need in this case. You can leave your production app running the old code/index (and keep updating the old index) while the live-reindex rebuilds a new index by using your new code. During the rebuild, all the changes made by the old code (still running live) get tracked and mirrored on the new index. When the new index is complete, the hot-swap of the old code and index with the new code and index can take place. Just a few lines of code to write, practically no down-time, no index inconsistency so no code failures and a very smooth user experience.
 
-> __Personal Note__: Live-reindexing is tricky per se, but finding a way to perform it easily and regardless the app structure has been an even trickier challenge.
+Live-reindex is also very useful in a few of other simpler cases, for example:
 
-> Live-reindex is very useful also when your app is not changing the index while you are reindexing, for example when your index/indices are updated only periodically. It provides a smooth reindexing with all the features you need, like index renaming, hot-swap, etc.
+1. When your app is not changing the index while you are reindexing, for example when your index/indices are updated only periodically
+2. When you don't change the code nor the structure of your index, but you need to reindex, for example when you crawl another site and index its content
+3. When you actually don't have any index in your app yet, for example when you start a new app
+
+In all cases, live-reindex provides a smooth reindexing with all the features you need, like index renaming/aliasing, hot-swap, no down-time, etc. In this page we consider the most complex case: code and (changing) index to swap. Simpler cases work the same way, with the only exception that you may skip some setting not needed for your particular context.
+
+> __Personal Note__: Live-reindexing is tricky per se, but finding a way to perform it easily and regardless the app structure has been an even trickier challenge.
 
 ## Requirements
 

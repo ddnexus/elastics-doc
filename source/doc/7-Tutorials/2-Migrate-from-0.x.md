@@ -28,6 +28,8 @@ If you used model related functionality, you will be required to load the `elast
 
 `raise_proc` > `http_client.raise_proc`
 
+`logger.color` > `ansi`
+
 ### 3. Special Variables
 
 `vars[:size]` is not a special variable anymore, so it will not be automatically converted to the `vars[:params][:size]` param anymore. You must set it as a standard param: `:params => {:size => size}`.
