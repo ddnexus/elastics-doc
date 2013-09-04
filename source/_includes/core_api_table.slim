@@ -222,15 +222,14 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       markdown:
         **Usage**
 
-        You must pass script or doc and the other options as the :data variable
-
-      |
-        {% shighlight ruby %}
+      | {% shighlight ruby %}
         Elastics.update :id    => id,    # required
                         :type  => nil,
                         :index => "elastics_test_index"
         {% endshighlight %}
 
+      markdown:
+        > You must pass script or doc and the other options as the `:data` variable
 
 
   ///////////////////////////////////////////////////////////////////////////
@@ -247,6 +246,31 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
       == Helper.see('2.3,3')
 
 
+  tr
+    td
+      code Elastics.suggestion
+    td
+      markdown:
+        Supplies the API method to the `_suggest` endpoint.
+
+        **Template**
+
+      | {% shighlight yaml %}
+        suggest:
+        - POST
+        - /<<index>>/<<type>>/_suggest
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      | {% shighlight ruby %}
+        Elastics.suggest :index => "elastics_test_index",
+                         :type  => nil
+        {% endshighlight %}
+
+      markdown:
+        > You must pass the suggest structure as the `:data` variable
 
   ///////////////////////////////////////////////////////////////////////////
   tr
