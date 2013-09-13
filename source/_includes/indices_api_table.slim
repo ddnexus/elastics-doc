@@ -21,6 +21,7 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
         post_index_aliases:
         - POST
         - /_aliases
+        - actions: <<actions>>
         {% endshighlight %}
 
       markdown:
@@ -28,12 +29,8 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
 
       |
         {% shighlight ruby %}
-        Elastics.post_index_aliases
+        Elastics.post_index_aliases :actions => actions
         {% endshighlight %}
-
-      markdown:
-        > You must pass the aliases API structure as the `:data` variable
-
 
   tr
     td

@@ -8,14 +8,17 @@ title: elastics-models - Elastics::ModelIndexer
 
 > __Notice__: The `Elastics::ModelIndexer` includes also `Elastics::ModelSyncer` {% see 4.4.1 %}
 
-Elastics avoids polluting your models with many methods: indeed it adds just 1 class method and 3 instance methods, all starting with the `elastics_` prefix to avoid confusion:
+Elastics avoids polluting your models with many methods: indeed it adds just a few methods, all starting with the `elastics_` prefix to avoid confusion:
 
 * `Model.elastics`
+* `Model.elastics_in_batches`
 * `record.elastics`
 * `record.elastics_source`
 * `record.elastics_indexable?`
 
 Besides you can define a `Model.elastics_result` method in order to customize the results {% see 2.4#modelelastics_resultresult Model.elastics_result %}
+
+The `Model.elastics_in_batches` is used internally to import the records/documents of the model. It is defined for `ActiveRecord` and `Mongoid` models. You may want to override it if you want to import only a subset of the table/collection (for example if you need to do an incremental import/live-reindex based on a timestamp).
 
 ## Class Methods
 
