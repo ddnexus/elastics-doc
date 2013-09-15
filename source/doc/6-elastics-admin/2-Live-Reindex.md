@@ -6,7 +6,9 @@ title: Live Reindex
 
 # {{ page.title }}
 
-If you ever tried to reindex your production app while it is running you know that it might be quite a difficult task. Maybe you have the old code running live and constantly updating the old index/indices, and you need to deploy some new search feature with the new code, that would produce and need a new index, so what should you do? If the production index/indices are small, you may shut-down your site for a few minutes in order to deploy the new code, reindex and restart the site. But quite typically your index/indices are big, so the reindexing would require you to shut down your site (or part of it) during a few hours, and that wouldn't be acceptable. If your app is making money, shutting it down would likely cost you a lot of bucks.
+> Live-reindexing is the process to re-build one or more indices that are used and eventually updated in real-time by a production application, without any appreciable application down-time.
+
+If you ever tried to reindex your production app while it is running you know that it might be a quite difficult task. Maybe you have the old code running live and constantly updating the old index/indices, and you need to deploy some new search feature with the new code, that would produce and need a new index, so what should you do? If the production index/indices are small, you may shut-down your site for a few minutes in order to deploy the new code, reindex and restart the site. But quite typically your index/indices are big, so the reindexing would require you to shut down your site (or part of it) during a few hours, and that wouldn't be acceptable. If your app is making money, shutting it down would likely cost you a lot of bucks.
 
 So you could try a live update, i.e. re-import the data while the old data is still in place. From a commercial point of view, that solution is probably better than shutting down the site, but it is still a bad one from a technical point of view. Your index will stay in an inconsistent state during the time of the update, and that may probably cause both your old and new code to fail during the process. The "deploy-then-update" will not be better than the "update-then-deploy" technique: both will likely produce a quite bad user experience during the process - depending on the magnitude of your changes.
 
@@ -38,11 +40,13 @@ The `reindex_models` and the `reindex_active_models` methods require the `elasti
 
 ## Usage
 
-The live-reindex feature is very easy to use, but reindexing while the indices and the DBs change is a tricky process, so you must understand the basics about how it works in order to use it properly, or you might corrupt your indices {% see 6.2#important_warnings %}.
+The live-reindex feature is very easy to use, but reindexing while the indices may change is a tricky process, so you must understand the basics about how it works in order to use it properly, or you might corrupt your indices {% see 6.2#important_warnings %}.
 
-The live reindexing should be the last step of your new deployment, performed just before you swap the old code with the new one. It will take care of reindex your data in new index/indices, including the changes being made during the reindexing itself.
+There are 2 different aspects that must be considered when live-reindexing:
 
-> If you deploy with `capistrano`, you should run the reindex method (perhaps in a migration) right before the `create_symlink`
+1. __index migration__: i.e. the structure of your index may or may not change after the reindexing and so the code. If it changes, you must deploy your new code as soon as the live-reindex finishes. You don't need to deploy if you reindex only in order to update the data in the index but not its structure.
+
+2. __live changes__: i.e. the running application may or may not change the indexed data during the live-reindexing. If it changes live, then you need to define and do a few more things (e.g. set the configuration blocks)
 
 ### Index Renaming
 
@@ -55,6 +59,12 @@ When the reindex will be completed each old index involved in the reindexing wil
 > You can always get the original basename, by calling `index_basename` on any elasticsearch document structure.
 
 > All the index, delete and bulk operations made by the process that is running the live-reindex will automatically rename the index to the current timestamped index name. Any other process running during the live-reindex (e.g. your live app) will index, delete and bulk on the old index/indices, so there will be no automatic renaming.
+
+### Deploy
+
+If the structure of your index changes, you need to deploy the new code. The live reindexing should be the last step of your new deployment, performed just before you swap the old code with the new one. It will take care of reindex your data in new index/indices, including the changes being made during the reindexing itself.
+
+> If you deploy with `capistrano`, you should run the reindex method (perhaps in a migration) right before the `create_symlink`
 
 ### Tracking Changes
 
@@ -89,10 +99,20 @@ end
 
 ### `on_stop_indexing`
 
-It's important to understand that code and index must constantly match when the app is running: the old code with the old index; the new code with the new index.
-So in order to ensure that consistency the live-reindex feature needs to stop the indexing during the swapping (old code and index / new code and index). The elapsed time from the indexing-stop to the indexing-restart will probably be just a few milliseconds or a few seconds at worse, but that is a critical step if you want a consistent and complete index and a smooth swapping. For that reason you must define the `on_stop_indexing` proc that must ensure to prevent all the processes that use the old code to change the index during the swapping (e.g. put the app in maintenance mode, wait for eventual `resque` tasks in the queue to complete before returning, flush the indices, etc.).
+If your live application may change the index during the reindexing, you need to set the `on_stop_indexing` block. Its code must ensure to prevent all the processes that use the old code to change the index during the swapping (e.g. put the app in maintenance mode, wait for eventual `resque` tasks in the queue to complete before returning, flush the indices, etc.).
 
-The `on_stop_indexing` proc will be called (almost) at the end of the live-reindexing, just before the index swap. Just remember that the reindex methods will: 1) reindex, 2) call the `on_stop_indexing` proc to stop the indexing and 3) swap the old index with the new one. After that you must: 1) swap the old code with the new one and 2) resume the indexing that your proc stopped (or maybe just restart the new deployed app).
+The `on_stop_indexing` block will be called (almost) at the end of the execution of the reindex method, just before the index swap. The reindex methods will:
+
+1. reindex
+2. call the `on_stop_indexing` proc to stop the indexing
+3. swap the old index with the new one
+
+When the reindex method finishes you must:
+
+1. swap the old code with the new one (if you need to deploy because the index structure and the code changed or skip the deploy otherwise)
+2. resume the indexing that your proc stopped (or maybe just restart the new deployed app)
+
+The elapsed time from the indexing-stop to the indexing-resume will probably be just a few milliseconds or a few seconds at worse, but that is a critical step if you want a consistent and complete index and a smooth swapping.
 
 > If you deploy with `capistrano`, you should resume the indexing right after the `restart`
 
@@ -115,7 +135,7 @@ Elastics::LiveReindex._a_reindex_method_(my_options) do |config|
 end
 {% endhighlight %}
 
-> The `on_stop_indexing` is explicitly required for your production environment when the index may change during the reindexing. However when your app doesn't change the index, or when you are experimenting in your development environment, you don't need to stop anything, so you can silence the `MissingStopIndexingProcError` error by explicitly pass a `:on_stop_indexing => false` option to the method or set `Elastics::Configuration.on_stop_indexing = false`. You may also want to set a different `Elastics::Configuration.on_stop_indexing` for different environments.
+> The `on_stop_indexing` is explicitly required for your production environment when the index may change during the reindexing. However when your app doesn't change the index, or when you are experimenting in your development environment, you don't need to stop anything, so you can silence the `MissingStopIndexingProcError` error by explicitly pass a `:on_stop_indexing => false` option to the reindex method or set `Elastics::Configuration.on_stop_indexing = false`. You may also want to set a different `Elastics::Configuration.on_stop_indexing` for different environments.
 
 ### `on_each_change`
 
@@ -188,7 +208,7 @@ If you don't pass any configuration block, the reindex methods will use specific
 
 ## Reindexing Methods
 
-There are 4 different reindexing methods, useful in different contexts but working quite similarly. 2 methods are added by the `elastics-models` gem: `reindex_models` and `reindex_active_models`. The other 2 methods are the `reindex_indices` and the generic and advanced `reindex` method. You can use only one of the 4 methods and only one time in one live-reindex session, then you have to swap the code and deploy. If you need to use more than one method, you must do it in different deploys.
+There are 4 different reindexing methods, useful in different contexts but working quite similarly. 2 methods are added by the `elastics-models` gem: `reindex_models` and `reindex_active_models`. The other 2 methods are the `reindex_indices` and the generic and advanced `reindex` method. You can use only one of the 4 methods and only one time in one live-reindex session. If you need to use more than one method, you must do it in different sessions/deploys.
 
 > If you try to use more than one of the reindexing method in the same session, the execution of the second method will raise a `MultipleReindexError` error. In that case the first reindexing execution took place regularly (and the error will tell you the new index/indices that have been swapped successfully), but the other reindexing(s) have been aborted so you have still the old index/indices in place. If the code-changes that you were about to deploy rely on the successive reindexings that have been aborted, your app may fail, so you should complete the other reindexing in single successive deploys ASAP.
 >
@@ -202,7 +222,7 @@ If any other (not `MultipleReindexError`) error is raised during the process, th
 
 The `on_each_change` block will receive __ONLY__ the tracked changes at the end of the reindexing.
 
-If you don't configure any `on_each_change` block a default proc will be used. It will simply pull the current record/document from the DB and index it in the new index, or delete the elasticsearch document from the new index in case of a `'delete'` action. That's fine when you don't change the structure of your models, and change only the `elastics_source` method for example. But if you delete or rename models, it will fail. In that case you could alias the models or split the changes in 2 deploys, or you  must configure an explicit `on_each_change` block that will receive as usual the action and the document hash pulled from the old elasticsearch index at the moment of the change: you must do the changes in the document (like changing the type for example, or reindexing some other record, etc.) and return the proper result {% see 6.2#id2 on_each_change %}.
+If you don't configure any `on_each_change` block a default block will be used. It will simply pull the current record/document from the DB and index it in the new index, or delete the elasticsearch document from the new index in case of a `'delete'` action. That's fine when you don't change the structure of your models, and change only the `elastics_source` method for example. But if you delete or rename models, it will fail. In that case you could alias the models or split the changes in 2 deploys, or you  must configure an explicit `on_each_change` block that will receive as usual the action and the document hash pulled from the old elasticsearch index at the moment of the change: you must do the changes in the document (like changing the type for example, or reindexing some other record, etc.) and return the proper result {% see 6.2#id2 on_each_change %}.
 
 #### Full Reindex
 
@@ -319,4 +339,4 @@ When you live-reindex, the `Elastics::Configuration.app_id` should be set and ma
 
 ### Safe live-reindex
 
-Live-reindexing is a potentially dangerous process because it deletes the old indices after a "successful" reindexing. Elastics considers as "successful" a reindexing that raised no errors, but if you have a bug in any configuration block or forget the couple of warnings above, you may lose or corrupt part of the indices. For that reasons __you should always backup your indices before proceed__, or at least dump the data with the `elastics:admin:dump` task. That's very important especially with `Elastics::ActiveModel` models, that don't have the data mirrored in a DB. Besides, this is a very new implementation that lacks the time to be tested thoroughly yet, so please, do backup your indices before live-reindexing.
+Live-reindexing is a potentially dangerous process because it deletes the old indices after a "successful" reindexing. Elastics considers as "successful" a reindexing that raised no errors, but if you have a bug in any configuration block or forget the couple of warnings above, you may lose or corrupt part of the indices. For that reasons __you should always backup your indices before proceed__, or at least dump the data with the `elastics:admin:dump` task. That's very important especially with `Elastics::ActiveModel` models, that don't have the data mirrored in a DB.
