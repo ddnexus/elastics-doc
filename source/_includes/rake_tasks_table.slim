@@ -12,11 +12,7 @@ table.code-topics cellspacing="0" cellpadding="0"
         This task can be customized with the following environment variables:
 
         * `FORCE` Deletes the existing indices before running. Default `false`.
-        * `INDEX` String representing one or a list of indices to create. Default: `Elastics::Configuration.variables[:index]`.
-
-      | {% shighlight sh %}
-        $ rake elastics:index:create INDEX=foo,bar
-        {% endshighlight %}
+        * `INDEX` String representing one or a comma-separated list of indices to create. Default: `Elastics::Configuration.variables[:index]`.
 
   tr
     td
@@ -30,7 +26,7 @@ table.code-topics cellspacing="0" cellpadding="0"
 
         This task can be customized with the following environment variables:
 
-        * `INDEX` String representing one or a list of indices to delete. Default: `Elastics::Configuration.variables[:index]`.
+        * `INDEX` String representing one or a comma-separated list of indices to delete. Default: `Elastics::Configuration.variables[:index]`.
 
   tr
     td
@@ -50,12 +46,7 @@ table.code-topics cellspacing="0" cellpadding="0"
         * `BATCH_SIZE` The batch size used to retrieve the records and bulk post to the elasticsearch server. Default `500`.
         * `TIMEOUT` The HTTP-client timeout. Default `60` for this task. (it is usually `5` for regular queries as set in `Configuration.http_client_options[:timeout]`). You might need a higher timeout if you raise the `BATCH_SIZE`.
         * `IMPORT_OPTIONS` A query string like string representing a hash of options to be used with the `find_in_batches` methods.
-        * `CONFIG_FILE` The configuration file. Default `Elastics::Configuration.config_file`
-        * `MODELS` Array like string representing a list of model classes. Default `Elastics::Configuration.elastics_models`.
-
-      | {% shighlight sh %}
-        $ rake elastics:import MODELS=Foo,Bar
-        {% endshighlight %}
+        * `MODELS` String representing one or a comma-separated list of model classes. Default `Elastics::Configuration.elastics_models`.
 
   tr
     td
@@ -72,11 +63,11 @@ table.code-topics cellspacing="0" cellpadding="0"
         This task can be customized with the following environment variables:
 
         * `FILE` The path to the dump file. Default: `'./elastics.dump'`
-        * `INDEX` String representing one or a list of indices to dump. Default: `Elastics::Configuration.variables[:index]`
-        * `TYPE` String representing one or a list of types to dump.  Default: `Elastics::Configuration.variables[:type]`
+        * `INDEX` String representing one or a comma-separated list of indices to dump. Default: `Elastics::Configuration.variables[:index]`
+        * `TYPE` String representing one or a comma-separated list of types to dump.  Default: `Elastics::Configuration.variables[:type]`
         * `SCROLL` elasticsearch option for the scan_type search performed to retrieve the documents. Default: `'5m'`
         * `SIZE` Represents the number of documents per shard dumped at a time. Default: `50`
-        * `VERBOSE` Prints informations during the process. Default: `true`
+        * `VERBOSE` Prints info during the process. Default: `true`
 
   tr
     td
@@ -96,8 +87,8 @@ table.code-topics cellspacing="0" cellpadding="0"
 
         * `FILE` The path to the dump file. Default: `'./elastics.dump'`
         * `BATCH_SIZE` The document batch size used to import the dump file to the elasticsearch server. Default `500`.
-        * `INDEX_MAP`  The index rename map (example: -m=dumped_index_name:loaded_index_name,a:b).
+        * `INDEX_MAP`  The index rename map (example: -m=my_dumped_index_name:my_loaded_index_name,a:b).
         * `TIMEOUT` The HTTP-client timeout. Default `60` for this task. (it is usually `5` for regular queries as set in `Configuration.http_client_options[:timeout]`).  You might need a higher timeout if you raise the `BATCH_SIZE`.
-        * `VERBOSE` Prints informations during the process. Default: `true`
+        * `VERBOSE` Prints info during the process. Default: `true`
 
 
