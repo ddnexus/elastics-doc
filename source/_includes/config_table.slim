@@ -85,7 +85,7 @@ table.code-topics#config cellspacing=0 cellpadding=0
       markdown:
         > This is a specific configuration for the `elastics-rails` gem.
 
-        Boolean. Option added by elastics-rails. If `true` prints the log to `STDOUT`. Default `false` unless in Rails Console.
+        Boolean. Option added by `elastics-rails`. If `true` prints the log to `STDOUT`. Default `false` unless in Rails Console.
 
   tr
     td
@@ -176,6 +176,14 @@ table.code-topics#config cellspacing=0 cellpadding=0
     td
       markdown:
         An unique string used to identify your app. Default: `nil` or the uderscored rails application name, plus the environment in rails. It must be set if you use any `reindex` method. Used by the elastics-reindex feature {% see 6.2 %}.
+
+  tr
+    td
+      code
+        | optimize_indexing
+    td
+      markdown:
+        Boolean. Option added by `elastics-admin`. If `true` it optimizes the new indices. Default `true`.
 
   tr
     td
