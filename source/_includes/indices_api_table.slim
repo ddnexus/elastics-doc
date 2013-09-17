@@ -375,6 +375,40 @@ table.code-topics.api-methods cellspacing=0 cellpadding=0
   ///////////////////////////////////////////////////////////////////////////
   tr
     th colspan=2
+      a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-update-settings/" target="_blank" Update Settings
+
+  tr
+    td
+      code Elastics.put_index_settings
+    td
+      markdown:
+        Change specific index level settings in real time.
+
+        **Template**
+
+      |
+        {% shighlight yaml %}
+        put_index_settings:
+        - put
+        - /<<index>>/_settings
+        {% endshighlight %}
+
+      markdown:
+        **Usage**
+
+      |
+        {% shighlight ruby %}
+        Elastics.put_index_settings :index => "elastics_test_index"
+        {% endshighlight %}
+
+      markdown:
+        > You can pass the settings structure as the `:data` variable.
+
+
+
+  ///////////////////////////////////////////////////////////////////////////
+  tr
+    th colspan=2
       a href="http://www.elasticsearch.org/guide/reference/api/admin-indices-get-mapping.html" target="_blank" Get Mapping
 
   tr
