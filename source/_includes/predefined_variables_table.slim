@@ -54,5 +54,11 @@ table.code-topics cellspacing=0 cellpadding=0 style="width: 100%"
                                                          :fields => ['text', 'category'] } )
         {% endshighlight %}
 
-
+  tr
+    td
+      code
+        | :now
+    td
+      markdown:
+        The time at the moment of the execution in milliseconds. It is not set as a real key in the variables hash, but if you use it in any template, it will return the value. If you set it as a regular variable, it will work as any other variable.
 
