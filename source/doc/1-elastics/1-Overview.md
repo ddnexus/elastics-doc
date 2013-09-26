@@ -68,7 +68,7 @@ The Elastics documentation is very complete and detailed, so starting from the r
 
 ### For Elasticsearch Experts
 
-1. Elastics provides the full elasticsearch APIs as ready to use methods. Just take a look at the [API Metods](http://elastics.github.io/elastics/doc/2-elastics/2-API-Methods.html) page to appreciate its completeness.
+1. Elastics provides the full elasticsearch APIs as ready to use methods. Just take a look at the [API Methods](http://elastics.github.io/elastics/doc/2-elastics/2-API-Methods.html) page to appreciate its completeness.
 
 2. Then you may want to read the [Usage Overview](http://elastics.github.io/elastics/doc/1-Elastics-Project/2-Usage-Overview.html) page. Follow the links from there in order to dig into the topics that interest you.
 
