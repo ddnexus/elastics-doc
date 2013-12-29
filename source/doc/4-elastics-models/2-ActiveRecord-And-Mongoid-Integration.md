@@ -90,7 +90,7 @@ Notice that in order to have the automatic routing and mapping for parent child 
 
 ## Indexing Records
 
-By default Elastics indexes all the records of the elastics models, but you may want to skip the indexing of particular records that may not be useful to index. You have just to define a `elastics_indexable?` instance method, returning `true` or `false` based on your own logic.
+By default Elastics indexes all the records of the elastics models on import, but you may want to skip the indexing of particular records that may not be useful to index. You have 2 options to do that: you can define a `elastics_indexable?` instance method, returning `true` or `false` based on your own logic, or you can define a `self.elastics_in_batches` that should return only the records to index, in batches
 
 ### record.elastics_indexable?
 
@@ -99,6 +99,15 @@ def elastics_indexable?
   !(title.blank? || text.blank?)
 end
 {% endhighlight %}
+
+### Model.elastics_in_batches
+
+{% highlight ruby %}
+def self.elastics_in_batches(options={},&block)
+  some_scope.find_in_batches(options, &block)
+end
+{% endhighlight %}
+
 
 ## Indexing Fields
 
