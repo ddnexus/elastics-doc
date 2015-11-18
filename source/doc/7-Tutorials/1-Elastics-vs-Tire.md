@@ -2,7 +2,7 @@
 layout: doc
 badge: elastics-client
 title: Why you should use Elastics rather than Tire
-alias_index: true
+redirect_from: /doc/7-tutorials/
 ---
 
 # {{ page.title }}

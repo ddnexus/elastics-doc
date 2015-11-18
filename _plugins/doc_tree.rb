@@ -50,7 +50,7 @@ class DocTree < Tree::TreeNode
     doc_path        = '/' + doc_source_path.relative_path_from(source_path).to_s
     tree            = DocTree.new(doc_path, {:title => Jekyll.configuration({})['name']})
     Find.find(doc_source_path) do |p|
-      next if doc_source_path == p   # discard root
+      next if doc_source_path.to_s == p   # discard root
       path      = Pathname.new p
       rel_path  = path.relative_path_from(doc_source_path)
       title = if path.directory?

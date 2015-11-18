@@ -2,7 +2,7 @@
 layout: doc
 badge: elastics-scopes
 title: elastics-scopes - Overview
-alias_index: true
+redirect_from: /doc/3-elastics-scopes/
 ---
 
 # {{ page.title }}

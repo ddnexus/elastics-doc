@@ -2,7 +2,7 @@
 layout: doc
 badge: elastics-models
 title: elastics-models - Overview
-alias_index: true
+redirect_from: /doc/4-elastics-models/
 ---
 
 # {{ page.title }}

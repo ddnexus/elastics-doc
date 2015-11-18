@@ -1,1 +1,1 @@
-Jekyll.logger.log_level = 3
+Jekyll.logger.log_level = :warn

@@ -2,6 +2,8 @@
 layout: doc
 badge: elastics-models
 title: elastics-models - Elastics::ModelSyncer
+redirect_from: /doc/4-elastics-models/4-Modules/
+
 ---
 
 # Elastics::ModelSyncer

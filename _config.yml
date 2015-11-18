@@ -19,3 +19,5 @@ asset_pipeline:
 doc_tree:
   doc_source_path: ./source/doc
 
+gems:
+  - jekyll-redirect-from

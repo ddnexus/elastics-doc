@@ -3,3 +3,5 @@ asset_pipeline:
   bundle:   true
   compress: true
   gzip:     true
+
+baseurl: http://elastics.github.io/elastics

@@ -2,7 +2,7 @@
 layout: doc
 badge: elastics-admin
 title: elastics-admin - Binary
-alias_index: true
+redirect_from: /doc/6-elastics-admin/
 ---
 
 # {{ page.title }}

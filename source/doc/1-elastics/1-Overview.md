@@ -2,8 +2,10 @@
 layout: doc
 badge: elastics-client
 title: Elastics Overview
-alias_index: true
-alias: /doc
+redirect_from:
+  - /doc/1-elastics/
+  - /doc/
+  - /
 ---
 
 # {{ page.title }}

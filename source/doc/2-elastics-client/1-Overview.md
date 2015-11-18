@@ -2,7 +2,7 @@
 layout: doc
 badge: elastics-client
 title: elastics-client - Overview
-alias_index: true
+redirect_from: /doc/2-elastics-client/
 ---
 
 # {{ page.title }}
