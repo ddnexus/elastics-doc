@@ -1,0 +1,44 @@
+- Helper.api_groups.each do |group, label|
+  h2 id=group = label
+  table.code-topics.api-methods cellspacing=0 cellpadding=0
+    - previous_api_name = ''
+    - Elastics.elastics.templates.select{|name,template| template.references[:group] == group}.keys.each do |name|
+      - out_obj = Elastics::ClassProxy::Templates::Doc::Output.new(name, Elastics.elastics)
+      - references = out_obj.template.references
+      - if previous_api_name != references['api_name']
+        tr
+          th colspan=2
+            a href=references['api_url'] target="_blank" = references['api_name']
+        - previous_api_name = references['api_name']
+
+      tr
+        td
+          code = out_obj.method_call
+        td
+          p
+            strong Template
+
+          | {% shighlight yaml %}
+          == out_obj.template.to_source.sub("---\n", '')
+          | {% endshighlight %}
+
+          p
+            strong Usage
+
+          | {% shighlight ruby %}
+          == out_obj.render_usage
+          | {% endshighlight %}
+
+          - unless references['notice'].nil?
+            blockquote
+              p == references['notice'].gsub(/(:[\w_]+)/, '<code>\1</code>')
+
+
+          - unless references['aliases'].nil?
+            p
+              strong Aliases
+            - references['aliases'].each do |a|
+              code = a
+
+
+

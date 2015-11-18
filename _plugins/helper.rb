@@ -32,4 +32,14 @@ module Helper
     out
   end
 
+
+  def api_groups
+    { 'document_api'       => 'Document API',
+      'indices_api'        => 'Indices API',
+      'search_api'         => 'Search API',
+      'cat_api'            => 'Cat API',
+      'cluster_api'        => 'Cluster API',
+      'elastics_additions' => 'Elastics Additions' }
+  end
+
 end

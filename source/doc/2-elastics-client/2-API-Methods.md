@@ -14,22 +14,12 @@ As any template-generated method, they accept a list of variables (hashes) for i
 
 When an API has flags/parameters, you can pass them as the `:params` variable; when it has structured data you can pass it as the `:data` variable.
 
-> __Notice__: you can get the updated full reference and usage example of these methods also in the console at any time, by just writing `Elastics.doc` (for the full API) or `Elastics.doc :create_index, :get_index_mapping, ...` (for specific methods).
+> __Notice__: you can get the updated full reference and usage example of these methods also in the console at any time, by just writing `Elastics.doc` (for the full API) or `Elastics.doc :create_index, :get_index_mapping, ...` (for specific methods).  You can also get only the usage with `Elastics.usage`, and search for some pattern or string (part of any API method) with `Elastics.find('get')`.
 
-> This document is updated to elasticsearch version 0.90.3
+> This document is updated to elasticsearch version 1.7.3
 
 
-## Core API
-
-{% slim core_api_table.slim %}
-
-## Indices API
-
-{% slim indices_api_table.slim %}
-
-## Cluster API
-
-{% slim cluster_api_table.slim %}
+{% slim api_tables.slim %}
 
 > If you find any elasticsearch API missing from this list, please, let me know and I will add it right away (it should be just a matter of a few minutes)
 
