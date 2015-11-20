@@ -21,5 +21,9 @@ When an API has flags/parameters, you can pass them as the `:params` variable; w
 
 {% slim api_tables.slim %}
 
+## Elastics Additions
+
+{% slim elastics_additions_table.slim %}
+
 > If you find any elasticsearch API missing from this list, please, let me know and I will add it right away (it should be just a matter of a few minutes)
 
