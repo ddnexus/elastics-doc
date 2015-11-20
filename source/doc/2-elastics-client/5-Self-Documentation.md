@@ -10,22 +10,24 @@ Elastics is aware of your templates, partials, the tags they use, whether they a
 
 You can get the complete info, with the (erb expanded) templates and partials used by each generated method, plus a commented example of its usage, by just calling `doc` on the `elastics` proxy object of your class. For example:
 
-{% highlight irb %}
->> MyClass.elastics.doc :facet_search
+### doc
 
-#  ########## MyClass.facet_search ##########
+{% highlight irb %}
+>> MyClass.elastics.doc :full_search
+
+#  ########## MyClass.full_search ##########
 #
-#  ----------------------
+#  --------------------------
 #  Elastics::Template::Search
 #  ---
-#  facet_search:
+#  full_search:
 #    - query:
 #        bool:
 #          must:
 #            - query_string:
 #                query: <<q= '*' >>
-#            - << _facet_terms= ~ >>
-#      facets:
+#            - << _filter_terms= ~ >>
+#      aggregations:
 #        keywords:
 #          terms:
 #            field: keywords
@@ -36,20 +38,20 @@ You can get the complete info, with the (erb expanded) templates and partials us
 #          terms:
 #            field: bar
 #
-#  -----------------------
+#  ---------------------------
 #  Elastics::Template::Partial
 #  ---
-#  _facet_terms:
+#  _filter_terms:
 #    term: <<facet_hash>>
 #
 #
 #  Usage:
-#  MyClass.facet_search :_facet_terms => nil,         # partial
-#                       :type         => type,        # required
-#                       :index        => "test",
-#                       :q            => "*"
+#  MyClass.full_search :_filter_terms => nil,         # partial
+#                      :type          => type,        # required
+#                      :index         => "test",
+#                      :q             => "*"
 #
-def MyClass.facet_search(*vars)
+def MyClass.full_search(*vars)
   # this is a stub, used for reference
 end
 {% endhighlight %}
@@ -70,4 +72,47 @@ You can get the self documetation of all the methods your class defines, by just
 
 {% highlight irb %}
 >> Elastics.doc
+{% endhighlight %}
+
+## Documentation Related Methods
+
+There are a few other methods that can help when you are looking for documentation:
+
+### usage
+
+`usage` prints just the usage of the method:
+
+{% highlight irb %}
+
+>> MyClass.elastics.usage :full_search
+
+MyClass.full_search :_filter_terms => nil,         # partial
+                    :type          => type,        # required
+                    :index         => "test",
+                    :q             => "*"
+
+{% endhighlight %}
+
+  ### find(pattern_or_String)
+
+`find` prints a list of methods that contains the `pattern_or_string`:
+
+{% highlight irb %}
+
+>> Elastics.find 'get'
+---
+- :get
+- :get_source
+- :multi_get_ids
+- :multi_get_docs
+- :get_index
+- :get_index_mapping
+- :get_field_mapping
+- :get_index_aliases
+- :get_index_alias
+- :get_index_settings
+- :get_index_template
+- :get_index_warmer
+- :get_cluster_settings
+
 {% endhighlight %}
